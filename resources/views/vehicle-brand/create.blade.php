@@ -1,12 +1,15 @@
 @extends('layouts.master')
 @section('title','add-district')
 @section('content')
-<p class="h3">Add District Form</p>
-<Form action="/districts/create" method="POST">
-    <div class="form-group">
-        <label>District:</label>
-        <input type="text" name="name" id="" class="form-control">
-    </div>
-    <button type="submit">Add</button>
-</Form>
+<div class="container mt-3">
+    <p class="h3">Add District Form</p>
+    <Form action="{{route('vehicleBrand.store')}}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label>Vehicle Brands:</label>
+            <input type="text" name="brand" id="" class="form-control">
+        </div>
+        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
+    </Form>
+</div>
 @endsection

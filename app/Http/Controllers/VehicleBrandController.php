@@ -9,40 +9,40 @@ class VehicleBrandController extends Controller
 {
     function index(){
         $vehicleBrands=VehicleBrand::all();
-        return view('vehicle-type.index',compact('vehicleTypes'));
+        return view('vehicle-brand.index',compact('vehicleBrands'));
     }
     function create(){
-        return view('vehicle-type.create');
+        return view('vehicle-brand.create');
     }
     function store(Request $req){
-        $lastVehicleBrandId=VehicleBrand::pluck('vehicle_type_id')->last();
+        $lastVehicleBrandId=VehicleBrand::pluck('brand_id')->last();
         if(!$lastVehicleBrandId){
-            $vehicleBrandId="VT001";
+            $vehicleBrandId="VB001";
         }
         else{
             $vehicleBrandId=++$lastVehicleBrandId;
         }
         $vehicleBrand = new VehicleBrand;
-        $vehicleType->vehicle_type_id=$vehicleTypeId;
-        $vehicleType->vehicle_type=$req->vehicle_type;
-        $vehicleType->save();
+        $vehicleBrand->brand_id=$vehicleBrandId;
+        $vehicleBrand->name=$req->name;
+        $vehicleBrand->save();
         return redirect()->back();
     }
     function show(){
         return;
     }
-    function edit($vehicleType){
-        $vehicleType=VehicleBrand::find($vehicleType);
+    function edit($vehicleBrand){
+        $vehicleType=VehicleBrand::find($vehicleBrand);
         return view('vehicle-type.edit',compact('vehicleType'));
     }
-    function update(Request $req,$vehicleType){
-        $vehicleType= VehicleBrand::find($vehicleType);
-        $vehicleType->vehicle_type=$req->vehicle_type;
-        $vehicleType->save();
+    function update(Request $req,$vehicleBrand){
+        $vehicleBrand= VehicleBrand::find($vehicleBrand);
+        $vehicleBrand->name=$req->name;
+        $vehicleBrand->save();
         return redirect()->route('vehicleType.index');
     }
-    function destroy($vehicleType){
-        VehicleBrand::destroy($vehicleType);
+    function destroy($vehicleBrand){
+        VehicleBrand::destroy($vehicleBrand);
         return redirect()->back();
     }
 }
