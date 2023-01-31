@@ -10,6 +10,9 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\VehicleBrandController;
 use App\Http\Controllers\VehicleTypeController;
+use App\Http\Controllers\StaffWorkplaceController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\DivisionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,4 +117,34 @@ Route::group(['prefix'=>'vehicleTypes'],function(){
     Route::post('/',[VehicleTypeController::class,'store'])->name('vehicleType.store');
     Route::put('/{vehicleType}',[VehicleTypeController::class,'update'])->name('vehicleType.update');
     Route::delete('/{vehicleType}',[VehicleTypeController::class,'destroy'])->name('vehicleType.destroy');
+});
+// Staff
+Route::group(['prefix'=>'staffs'],function(){
+    Route::get('/',[StaffController::class,'index'])->name('staff.index');
+    Route::get('/create',[StaffController::class,'create'])->name('staff.create');
+    Route::get('/{staff}',[StaffController::class,'show'])->name('staff.show');
+    Route::get('/{staff}/edit',[StaffController::class,'edit'])->name('staff.edit');
+    Route::post('/',[StaffController::class,'store'])->name('staff.store');
+    Route::put('/{staff}',[StaffController::class,'update'])->name('staff.update');
+    Route::delete('/{staff}',[StaffController::class,'destroy'])->name('staff.destroy');
+});
+// StaffWorkplace
+Route::group(['prefix'=>'staffworkplaces'],function(){
+    Route::get('/',[StaffWorkplaceController::class,'index'])->name('staffWorkplace.index');
+    Route::get('/create',[StaffWorkplaceController::class,'create'])->name('staffWorkplace.create');
+    Route::get('/{staffworkplace}',[StaffWorkplaceController::class,'show'])->name('staffWorkplace.show');
+    Route::get('/{staffworkplace}/edit',[StaffWorkplaceController::class,'edit'])->name('staffWorkplace.edit');
+    Route::post('/',[StaffWorkplaceController::class,'store'])->name('staffWorkplace.store');
+    Route::put('/{staffworkplace}',[StaffWorkplaceController::class,'update'])->name('staffWorkplace.update');
+    Route::delete('/{staffworkplace}',[StaffWorkplaceController::class,'destroy'])->name('staffWorkplace.destroy');
+});
+// Division
+Route::group(['prefix'=>'divisions'],function(){
+    Route::get('/',[DivisionController::class,'index'])->name('division.index');
+    Route::get('/create',[DivisionController::class,'create'])->name('division.create');
+    Route::get('/{division}',[DivisionController::class,'show'])->name('division.show');
+    Route::get('/{division}/edit',[DivisionController::class,'edit'])->name('division.edit');
+    Route::post('/',[DivisionController::class,'store'])->name('division.store');
+    Route::put('/{division}',[DivisionController::class,'update'])->name('division.update');
+    Route::delete('/{division}',[DivisionController::class,'destroy'])->name('division.destroy');
 });

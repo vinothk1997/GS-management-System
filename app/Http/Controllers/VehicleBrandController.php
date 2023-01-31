@@ -24,7 +24,7 @@ class VehicleBrandController extends Controller
         }
         $vehicleBrand = new VehicleBrand;
         $vehicleBrand->brand_id=$vehicleBrandId;
-        $vehicleBrand->name=$req->name;
+        $vehicleBrand->brand=$req->brand;
         $vehicleBrand->save();
         return redirect()->back();
     }
@@ -32,14 +32,14 @@ class VehicleBrandController extends Controller
         return;
     }
     function edit($vehicleBrand){
-        $vehicleType=VehicleBrand::find($vehicleBrand);
-        return view('vehicle-type.edit',compact('vehicleType'));
+        $vehicleBrand=VehicleBrand::find($vehicleBrand);
+        return view('vehicle-brand.edit',compact('vehicleBrand'));
     }
     function update(Request $req,$vehicleBrand){
         $vehicleBrand= VehicleBrand::find($vehicleBrand);
-        $vehicleBrand->name=$req->name;
+        $vehicleBrand->brand=$req->brand;
         $vehicleBrand->save();
-        return redirect()->route('vehicleType.index');
+        return redirect()->route('vehicleBrand.index');
     }
     function destroy($vehicleBrand){
         VehicleBrand::destroy($vehicleBrand);

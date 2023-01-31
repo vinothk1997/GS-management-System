@@ -3,6 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Add District Form</p>
+    <a href="{{route('vehicleBrand.index')}}" method="POST">Back</a>
     <Form action="{{route('vehicleBrand.store')}}" method="POST">
         @csrf
         <div class="form-group">

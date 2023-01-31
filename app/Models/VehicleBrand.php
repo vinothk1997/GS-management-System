@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleBrand extends Model
 {
-    use HasFactory;
+    protected $primaryKey='brand_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $fillable=['brand_id','brand'];
+    public $timestamps = false;
 }

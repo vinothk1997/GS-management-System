@@ -12,11 +12,15 @@
     @foreach($vehicleBrands as $vehicleBrand)
     <tr>
         <td>{{$vehicleBrand->brand_id}}</th>
-        <td>{{$vehicleBrand->name}}</th>
+        <td>{{$vehicleBrand->brand}}</th>
         <td>
-            <a href="" class="btn btn-sm btn-success">View</a>
-            <a href="" class="btn btn-sm btn-secondary">Edit</a>
-            <a href="" class="btn btn-sm btn-danger">Delete</a>
+            <a href="{{route('vehicleBrand.show',$vehicleBrand->brand_id)}}" class="btn btn-sm btn-success">View</a>
+            <a href="{{route('vehicleBrand.edit',$vehicleBrand->brand_id)}}" class="btn btn-sm btn-secondary">Edit</a>
+            <form class="d-inline" action="{{route('vehicleBrand.destroy',$vehicleBrand->brand_id)}}" method="POST">
+                @method("DELETE")
+                @csrf
+                <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
         </td>
     </tr>
     @endforeach
