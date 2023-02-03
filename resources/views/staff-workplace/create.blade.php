@@ -2,19 +2,11 @@
 @section('title','add-staffWorkplaces')
 @section('content')
 <div class="container mt-3">
-    <p class="h3">Add Staff Form Form</p>
-    <a href="{{route('staffWorkplace.index')}}">Back</a>
+    <p class="h3">Add Staff Workplace Form</p>
+    <a href="{{route('staff.show',$staffId)}}">Back</a>
     <Form action="{{route('staffWorkplace.store')}}" method="POST">
         @csrf
-        <div class="form-group">
-            <label>National Identy Card No:</label>
-            <select name="nic" class="form-control">
-                <option>Select NIC Number</option>
-                @foreach($staffNICs as $staffNIC)
-                <option>{{$staffNIC}}</option>
-                @endforeach
-            </select>
-        </div>
+        <input type="hidden" name="staffId" value="{{$staffId}}">
         <div class="form-group">
             <label>Start Date:</label>
             <input type="date" name="startDate" value="{{old('startDate')}}" id="" class="form-control">

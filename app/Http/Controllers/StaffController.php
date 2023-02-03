@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Staff;
+use App\Models\StaffWorkplace;
+use DB;
 
 class StaffController extends Controller
 {
@@ -34,8 +36,10 @@ class StaffController extends Controller
         $staff->save();
         return redirect()->back();
     }
-    function show(){
-        return;
+    function show($staff){
+        $staffId=$staff;
+        $staffWorkplaces=StaffWorkplace::where('staff_id',$staff)->get();
+        return view('staff.show',compact('staffWorkplaces','staffId'));
     }
     function edit($staff){
         $staff=Staff::find($staff);

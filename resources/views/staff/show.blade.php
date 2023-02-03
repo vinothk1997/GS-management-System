@@ -1,19 +1,18 @@
 @extends('layouts.master')
 @section('title','vehicleType')
 @section('content')
-<p class="h3">Staff Workplaces</p>
+<p class="h3">Working History Details</p>
+<a href="{{route('staff.index')}}" class="">Go Back</a>
+<a href="{{route('staffWorkplace.create',$staffId)}}" class="btn btn-primary btn-sm px-4">Add</a>
 <table class="table">
     <tr>
-        <th>StaffId</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>Designation</th>
         <th>Place Worked</th>
-        <th>Action</th>
     </tr>
     @foreach($staffWorkplaces as $staffWorkplace)
     <tr>
-        <td>{{$staffWorkplace->staff_id}}</th>
         <td>{{$staffWorkplace->start_date}}</th>
         <td>{{$staffWorkplace->end_date}}</th>
         <td>{{$staffWorkplace->designation}}</th>

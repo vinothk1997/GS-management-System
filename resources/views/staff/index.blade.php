@@ -5,6 +5,7 @@
 <a href="{{route('staff.create')}}" class="btn btn-primary">Add New</a>
 <table class="table">
     <tr>
+        <th>StaffId</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>NIC</th>

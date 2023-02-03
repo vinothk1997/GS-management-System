@@ -1,40 +1,30 @@
 @extends('layouts.master')
-@section('title','edit-vehicleType')
+@section('title','edit-woking history')
 @section('content')
 <div class="container mt-3">
-    <p class="h3">Add Vehicle Type Form</p>
-    <Form action="{{route('staff.update',$staff->staff_id)}}" method="POST">
-        @method('PUT')
+    <p class="h3">Edit Working Histrory</p>
+    <a href="{{route('staff.show',$staffWorkplace->staff_id)}}">Back</a>
+    <Form action="{{route('staffWorkplace.update',[$staffWorkplace->staff_id,$staffWorkplace->start_date])}}"
+        method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group">
-            <label>First Name:</label>
-            <input type="text" name="fname" value="{{$staff->first_name}}" id="" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Last Name:</label>
-            <input type="text" name="lname" value="{{$staff->last_name}}" id="" class="form-control">
+            <label>Start Date:</label>
+            <input type="date" name="startDate" value="{{$staffWorkplace->start_date}}" id="" class="form-control">
         </div>
         <div class="form-group">
             <label>National Identity Card No:</label>
-            <input type="text" name="nic" value="{{$staff->nic}}" id="" class="form-control">
+            <input type="date" name="endDate" value="{{$staffWorkplace->end_date}}" id="" class="form-control">
         </div>
         <div class="form-group">
-            <label>Date of Birth:</label>
-            <input type="date" name="dob" value="{{$staff->dob}}" id="" class="form-control">
+            <label>Designation:</label>
+            <input type="text" name="designation" value="{{$staffWorkplace->designation}}" id="" class="form-control">
         </div>
         <div class="form-group">
-            <label>Gender:</label>
-            <input type="text" name="gender" value="{{$staff->gender}}" id="" class="form-control">
+            <label>Place ID:</label>
+            <input type="text" name="placeId" value="{{$staffWorkplace->place_id}}" id="" class="form-control">
         </div>
-        <div class="form-group">
-            <label>Address:</label>
-            <input type="text" name="address" value="{{$staff->first_name}}" id="" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Mobile No:</label>
-            <input type="text" name="mobile" value="{{$staff->mobile}}" id="" class="form-control">
-        </div>
-        <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
+        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
     </Form>
 </div>
 @endsection

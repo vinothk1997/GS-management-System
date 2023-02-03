@@ -13,6 +13,7 @@ use App\Http\Controllers\VehicleTypeController;
 use App\Http\Controllers\StaffWorkplaceController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\GnDivisionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::get('/', function () {
 Route::group(['prefix'=>'districts'],function(){
     Route::get('/',[DistrictController::class,'index'])->name('district.index');
     Route::get('/create',[DistrictController::class,'create'])->name('district.create');
-    Route::get('/{district}',[DistrictController::class,'show'])->name('district.show');
+    Route::get('/{district}/show',[DistrictController::class,'show'])->name('district.show');
     Route::get('/{district}/edit',[DistrictController::class,'edit'])->name('district.edit');
     Route::post('/',[DistrictController::class,'store'])->name('district.store');
     Route::put('/{district}',[DistrictController::class,'update'])->name('district.update');
@@ -131,20 +132,30 @@ Route::group(['prefix'=>'staffs'],function(){
 // StaffWorkplace
 Route::group(['prefix'=>'staffworkplaces'],function(){
     Route::get('/',[StaffWorkplaceController::class,'index'])->name('staffWorkplace.index');
-    Route::get('/create',[StaffWorkplaceController::class,'create'])->name('staffWorkplace.create');
-    Route::get('/{staffworkplace}',[StaffWorkplaceController::class,'show'])->name('staffWorkplace.show');
-    Route::get('/{staffworkplace}/edit',[StaffWorkplaceController::class,'edit'])->name('staffWorkplace.edit');
+    Route::get('/{staffworkplace}/create',[StaffWorkplaceController::class,'create'])->name('staffWorkplace.create');
+    Route::get('/{staffworkplace}/{startDate}/show',[StaffWorkplaceController::class,'show'])->name('staffWorkplace.show');
+    Route::get('/{staffworkplace}/{startDate}/edit',[StaffWorkplaceController::class,'edit'])->name('staffWorkplace.edit');
     Route::post('/',[StaffWorkplaceController::class,'store'])->name('staffWorkplace.store');
-    Route::put('/{staffworkplace}',[StaffWorkplaceController::class,'update'])->name('staffWorkplace.update');
-    Route::delete('/{staffworkplace}',[StaffWorkplaceController::class,'destroy'])->name('staffWorkplace.destroy');
+    Route::put('/{staffworkplace}/{startDate}',[StaffWorkplaceController::class,'update'])->name('staffWorkplace.update');
+    Route::delete('/{staffworkplace}/{startDate}',[StaffWorkplaceController::class,'destroy'])->name('staffWorkplace.destroy');
 });
 // Division
 Route::group(['prefix'=>'divisions'],function(){
     Route::get('/',[DivisionController::class,'index'])->name('division.index');
-    Route::get('/create',[DivisionController::class,'create'])->name('division.create');
-    Route::get('/{division}',[DivisionController::class,'show'])->name('division.show');
+    Route::get('/{districtID}/create',[DivisionController::class,'create'])->name('division.create');
+    Route::get('/{division}/show',[DivisionController::class,'show'])->name('division.show');
     Route::get('/{division}/edit',[DivisionController::class,'edit'])->name('division.edit');
     Route::post('/',[DivisionController::class,'store'])->name('division.store');
     Route::put('/{division}',[DivisionController::class,'update'])->name('division.update');
     Route::delete('/{division}',[DivisionController::class,'destroy'])->name('division.destroy');
+});
+// GN Division
+Route::group(['prefix'=>'GN-Divisions'],function(){
+    Route::get('/',[GnDivisionController::class,'index'])->name('gn.index');
+    Route::get('/{divisionId}/create',[GnDivisionController::class,'create'])->name('gn.create');
+    Route::get('/{gn}',[GnDivisionController::class,'show'])->name('gn.show');
+    Route::get('/{gn}/edit',[GnDivisionController::class,'edit'])->name('gn.edit');
+    Route::post('/',[GnDivisionController::class,'store'])->name('gn.store');
+    Route::put('/{gn}',[GnDivisionController::class,'update'])->name('gn.update');
+    Route::delete('/{gn}',[GnDivisionController::class,'destroy'])->name('gn.destroy');
 });

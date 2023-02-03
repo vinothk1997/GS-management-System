@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\District;
+use App\Models\Division;
 
 class DistrictController extends Controller
 {
@@ -30,8 +31,11 @@ class DistrictController extends Controller
         $district->save();
         return redirect()->back();
     }
-    function show(){
-        return;
+    function show($district){
+        $districtId=$district;
+        $divisions=Division::where('district_id',$district)->get();
+        // return $divisions;
+        return view('district.show',compact('divisions','districtId'));
     }
     function edit($district){
         $district=District::find($district);

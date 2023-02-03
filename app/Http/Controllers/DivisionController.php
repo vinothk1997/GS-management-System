@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Division;
 use App\Models\District;
+use App\Models\GnDivision;;
 use DB;
 
 class DivisionController extends Controller
@@ -16,17 +17,16 @@ class DivisionController extends Controller
         ->get();
         return view('division.index',compact('divisions'));
     }
-    function create(){
-        $districts=District::pluck('name');
-        return view('division.create',compact('districts'));
+    function create($districtId){
+        $districtId=$districtId;
+        return view('division.create',compact('districtId'));
 
     }
     function store(Request $req){
         // return $req;
-        $district=District::where('name',$req->district)->select('district_id')->get();
         $lastDivisionId=Division::pluck('division_id')->last();
         if(!$lastDivisionId){
-            $divisionId="ST001";
+            $divisionId="DV001";
         }
         else{
             $divisionId=++$lastDivisionId;
@@ -34,31 +34,35 @@ class DivisionController extends Controller
         $division = new Division;
         $division->division_id=$divisionId;
         $division->name=$req->name;
-        $division->district_id=$district[0]->district_id;;
+        $division->district_id=$req->districtId;
         $division->save();
         return redirect()->back();
     }
-    function show(){
-        return;
+    function show($division){
+        $divisionId=$division;
+        $gns=GnDivision::where('division_id',$division)->get();
+        // return $gns; 
+        return view('division.show',compact('gns','divisionId'));
     }
-    function edit($staff){
-        $division=Division::find($division);
-        return view('division.edit',compact('division'));
+    function edit($division){
+        $districts=District::pluck('name');
+        $division=DB::table('divisions')
+        ->join('districts','divisions.district_id','districts.district_id')
+        ->select('divisions.division_id','divisions.name','districts.name as district')
+        ->get()[0];
+        // return $division;
+        return view('division.edit',compact('division','districts'));
     }
-    function update(Request $req,$staff){
-        $staff= Division::find($staff);
-        $staff->first_name=$req->fname;
-        $staff->last_name=$req->lname;
-        $staff->nic=$req->nic;
-        $staff->dob=$req->dob;
-        $staff->gender=$req->gender;
-        $staff->mobile=$req->mobile;
-        $staff->address=$req->address;
-        $staff->save();
-        return redirect()->route('staff.index');
+    function update(Request $req,$division){
+        $districtId=District::where('name',$req->district)->pluck('district_id')[0];
+        $division= Division::find($division);
+        $division->name=$req->name;
+        $division->district_id=$districtId;
+        $division->save();
+        return redirect()->route('division.index');
     }
-    function destroy($staff){
-        Division::destroy($staff);
+    function destroy($division){
+        Division::destroy($division);
         return redirect()->back();
     }
 }

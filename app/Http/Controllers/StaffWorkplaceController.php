@@ -9,55 +9,48 @@ use App\Models\StaffWorkplace;
 class StaffWorkplaceController extends Controller
 {
     function index(){
-      
-        $staffworkplaces=StaffWorkplace::all();
-        return view('staff-workplace.index',compact('staffworkplaces'));
+        $staffWorkplaces=StaffWorkplace::all();
+        return view('staff-workplace.index',compact('staffWorkplaces'));
     }
-    function create(){
-        $staffNICs=Staff::pluck('nic');
-        return view('staff-workplace.create',compact('staffNICs'));
+    
+    function create($staffworkplace){
+        // $staffNICs=Staff::pluck('nic');
+        $staffId=$staffworkplace;
+        return view('staff-workplace.create',compact('staffId'));
     }
+    
     function store(Request $req){
-        $lastStaffId=Staff::pluck('staff_id')->last();
-        if(!$lastStaffId){
-            $StaffId="ST001";
-        }
-        else{
-            $StaffId=++$lastStaffId;
-        }
-        $staff = new Staff;
-        $staff->staff_id=$StaffId;
-        $staff->first_name=$req->fname;
-        $staff->last_name=$req->lname;
-        $staff->nic=$req->nic;
-        $staff->dob=$req->dob;
-        $staff->gender=$req->gender;
-        $staff->mobile=$req->mobile;
-        $staff->address=$req->address;
-        $staff->save();
+        $staffWorkplace = new StaffWorkplace;
+        $staffWorkplace->staff_id=$req->staffId;
+        $staffWorkplace->start_date=$req->startDate;
+        $staffWorkplace->end_date=$req->endDate;
+        $staffWorkplace->designation=$req->designation;
+        $staffWorkplace->place_id=$req->placeId;
+        $staffWorkplace->save();
         return redirect()->back();
     }
     function show(){
         return;
     }
-    function edit($staff){
-        $staff=Staff::find($staff);
-        return view('staff.edit',compact('staff'));
+    function edit($staffworkplace,$startDate){
+        $staffWorkplace=StaffWorkplace::where('staff_id',$staffworkplace)
+        ->where('start_date',$startDate)
+        ->first();
+        // return $staffWorkplace;
+        return view('staff-workplace.edit',compact('staffWorkplace'));
     }
-    function update(Request $req,$staff){
-        $staff= Staff::find($staff);
-        $staff->first_name=$req->fname;
-        $staff->last_name=$req->lname;
-        $staff->nic=$req->nic;
-        $staff->dob=$req->dob;
-        $staff->gender=$req->gender;
-        $staff->mobile=$req->mobile;
-        $staff->address=$req->address;
-        $staff->save();
-        return redirect()->route('staff.index');
+    function update(Request $req,$staffworkplace,$startDate){
+        $staffWorkplace=StaffWorkplace::where('staff_id',$staffworkplace)->where('start_date',$startDate)
+        ->update([
+            'start_date'=>$req->startDate,
+            'end_date'=>$req->endDate,
+            'designation'=>$req->designation,
+            'place_id'=>$req->placeId,
+        ]);
+        return redirect()->route('staffWorkplace.index');
     }
-    function destroy($staff){
-        Staff::destroy($staff);
+    function destroy($staffworkplace,$startDate){
+        StaffWorkplace::where('staff_id',$staffworkplace)->where('start_date',$startDate)->delete();
         return redirect()->back();
     }
 }
