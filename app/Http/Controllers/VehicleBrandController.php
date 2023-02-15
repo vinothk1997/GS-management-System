@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VehicleBrand;
+use App\Models\VehicleModel;
 
 class VehicleBrandController extends Controller
 {
@@ -28,8 +29,10 @@ class VehicleBrandController extends Controller
         $vehicleBrand->save();
         return redirect()->back();
     }
-    function show(){
-        return;
+    function show($vehicleBrand){
+        $vehicleModels=VehicleModel::where('brand_id',$vehicleBrand)->get();
+        $brandId=$vehicleBrand;
+        return view('vehicle-brand.show',compact('vehicleModels','brandId'));
     }
     function edit($vehicleBrand){
         $vehicleBrand=VehicleBrand::find($vehicleBrand);

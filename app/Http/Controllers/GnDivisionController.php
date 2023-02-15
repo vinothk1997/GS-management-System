@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreGNDivisionRequest;
 use App\Models\GnDivision;
 use App\Models\Division;
 use DB;
@@ -20,7 +21,7 @@ class GnDivisionController extends Controller
         $divisionId=$divisionId;
         return view('gn-division.create',compact('divisionId'));
     }
-    function store(Request $req){
+    function store(StoreGNDivisionRequest $req){
         // return $req;
         $lastGnId=GnDivision::pluck('gn_id')->last();
         if(!$lastGnId){

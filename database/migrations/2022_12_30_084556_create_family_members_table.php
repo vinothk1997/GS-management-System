@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name','100');
             $table->string('last_name','100');
             $table->string('nic','12');
-            $table->integer('mibile');
+            $table->integer('mobile');
             $table->date('dob');
             $table->string('gender','6');
             $table->string('family_id','12');

@@ -8,7 +8,10 @@
         @csrf
         <div class="form-group">
             <label>Education:</label>
-            <input type="text" name="name" id="" class="form-control">
+            <input type="text" name="name" id="" class="form-control @error('name') is-invalid @enderror">
+            @error('name')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
     </Form>

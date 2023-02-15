@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Staff;
+use App\Http\Requests\StoreStaffRequest;
 use App\Models\StaffWorkplace;
 use DB;
 
@@ -16,7 +17,7 @@ class StaffController extends Controller
     function create(){
         return view('staff.create');
     }
-    function store(Request $req){
+    function store(StoreStaffRequest $req){
         $lastStaffId=Staff::pluck('staff_id')->last();
         if(!$lastStaffId){
             $StaffId="ST001";

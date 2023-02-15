@@ -9,11 +9,13 @@ use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\VehicleBrandController;
+use App\Http\Controllers\VehicleModelController;
 use App\Http\Controllers\VehicleTypeController;
 use App\Http\Controllers\StaffWorkplaceController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\GnDivisionController;
+use App\Http\Controllers\FamilyHeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +121,16 @@ Route::group(['prefix'=>'vehicleTypes'],function(){
     Route::put('/{vehicleType}',[VehicleTypeController::class,'update'])->name('vehicleType.update');
     Route::delete('/{vehicleType}',[VehicleTypeController::class,'destroy'])->name('vehicleType.destroy');
 });
+// Vehicle Models
+Route::group(['prefix'=>'vehicleModels'],function(){
+    Route::get('/',[VehicleModelController::class,'index'])->name('vehicleModel.index');
+    Route::get('/{vehicleBrand}/create',[VehicleModelController::class,'create'])->name('vehicleModel.create');
+    Route::get('/{vehicleModel}',[VehicleModelController::class,'show'])->name('vehicleModel.show');
+    Route::get('/{vehicleModel}/edit',[VehicleModelController::class,'edit'])->name('vehicleModel.edit');
+    Route::post('/',[VehicleModelController::class,'store'])->name('vehicleModel.store');
+    Route::put('/{vehicleModel}',[VehicleModelController::class,'update'])->name('vehicleModel.update');
+    Route::delete('/{vehicleModel}',[VehicleModelController::class,'destroy'])->name('vehicleModel.destroy');
+});
 // Staff
 Route::group(['prefix'=>'staffs'],function(){
     Route::get('/',[StaffController::class,'index'])->name('staff.index');
@@ -158,4 +170,24 @@ Route::group(['prefix'=>'GN-Divisions'],function(){
     Route::post('/',[GnDivisionController::class,'store'])->name('gn.store');
     Route::put('/{gn}',[GnDivisionController::class,'update'])->name('gn.update');
     Route::delete('/{gn}',[GnDivisionController::class,'destroy'])->name('gn.destroy');
+});
+// Family Head
+Route::group(['prefix'=>'family-Heads'],function(){
+    Route::get('/',[FamilyHeadController::class,'index'])->name('familyHead.index');
+    Route::get('/create',[FamilyHeadController::class,'create'])->name('familyHead.create');
+    Route::get('/{familyId}',[FamilyHeadController::class,'show'])->name('familyHead.show');
+    Route::get('/{familyId}/edit',[FamilyHeadController::class,'edit'])->name('familyHead.edit');
+    Route::post('/',[FamilyHeadController::class,'store'])->name('familyHead.store');
+    Route::put('/{familyId}',[FamilyHeadController::class,'update'])->name('familyHead.update');
+    Route::delete('/{familyId}',[FamilyHeadController::class,'destroy'])->name('familyHead.destroy');
+});
+// Family Members
+Route::group(['prefix'=>'family-Members'],function(){
+    Route::get('/',[FamilyMemberController::class,'index'])->name('familyMember.index');
+    Route::get('/familyId}/create',[FamilyMemberController::class,'create'])->name('familyMember.create');
+    Route::get('/{memberId}',[FamilyMemberController::class,'show'])->name('familyMember.show');
+    Route::get('/{memberId}/edit',[FamilyMemberController::class,'edit'])->name('familyMember.edit');
+    Route::post('/',[FamilyMemberController::class,'store'])->name('familyMember.store');
+    Route::put('/{memberId}',[FamilyMemberController::class,'update'])->name('familyMember.update');
+    Route::delete('/{memberId}',[FamilyMemberController::class,'destroy'])->name('familyMember.destroy');
 });

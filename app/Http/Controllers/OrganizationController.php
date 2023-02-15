@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreOrganizationRequest;
 use App\Models\Organization;
 
 class OrganizationController extends Controller
@@ -14,7 +15,7 @@ class OrganizationController extends Controller
     function create(){
         return view('organization.create');
     }
-    function store(Request $req){
+    function store(StoreOrganizationRequest $req){
         // return $req;
         $lastOrganizationId=Organization::pluck('organization_id')->last();
         if(!$lastOrganizationId){

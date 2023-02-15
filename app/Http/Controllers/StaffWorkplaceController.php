@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreStaffWorkplaceRequest;
 use App\Models\Staff;
 use App\Models\StaffWorkplace;
 
@@ -19,7 +20,7 @@ class StaffWorkplaceController extends Controller
         return view('staff-workplace.create',compact('staffId'));
     }
     
-    function store(Request $req){
+    function store(StoreStaffWorkplaceRequest $req){
         $staffWorkplace = new StaffWorkplace;
         $staffWorkplace->staff_id=$req->staffId;
         $staffWorkplace->start_date=$req->startDate;

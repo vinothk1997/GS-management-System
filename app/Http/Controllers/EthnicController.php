@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEthnicRequest;
 use App\Models\Ethnic;
 
 class EthnicController extends Controller
@@ -14,7 +15,7 @@ class EthnicController extends Controller
     function create(){
         return view('ethnic.create');
     }
-    function store(Request $req){
+    function store(StoreEthnicRequest $req){
         $lastEthnicId=Ethnic::pluck('ethnic_id')->last();
         if(!$lastEthnicId){
             $ethnicId="ET01";

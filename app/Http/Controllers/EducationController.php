@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEducationRequest;
 use App\Models\Education;
 
 class EducationController extends Controller
@@ -14,7 +15,7 @@ class EducationController extends Controller
     function create(){
         return view('education.create');
     }
-    function store(Request $req){
+    function store(StoreEducationRequest $req){
         $lastEducationId=Education::pluck('education_id')->last();
         if(!$lastEducationId){
             $educationId="ED001";

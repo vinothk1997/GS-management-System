@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreDistrictRequest;
 use App\Models\District;
 use App\Models\Division;
 
@@ -16,7 +16,7 @@ class DistrictController extends Controller
     function create(){
         return view('district.create');
     }
-    function store(Request $req){
+    function store(StoreDistrictRequest $req){
 
         $lastDistrict=District::pluck('district_id')->last();
         if(!$lastDistrict){

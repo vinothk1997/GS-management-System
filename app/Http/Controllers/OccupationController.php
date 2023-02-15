@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreOccupationRequest;
 use App\Models\Occupation;
 
 class OccupationController extends Controller
@@ -14,7 +15,7 @@ class OccupationController extends Controller
     function create(){
         return view('occupation.create');
     }
-    function store(Request $req){
+    function store(StoreOccupationRequest $req){
         $lastOccupationId=Occupation::pluck('occupation_id')->last();
         if(!$lastOccupationId){
             $occupationId="OC001";

@@ -7,7 +7,10 @@
         @csrf
         <div class="form-group">
             <label>Division:</label>
-            <input type="text" name="name" id="" class="form-control">
+            <input type="text" name="name" id="" class="form-control @error('name') is-invalid @enderror">
+            @error('name')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <input type="hidden" name="districtId" value="{{$districtId}}">
