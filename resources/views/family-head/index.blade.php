@@ -3,7 +3,6 @@
 @section('content')
 <p class="h3">Family Head Table</p>
 <a href="{{route('familyHead.create')}}" class="btn btn-sm btn-primary my-2">Add New</a>
-
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
@@ -26,12 +25,22 @@
             <td>{{$familyHead->dob}}</td>
             <td>{{$familyHead->gender}}</td>
             <td>
-                <a href="{{route('familyHead.show',$familyHead->family_id)}}" class="btn btn-sm btn-success">View</a>
-                <a href="{{route('familyHead.edit',$familyHead->family_id)}}" class="btn btn-sm btn-secondary">Edit</a>
-                <form class=d-inline action="{{route('familyHead.destroy',$familyHead->family_id)}}" method="POST">
+                <form class="d-inline me-1" action="{{route('familyHead.show')}}" method="GET">
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                    @method('GET')
+                    <input type="hidden" name="familyId" value="{{$familyHead->family_id}}" />
+                    <button type="submit" class="btn btn-sm btn-primary">View</a>
+                </form>
+                <form class="d-inline" action="{{route('familyHead.edit')}}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="familyId" value="{{$familyHead->family_id}}" />
+                    <button type="submit" class="btn btn-sm btn-secondary mx-2">Edit</a>
+                </form>
+                <form class="d-inline" action="{{route('familyHead.destroy')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="familyId" value="{{$familyHead->family_id}}">
+                    @method('DELETE') <button type="submit" class="btn btn-sm btn-danger">Delete</a>
                 </form>
             </td>
         </tr>

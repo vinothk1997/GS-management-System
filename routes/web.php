@@ -16,6 +16,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\GnDivisionController;
 use App\Http\Controllers\FamilyHeadController;
+use App\Http\Controllers\FamilyMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,19 +176,19 @@ Route::group(['prefix'=>'GN-Divisions'],function(){
 Route::group(['prefix'=>'family-Heads'],function(){
     Route::get('/',[FamilyHeadController::class,'index'])->name('familyHead.index');
     Route::get('/create',[FamilyHeadController::class,'create'])->name('familyHead.create');
-    Route::get('/{familyId}',[FamilyHeadController::class,'show'])->name('familyHead.show');
-    Route::get('/{familyId}/edit',[FamilyHeadController::class,'edit'])->name('familyHead.edit');
+    Route::get('/show',[FamilyHeadController::class,'show'])->name('familyHead.show');
+    Route::post('/edit',[FamilyHeadController::class,'edit'])->name('familyHead.edit');
     Route::post('/',[FamilyHeadController::class,'store'])->name('familyHead.store');
-    Route::put('/{familyId}',[FamilyHeadController::class,'update'])->name('familyHead.update');
-    Route::delete('/{familyId}',[FamilyHeadController::class,'destroy'])->name('familyHead.destroy');
+    Route::put('/',[FamilyHeadController::class,'update'])->name('familyHead.update');
+    Route::delete('/',[FamilyHeadController::class,'destroy'])->name('familyHead.destroy');
 });
 // Family Members
 Route::group(['prefix'=>'family-Members'],function(){
     Route::get('/',[FamilyMemberController::class,'index'])->name('familyMember.index');
-    Route::get('/familyId}/create',[FamilyMemberController::class,'create'])->name('familyMember.create');
+    Route::get('/create',[FamilyMemberController::class,'create'])->name('familyMember.create');
     Route::get('/{memberId}',[FamilyMemberController::class,'show'])->name('familyMember.show');
-    Route::get('/{memberId}/edit',[FamilyMemberController::class,'edit'])->name('familyMember.edit');
+    Route::post('/edit',[FamilyMemberController::class,'edit'])->name('familyMember.edit');
     Route::post('/',[FamilyMemberController::class,'store'])->name('familyMember.store');
-    Route::put('/{memberId}',[FamilyMemberController::class,'update'])->name('familyMember.update');
-    Route::delete('/{memberId}',[FamilyMemberController::class,'destroy'])->name('familyMember.destroy');
+    Route::put('/',[FamilyMemberController::class,'update'])->name('familyMember.update');
+    Route::delete('/delete',[FamilyMemberController::class,'destroy'])->name('familyMember.destroy');
 });

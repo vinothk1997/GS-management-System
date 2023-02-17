@@ -1,15 +1,16 @@
 @extends('layouts.master')
-@section('title','add-familyHead')
+@section('title','edit-familyHead')
 @section('content')
 <div class="container mt-3">
-    <p class="h3">Add Family Form</p>
-    <a href="{{route('familyHead.index')}}">Back</a>
-    <Form action="{{route('familyHead.store')}}" method="POST">
+    <p class="h3">Edit Family Member Form</p>
+    <a href="{{route('familyMember.index')}}">Back</a>
+    <Form action="{{route('familyMember.update')}}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group">
             <label>First Name:</label>
             <input type="text" name="fname" id="" class="form-control  @error('fname') is-invalid @enderror"
-                value="{{old('fname')}}">
+                value="{{$familyMember->first_name}}">
             @error('fname')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -17,7 +18,7 @@
         <div class="form-group">
             <label>Last Name:</label>
             <input type="text" name="lname" id="" class="form-control @error('lname') is-invalid @enderror"
-                value="{{old('lname')}}">
+                value="{{$familyMember->last_name}}">
             @error('lname')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -25,7 +26,7 @@
         <div class="form-group">
             <label>National Identity Card:</label>
             <input type="text" name="nic" id="" class="form-control @error('nic') is-invalid @enderror"
-                value="{{old('nic')}}">
+                value="{{$familyMember->nic}}">
             @error('nic')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -33,7 +34,7 @@
         <div class="form-group">
             <label>Date of Birth:</label>
             <input type="date" name="dob" id="" class="form-control @error('dob') is-invalid @enderror"
-                value="{{old('dob')}}">
+                value="{{$familyMember->dob}}">
             @error('dob')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -41,7 +42,7 @@
         <div class="form-group">
             <label>Gender:</label>
             <input type="text" name="gender" id="" class="form-control @error('gender') is-invalid @enderror"
-                value="{{old('gender')}}">
+                value="{{$familyMember->gender}}">
             @error('gender')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -49,86 +50,61 @@
         <div class="form-group">
             <label>Mobile No:</label>
             <input type="text" name="mobile" id="" class="form-control @error('mobile') is-invalid @enderror"
-                value="{{old('mobile')}}">
+                value="{{$familyMember->mobile}}">
             @error('mobile')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
-            <label>Permenant Address:</label>
-            <input type="text" name="p_address" id="" class="form-control @error('p_address') is-invalid @enderror"
-                value="{{old('p_address')}}">
-            @error('p_address')
+            <label>Birth Certificate Number:</label>
+            <input type="text" name="birth_c_no" id="" class="form-control @error('birth_c_no') is-invalid @enderror"
+                value="{{$familyMember->birth_certificate_no}}">
+            @error('birth_c_no')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
-            <label>Temporary Address:</label>
-            <input type="text" name="t_address" id="" class="form-control @error('t_address') is-invalid @enderror"
-                value="{{old('t_address')}}">
-            @error('t_address')
+            <label>Relationship:</label>
+            <input type="text" name="relationship" id=""
+                class="form-control @error('relationship') is-invalid @enderror"
+                value="{{$familyMember->relationship}}">
+            @error('relationship')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
-            <label>House No:</label>
-            <input type="text" name="house_no" id="" class="form-control @error('house_no') is-invalid @enderror"
-                value="{{old('house_no')}}">
-            @error('house_no')
+            <label>School :</label>
+            <input type="text" name="school" id="" class="form-control @error('school') is-invalid @enderror"
+                value="{{$familyMember->school}}">
+            @error('school')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
-            <label>Card Type:</label>
-            <input type="text" name="card_type" id="" class="form-control @error('card_type') is-invalid @enderror"
-                value="{{old('card_type')}}">
-            @error('card_type')
+            <label>Learning Place Type:</label>
+            <input type="text" name="learning_place_type" id=""
+                class="form-control @error('learning_place_type') is-invalid @enderror"
+                value="{{$familyMember->learning_place_type}}">
+            @error('learning_place_type')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
-            <label>Internet:</label>
-            <input type="text" name="internet" id="" class="form-control @error('internet') is-invalid @enderror"
-                value="{{old('internet')}}">
-            @error('internet')
+            <label>Monthly Income:</label>
+            <input type="text" name="monthly_income" id=""
+                class="form-control @error('monthly_income') is-invalid @enderror"
+                value="{{$familyMember->monthly_income}}">
+            @error('monthly_income')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="form-group">
-            <label>Married Certificate No:</label>
-            <input type="text" name="married_c_no" id=""
-                class="form-control  @error('married_c_no') is-invalid @enderror" value="{{old('married_c_no')}}">
-            @error('married_c_no')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <!-- GN ID want to be hidden -->
-        <label>GN ID</label>
-        <input type="text" name="gn_id" id="" class="form-control  @error('gn_id') is-invalid @enderror">
-        <div class="form-group">
-            <label>Religion:</label>
-
-            <select name="religion" class="form-control  @error('religion') is-invalid @enderror"
-                value="{{old('religion')}}">
-                <option>-- Choose religion --</option>
-                @foreach($religions as $religion)
-                <option value="{{$religion}}">{{$religion}}</option>
-                @endforeach
-            </select>
-            @error('religion')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label>Ethnic:</label>
-            <select name="ethnic" class="form-control  @error('ethnic') is-invalid @enderror" value="{{old('ethnic')}}">
-                <option>-- Choose ethnic --</option>
-                @foreach($ethnics as $ethnic)
-                <option value="{{$ethnic}}">{{$ethnic}}</option>
-                @endforeach
-            </select>
-            @error('ethnic')
+            <label>Driving Licence No:</label>
+            <input type="text" name="driving_licence_no" id=""
+                class="form-control  @error('driving_licence_no') is-invalid @enderror"
+                value="{{$familyMember->driving_licence_no}}">
+            @error('driving_licence_no')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -138,15 +114,27 @@
                 value="{{old('occupation')}}">
                 <option>-- Choose occupation --</option>
                 @foreach($occupations as $occupation)
-                <option value="{{$occupation}}"> {{$occupation}}</option>
+                <option @if($selectedOccupation) selected @endif value="{{$occupation}}">{{$occupation}}</option>
                 @endforeach
             </select>
             @error('occupation')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group">
+            <label>Education:</label>
+            <select name="education" class="form-control  @error('education') is-invalid @enderror"
+                value="{{old('ethnic')}}">
+                <option>-- Choose education --</option>
+                @foreach($educations as $education)
+                <option @if($selectedEducation) selected @endif value="{{$education}}">{{$education}}</option>
+                @endforeach
+            </select>
+            @error('education')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <input type="hidden" name="memberId" value="{{$memberId}}">
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
     </Form>
 </div>
-
-@endsection
