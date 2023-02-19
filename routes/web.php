@@ -186,7 +186,7 @@ Route::group(['prefix'=>'family-Heads'],function(){
 Route::group(['prefix'=>'family-Members'],function(){
     Route::get('/',[FamilyMemberController::class,'index'])->name('familyMember.index');
     Route::get('/create',[FamilyMemberController::class,'create'])->name('familyMember.create');
-    Route::get('/{memberId}',[FamilyMemberController::class,'show'])->name('familyMember.show');
+    Route::get('/show',[FamilyMemberController::class,'show'])->name('familyMember.show');
     Route::post('/edit',[FamilyMemberController::class,'edit'])->name('familyMember.edit');
     Route::post('/',[FamilyMemberController::class,'store'])->name('familyMember.store');
     Route::put('/',[FamilyMemberController::class,'update'])->name('familyMember.update');

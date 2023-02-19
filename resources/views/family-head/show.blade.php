@@ -49,8 +49,10 @@
             <td>{{$familyMember->dob}}</td>
             <td>{{$familyMember->gender}}</td>
             <td>
-                <a href="{{route('familyMember.show',$familyMember->member_id)}}"
-                    class="btn btn-sm btn-success">View</a>
+                <form class=d-inline action="{{route('familyMember.show')}}" method="GET">
+                    <input type="hidden" name="memberId" value="{{$familyMember->member_id}}">
+                    <button type="submit" class="btn btn-sm btn-primary mx-1">View</a>
+                </form>
                 <form class=d-inline action="{{route('familyMember.edit')}}" method="POST">
                     @csrf
                     @method('POST')

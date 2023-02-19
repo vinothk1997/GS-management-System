@@ -41,9 +41,9 @@
         <div class="form-group">
             <label>Gender:</label>
             <br>
-            <input class="form-check-input" type="radio" name="gender" checked value="{{old('gender')}}">
+            <input class="form-check-input" type="radio" name="gender" checked value="male">
             <label class="form-check-label">Male</label>
-            <input class="form-check-input ms-2" type="radio" name="gender" value="{{old('gender')}}">
+            <input class="form-check-input ms-2" type="radio" name="gender" value="female">
             <label class="form-check-label">Female</label>
         </div>
         <div class="form-group">

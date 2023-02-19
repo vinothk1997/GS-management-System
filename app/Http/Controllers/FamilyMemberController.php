@@ -52,7 +52,13 @@ class FamilyMemberController extends Controller
         $member->save();
         return redirect()->back();
     }
-    function show($familyId){
+    function show(Request $req){
+        $familyMember=FamilyMember::find($req->memberId);
+        $occupation=Occupation::where('occupation_id',$familyMember->occupation_id)->pluck('name')->first();
+        $education=Education::where('education_id',$familyMember->education_id)->pluck('name')->first();
+        $familyMember->setAttribute('occupation',$occupation );
+        $familyMember->setAttribute('education',$education);
+        return view('family-member.show',compact('familyMember'));
     }
 
     function edit(Request $req){

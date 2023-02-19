@@ -3,8 +3,15 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Edit Family Member Form</p>
-    <a href="{{route('familyMember.index')}}">Back</a>
-    <Form action="{{route('familyMember.update')}}" method="POST">
+    <div>
+        <form class="d-inline me-1" action="{{route('familyHead.show')}}" method="GET">
+            @csrf
+            @method('GET')
+            <input type="hidden" name="familyId" value="{{$familyMember->family_id}}" />
+            <button type="submit" class="btn btn-link">Back</button>
+        </form>
+    </div>
+    <Form action=" {{route('familyMember.update')}}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -41,11 +48,13 @@
         </div>
         <div class="form-group">
             <label>Gender:</label>
-            <input type="text" name="gender" id="" class="form-control @error('gender') is-invalid @enderror"
-                value="{{$familyMember->gender}}">
-            @error('gender')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
+            <br>
+            <input class="form-check-input" type="radio" name="gender" @if($familyMember->gender=='male') checked @endif
+            value="male">
+            <label class="form-check-label">Male</label>
+            <input class="form-check-input ms-2" type="radio" name="gender" @if($familyMember->gender=='female') checked
+            @endif value="female">
+            <label class="form-check-label">Female</label>
         </div>
         <div class="form-group">
             <label>Mobile No:</label>
@@ -135,6 +144,6 @@
             @enderror
         </div>
         <input type="hidden" name="memberId" value="{{$memberId}}">
-        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
+        <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>
 </div>
