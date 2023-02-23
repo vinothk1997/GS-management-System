@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('family_heads', function (Blueprint $table) {
-            $table->string('family_id','12')->primary();
+            $table->string('family_id',12)->primary();
             $table->string('first_name','100');
             $table->string('last_name','100');
             $table->string('nic','12');

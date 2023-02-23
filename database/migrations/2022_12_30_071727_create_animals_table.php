@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->string('family_id',12);
-            $table->string('animal_id',100);
+            $table->string('type_of_animal');
             $table->tinyInteger('no_of_animal');
-            $table->primary(array('family_id','animal_id'));
+            $table->primary(array('family_id','type_of_animal'));
             $table->foreign('family_id')
             ->references('family_id')
-            ->on('family_heads')
-            ->onUpdate('cascade');
+            ->on('family_heads');
         });
     }
 

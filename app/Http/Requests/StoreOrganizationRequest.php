@@ -26,8 +26,8 @@ class StoreOrganizationRequest extends FormRequest
         return [
             'name'=>'required',
             'description'=>'max:100',
-            'mobile'=>'nullable|min:10|integer',
-            'landline'=>'required|integer'
+            'mobile'=>'nullable|min:10|numeric',
+            'landline'=>'required|numeric'
         ];
     }
 

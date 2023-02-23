@@ -17,6 +17,12 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\GnDivisionController;
 use App\Http\Controllers\FamilyHeadController;
 use App\Http\Controllers\FamilyMemberController;
+use App\Http\Controllers\InfrastructureController;
+use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\LandController;
+use App\Http\Controllers\TreeController;
+use App\Http\Controllers\LivelihoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,11 +190,71 @@ Route::group(['prefix'=>'family-Heads'],function(){
 });
 // Family Members
 Route::group(['prefix'=>'family-Members'],function(){
-    Route::get('/',[FamilyMemberController::class,'index'])->name('familyMember.index');
+    Route::get('/',[Infrastructure::class,'index'])->name('familyMember.index');
     Route::get('/create',[FamilyMemberController::class,'create'])->name('familyMember.create');
     Route::get('/show',[FamilyMemberController::class,'show'])->name('familyMember.show');
     Route::post('/edit',[FamilyMemberController::class,'edit'])->name('familyMember.edit');
     Route::post('/',[FamilyMemberController::class,'store'])->name('familyMember.store');
     Route::put('/',[FamilyMemberController::class,'update'])->name('familyMember.update');
     Route::delete('/delete',[FamilyMemberController::class,'destroy'])->name('familyMember.destroy');
+});
+// Infrastructure
+Route::group(['prefix'=>'infrastructures'],function(){
+    Route::get('/',[InfrastructureController::class,'index'])->name('infrastructure.index');
+    Route::get('/create',[InfrastructureController::class,'create'])->name('infrastructure.create');
+    Route::get('/show',[InfrastructureController::class,'show'])->name('infrastructure.show');
+    Route::post('/edit',[InfrastructureController::class,'edit'])->name('infrastructure.edit');
+    Route::post('/',[InfrastructureController::class,'store'])->name('infrastructure.store');
+    Route::put('/',[InfrastructureController::class,'update'])->name('infrastructure.update');
+    Route::delete('/delete',[InfrastructureController::class,'destroy'])->name('infrastructure.destroy');
+});
+// Animals
+Route::group(['prefix'=>'animals'],function(){
+    Route::get('/',[AnimalController::class,'index'])->name('animal.index');
+    Route::get('/create',[AnimalController::class,'create'])->name('animal.create');
+    Route::get('/show',[AnimalController::class,'show'])->name('animal.show');
+    Route::post('/edit',[AnimalController::class,'edit'])->name('animal.edit');
+    Route::post('/',[AnimalController::class,'store'])->name('animal.store');
+    Route::put('/',[AnimalController::class,'update'])->name('animal.update');
+    Route::delete('/delete',[AnimalController::class,'destroy'])->name('animal.destroy');
+});
+// Donation
+Route::group(['prefix'=>'donations'],function(){
+    Route::get('/',[DonationController::class,'index'])->name('donation.index');
+    Route::get('/create',[DonationController::class,'create'])->name('donation.create');
+    Route::get('/show',[DonationController::class,'show'])->name('donation.show');
+    Route::post('/edit',[DonationController::class,'edit'])->name('donation.edit');
+    Route::post('/',[DonationController::class,'store'])->name('donation.store');
+    Route::put('/',[DonationController::class,'update'])->name('donation.update');
+    Route::delete('/delete',[DonationController::class,'destroy'])->name('donation.destroy');
+});
+// Land
+Route::group(['prefix'=>'lands'],function(){
+    Route::get('/',[LandController::class,'index'])->name('land.index');
+    Route::get('/create',[LandController::class,'create'])->name('land.create');
+    Route::get('/show',[LandController::class,'show'])->name('land.show');
+    Route::post('/edit',[LandController::class,'edit'])->name('land.edit');
+    Route::post('/',[LandController::class,'store'])->name('land.store');
+    Route::put('/',[LandController::class,'update'])->name('land.update');
+    Route::delete('/delete',[LandController::class,'destroy'])->name('land.destroy');
+});
+// Tree
+Route::group(['prefix'=>'trees'],function(){
+    Route::get('/',[TreeController::class,'index'])->name('tree.index');
+    Route::get('/create',[TreeController::class,'create'])->name('tree.create');
+    Route::get('/show',[TreeController::class,'show'])->name('tree.show');
+    Route::post('/edit',[TreeController::class,'edit'])->name('tree.edit');
+    Route::post('/',[TreeController::class,'store'])->name('tree.store');
+    Route::put('/',[TreeController::class,'update'])->name('tree.update');
+    Route::delete('/delete',[TreeController::class,'destroy'])->name('tree.destroy');
+});
+// Livelihood
+Route::group(['prefix'=>'livelihoods'],function(){
+    Route::get('/',[LivelihoodController::class,'index'])->name('livelihood.index');
+    Route::get('/create',[LivelihoodController::class,'create'])->name('livelihood.create');
+    Route::get('/show',[LivelihoodController::class,'show'])->name('livelihood.show');
+    Route::post('/edit',[LivelihoodController::class,'edit'])->name('livelihood.edit');
+    Route::post('/',[LivelihoodController::class,'store'])->name('livelihood.store');
+    Route::put('/',[LivelihoodController::class,'update'])->name('livelihood.update');
+    Route::delete('/delete',[LivelihoodController::class,'destroy'])->name('livelihood.destroy');
 });
