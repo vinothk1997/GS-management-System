@@ -23,6 +23,11 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\LandController;
 use App\Http\Controllers\TreeController;
 use App\Http\Controllers\LivelihoodController;
+use App\Http\Controllers\SocialServiceController;
+use App\Http\Controllers\PensionController;
+use App\Http\Controllers\VotingDetailController;
+use App\Http\Controllers\DeathController;
+use App\Http\Controllers\DifferentlyAbledPersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -257,4 +262,64 @@ Route::group(['prefix'=>'livelihoods'],function(){
     Route::post('/',[LivelihoodController::class,'store'])->name('livelihood.store');
     Route::put('/',[LivelihoodController::class,'update'])->name('livelihood.update');
     Route::delete('/delete',[LivelihoodController::class,'destroy'])->name('livelihood.destroy');
+});
+// Social service
+Route::group(['prefix'=>'socialServices'],function(){
+    Route::get('/',[SocialServiceController::class,'index'])->name('socialService.index');
+    Route::get('/create',[SocialServiceController::class,'create'])->name('socialService.create');
+    Route::get('/show',[SocialServiceController::class,'show'])->name('socialService.show');
+    Route::post('/edit',[SocialServiceController::class,'edit'])->name('socialService.edit');
+    Route::post('/',[SocialServiceController::class,'store'])->name('socialService.store');
+    Route::put('/',[SocialServiceController::class,'update'])->name('socialService.update');
+    Route::delete('/delete',[SocialServiceController::class,'destroy'])->name('socialService.destroy');
+});
+// Social service
+Route::group(['prefix'=>'pensions'],function(){
+    Route::get('/',[PensionController::class,'index'])->name('pension.index');
+    Route::get('/create',[PensionController::class,'create'])->name('pension.create');
+    Route::get('/show',[PensionController::class,'show'])->name('pension.show');
+    Route::post('/edit',[PensionController::class,'edit'])->name('pension.edit');
+    Route::post('/',[PensionController::class,'store'])->name('pension.store');
+    Route::put('/',[PensionController::class,'update'])->name('pension.update');
+    Route::delete('/delete',[PensionController::class,'destroy'])->name('pension.destroy');
+});
+// Voting Detail
+Route::group(['prefix'=>'votingDetails'],function(){
+    Route::get('/',[VotingDetailController::class,'index'])->name('votingDetail.index');
+    Route::get('/create',[VotingDetailController::class,'create'])->name('votingDetail.create');
+    Route::get('/show',[VotingDetailController::class,'show'])->name('votingDetail.show');
+    Route::post('/edit',[VotingDetailController::class,'edit'])->name('votingDetail.edit');
+    Route::post('/',[VotingDetailController::class,'store'])->name('votingDetail.store');
+    Route::put('/',[VotingDetailController::class,'update'])->name('votingDetail.update');
+    Route::delete('/delete',[VotingDetailController::class,'destroy'])->name('votingDetail.destroy');
+});
+// Death
+Route::group(['prefix'=>'deaths'],function(){
+    Route::get('/',[DeathController::class,'index'])->name('death.index');
+    Route::get('/create',[DeathController::class,'create'])->name('death.create');
+    Route::get('/show',[DeathController::class,'show'])->name('death.show');
+    Route::post('/edit',[DeathController::class,'edit'])->name('death.edit');
+    Route::post('/',[DeathController::class,'store'])->name('death.store');
+    Route::put('/',[DeathController::class,'update'])->name('death.update');
+    Route::delete('/delete',[DeathController::class,'destroy'])->name('death.destroy');
+});
+// DiffrentlyAbledPerson
+Route::group(['prefix'=>'DifferentlyAbledPersons'],function(){
+    Route::get('/',[DifferentlyAbledPersonController::class,'index'])->name('differentlyAbledPerson.index');
+    Route::get('/create',[DifferentlyAbledPersonController::class,'create'])->name('differentlyAbledPerson.create');
+    Route::get('/show',[DifferentlyAbledPersonController::class,'show'])->name('differentlyAbledPerson.show');
+    Route::post('/edit',[DifferentlyAbledPersonController::class,'edit'])->name('differentlyAbledPerson.edit');
+    Route::post('/',[DifferentlyAbledPersonController::class,'store'])->name('differentlyAbledPerson.store');
+    Route::put('/',[DifferentlyAbledPersonController::class,'update'])->name('differentlyAbledPerson.update');
+    Route::delete('/delete',[DifferentlyAbledPersonController::class,'destroy'])->name('differentlyAbledPerson.destroy');
+});
+// Message
+Route::group(['prefix'=>'messages'],function(){
+    Route::get('/',[MessageController::class,'index'])->name('message.index');
+    Route::get('/create',[MessageController::class,'create'])->name('message.create');
+    Route::get('/show',[MessageController::class,'show'])->name('message.show');
+    Route::post('/edit',[MessageController::class,'edit'])->name('message.edit');
+    Route::post('/',[MessageController::class,'store'])->name('message.store');
+    Route::put('/',[MessageController::class,'update'])->name('message.update');
+    Route::delete('/delete',[MessageController::class,'destroy'])->name('message.destroy');
 });

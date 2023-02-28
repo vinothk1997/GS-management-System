@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('voting_details_', function (Blueprint $table) {
-            $table->string('member_id','17');
+        Schema::create('voting_details', function (Blueprint $table) {
+            $table->increments('Voting_id');
             $table->year('year');
             $table->string('vote_no',10);
-            $table->primary(array('member_id','year'));
+            $table->string('member_id','17')->nullable();
+            $table->string('family_id','12')->nullable();
             $table->foreign('member_id')->references('member_id')->on('family_members');
+            $table->foreign('family_id')->references('family_id')->on('family_heads');
         });
     }
 

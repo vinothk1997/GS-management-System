@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DifferentlyAbledPerson extends Model
 {
     use HasFactory;
+    protected $fillable=['member_id','family_id','type','date','reason','monthly_assist','amount'];
+    public $timestamps=false;
 }

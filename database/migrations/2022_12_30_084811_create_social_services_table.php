@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('social_services', function (Blueprint $table) {
-            $table->string('member_id','17');
+            $table->string('social_service_id','10')->nullable();
+            $table->string('member_id','17')->nullable();
+            $table->string('family_id',12)->nullable();
             $table->string('type','100');
             $table->decimal('amount');
             $table->longText('description');
             $table->year('year');
-            $table->primary(array('member_id','type'));
             $table->foreign('member_id')->references('member_id')->on('family_members');
+            $table->foreign('family_id')->references('family_id')->on('family_heads');
         });
     }
 

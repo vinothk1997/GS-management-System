@@ -57,7 +57,5 @@ class LivelihoodController extends Controller
     function destroy(Request $req){
         Livelihood::destroy($req->livelihood_id);
         return redirect()->route('livelihood.index');
-
-        
     }
 }
