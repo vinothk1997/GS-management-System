@@ -18,7 +18,8 @@
         </div>
         <div class="form-group">
             <label>Designation:</label>
-            <input type="text" name="designation" value="{{$staffWorkplace->designation}}" id="" class="form-control">
+            <input type="text" name="designation" onkeypress="return isTextKey(event)"
+                value="{{$staffWorkplace->designation}}" id="" class="form-control">
         </div>
         <div class="form-group">
             <label>Place ID:</label>

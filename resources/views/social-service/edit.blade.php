@@ -16,16 +16,18 @@
         </div>
         <div class="form-group">
             <label>Amount:</label>
-            <input type="text" name="amount" class="form-control" id="" value="{{$socialService->amount}}">
+            <input type="text" name="amount" class="form-control" id="" onkeypress="return isNumberKey(event)"
+                value="{{$socialService->amount}}">
         </div>
         <div class="form-group">
             <label>Year:</label>
-            <input type="number" min="2000" max="2099" name="year" class="form-control" id=""
-                value="{{$socialService->year}}">
+            <input type="number" min="2000" max="2099" name="year" onkeypress="return isNumberKey(event)"
+                class="form-control" id="" value="{{$socialService->year}}">
         </div>
         <div class="form-group">
             <label>Description:</label>
-            <input type="text" name="description" class="form-control" id="" value="{{$socialService->description}}">
+            <input type="text" name="description" onkeypress="return isTextKey(event)" class="form-control" id=""
+                value="{{$socialService->description}}">
         </div>
         <div>
             <input type="hidden" name="social_service_id" value="{{$socialService->social_service_id}}">

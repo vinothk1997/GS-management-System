@@ -7,7 +7,8 @@
         <p class="h3">Add GN Division Form</p>
         <div class="form-group">
             <label>GN Division:</label>
-            <input type="text" name="name" id="" class="form-control @error('name') is-invalid @enderror">
+            <input type="text" name="name" id="" onkeypress="return isTextKey(event)"
+                class="form-control @error('name') is-invalid @enderror">
             @error('name')
             <div class="text-danger">{{ $message }}</div>
             @enderror

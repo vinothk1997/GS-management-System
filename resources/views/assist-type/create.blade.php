@@ -7,7 +7,7 @@
         <p class="h3">Add District Form</p>
         <div class="form-group">
             <label>Assist Type:</label>
-            <input type="text" name="name" id="" class="form-control">
+            <input type="text" name="name" id="" onkeypress="return isTextKey(event)" class="form-control">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
 

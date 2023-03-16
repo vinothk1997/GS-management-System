@@ -15,11 +15,11 @@
         </div>
         <div class="form-group">
             <label>Tree Name:</label>
-            <input type="text" name="tree_name" class="form-control" id="">
+            <input type="text" name="tree_name" onkeypress="return isTextKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
             <label>Number of Tree:</label>
-            <input type="text" name="no_of_tree" class="form-control" id="">
+            <input type="text" name="no_of_tree" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div>
             <input type="text" name="land_id" placeholder="land id want to be loaded" value="">

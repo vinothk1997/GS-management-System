@@ -25,8 +25,8 @@
         </div>
         <div class="form-group">
             <label>Designation:</label>
-            <input type="text" name="designation" value="{{old('designation')}}" id=""
-                class="form-control @error('designation') is-invalid @enderror">
+            <input type="text" name="designation" onkeypress="return isTextKey(event)" value="{{old('designation')}}"
+                id="" class="form-control @error('designation') is-invalid @enderror">
             @error('designation')
             <div class="text-danger">{{ $message }}</div>
             @enderror

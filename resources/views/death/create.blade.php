@@ -12,11 +12,12 @@
         </div>
         <div class="form-group">
             <label>Place of death:</label>
-            <input type="text" name="place" class="form-control" id="">
+            <input type="text" name="place" onkeypress="return isTextKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
             <label>Reason:</label>
-            <textarea name="reason" id="" class="form-control" cols="30" rows="5"></textarea>
+            <textarea name="reason" id="" class="form-control" onkeypress="return isTextKey(event)" cols="30"
+                rows="5"></textarea>
         </div>
         <div>
             <input type="text" name="member_id" placeholder="member id want to be loaded" value="">

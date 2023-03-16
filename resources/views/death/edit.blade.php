@@ -13,11 +13,13 @@
         </div>
         <div class="form-group">
             <label>Place of death:</label>
-            <input type="text" name="place" class="form-control" id="" value="{{$death->place}}">
+            <input type="text" name="place" onkeypress="return isTextKey(event)" class="form-control" id=""
+                value="{{$death->place}}">
         </div>
         <div class="form-group">
             <label>Reason:</label>
-            <textarea name="reason" id="" class="form-control" cols="30" rows="5">{{$death->reason}}</textarea>
+            <textarea name="reason" id="" class="form-control" onkeypress="return isTextKey(event)" cols="30"
+                rows="5">{{$death->reason}}</textarea>
         </div>
         <input type="hidden" name="death_id" value="{{$death->death_id}}">
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>

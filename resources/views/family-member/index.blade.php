@@ -22,7 +22,7 @@
                 method="POST">
                 @method("DELETE")
                 @csrf
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button onclick="return deletedata()" class="btn btn-sm btn-danger">Delete</button>
             </form>
         </td>
     </tr>

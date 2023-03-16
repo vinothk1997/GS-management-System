@@ -22,10 +22,12 @@
             </select>
             <div class="form-group">
                 <label>Amount:</label>
-                <input type="text" name="amount" class="form-control" id="" value="{{$donation->amount}}">
+                <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id=""
+                    value="{{$donation->amount}}">
             </div>
             <div class="form-group">
-                <textarea class="form-control" name="description" rows="4">{{$donation->description}}</textarea>
+                <textarea class="form-control" name="description" onkeypress="return isTextKey(event)"
+                    rows="4">{{$donation->description}}</textarea>
             </div>
         </div>
         <div>

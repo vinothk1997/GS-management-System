@@ -37,12 +37,15 @@ class OrganizationController extends Controller
         return;
     }
     function edit($organization){
-        $occupation=Organization::find($organization);
+        $organization=Organization::find($organization);
         return view('organization.edit',compact('organization'));
     }
     function update(Request $req,$organization){
         $organization= Organization::find($organization);
         $organization->name=$req->name;
+        $organization->description=$req->description;
+        $organization->mobile=$req->mobile;
+        $organization->landline_no=$req->landline;
         $organization->save();
         return redirect()->route('organization.index');
     }

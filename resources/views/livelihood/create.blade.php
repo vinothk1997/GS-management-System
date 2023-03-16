@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label>Amount:</label>
-            <input type="text" name="amount" class="form-control" id="">
+            <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div>
             <input type="text" name="family_id" placeholder="family id want to be loaded" value="">

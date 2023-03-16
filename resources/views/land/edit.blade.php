@@ -24,11 +24,13 @@
         </div>
         <div class="form-group">
             <label>Address:</label>
-            <input type="text" name="address" class="form-control" id="" value="{{$land->address}}">
+            <input type="text" name="address" onkeypress="return isTextKey(event)" class="form-control" id=""
+                value="{{$land->address}}">
         </div>
         <div class="form-group">
-            <label>Area:</label>
-            <input type="text" name="area" class="form-control" id="" value="{{$land->area}}">
+            <label>Area (in perch):</label>
+            <input type="text" name="area" onkeypress="return isNumberKey(event)" class="form-control" id=""
+                value="{{$land->area}}">
         </div>
         <div class="form-group">
             <label>Reg.No:</label>

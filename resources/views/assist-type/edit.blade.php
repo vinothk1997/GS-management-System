@@ -8,7 +8,8 @@
         @csrf
         <div class="form-group">
             <label>Assist Type:</label>
-            <input type="text" name="name" id="" value="{{$assistType->name}}" class="form-control">
+            <input type="text" name="name" id="" onkeypress="return isTextKey(event)" value="{{$assistType->name}}"
+                class="form-control">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>

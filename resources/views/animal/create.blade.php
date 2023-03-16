@@ -15,7 +15,8 @@
         </div>
         <div class="form-group">
             <label>Number of Animals:</label>
-            <input type="text" name="no_of_animal" class="form-control" id="">
+            <input type="text" name="no_of_animal" class="form-control" id="no_of_animal"
+                onkeypress="return isNumberKey(event)">
         </div>
         <div>
             <input type="text" name="familyId" placeholder="family id want to be loaded" value="">

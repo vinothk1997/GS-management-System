@@ -15,16 +15,17 @@
         </div>
         <div class="form-group">
             <label>Amount:</label>
-            <input type="text" name="amount" class="form-control" id="">
+            <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
             <label>Year:</label>
-            <input type="number" min="2000" max="2099" name="year" class="form-control" id="" value="2020">
+            <input type="number" min="2000" max="2099" name="year" onkeypress="return isNumberKey(event)"
+                class="form-control" id="" value="2020">
 
         </div>
         <div class="form-group">
             <label>Description:</label>
-            <input type="text" name="description" class="form-control" id="">
+            <input type="text" name="description" onkeypress="return isTextKey(event)" class="form-control" id="">
         </div>
         <div>
             <input type="text" name="family_id" placeholder="family id want to be loaded" value="">

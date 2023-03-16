@@ -28,6 +28,8 @@ use App\Http\Controllers\PensionController;
 use App\Http\Controllers\VotingDetailController;
 use App\Http\Controllers\DeathController;
 use App\Http\Controllers\DifferentlyAbledPersonController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -323,3 +325,17 @@ Route::group(['prefix'=>'messages'],function(){
     Route::put('/',[MessageController::class,'update'])->name('message.update');
     Route::delete('/delete',[MessageController::class,'destroy'])->name('message.destroy');
 });
+// authentication
+Route::group(['prefix'=>'auth'],function(){
+    Route::get('/',[AuthController::class,'showLogin'])->name('auth.index');
+    Route::post('/login',[AuthController::class,'login'])->name('auth.login');
+    Route::get('/forget',[AuthController::class,'forget'])->name('auth.forget');
+    Route::post('/recover',[AuthController::class,'recover'])->name('auth.recover');
+    Route::post('/verify',[AuthController::class,'verifyCode'])->name('auth.verifyCode');
+    Route::post('/confirm',[AuthController::class,'storeConfirmedpassword'])->name('auth.storeConfirmedpassword');
+    Route::get('/change-password',[AuthController::class,'changePasswordView'])->name('auth.changePasswordView');
+    Route::post('/change-password',[AuthController::class,'changePassword'])->name('auth.changePassword');
+    Route::get('forget_password',[AuthController::class,'customForgetPassword'])->name('auth.customForgetPassword');
+});
+
+Route::get("/calculatenic/{nic}",[AjaxController::class,'calculateNic']);

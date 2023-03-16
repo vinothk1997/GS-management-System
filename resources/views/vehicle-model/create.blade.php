@@ -8,7 +8,7 @@
         @csrf
         <div class="form-group">
             <label>Vehicle Model:</label>
-            <input type="text" name="name" id="" class="form-control">
+            <input type="text" name="name" id="" onkeypress="return isTextKey(event)" class="form-control">
         </div>
         <input type="hidden" name="brandId" id="" class="form-control" value="{{$brandId}}">
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>

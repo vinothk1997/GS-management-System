@@ -8,7 +8,8 @@
         @csrf
         <div class="form-group">
             <label>District:</label>
-            <input type="text" name="name" id="" value="{{$district->name}}" class="form-control">
+            <input type="text" name="name" onkeypress="return isTextKey(event)" id="" value="{{$district->name}}"
+                class="form-control">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>

@@ -8,64 +8,64 @@
         @csrf
         <div class="form-group">
             <label>First Name:</label>
-            <input type="text" name="fname" id="" class="form-control  @error('fname') is-invalid @enderror"
-                value="{{old('fname')}}">
+            <input type="text" name="fname" id="" onkeypress="return isTextKey(event)"
+                class="form-control  @error('fname') is-invalid @enderror" value="{{old('fname')}}">
             @error('fname')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Last Name:</label>
-            <input type="text" name="lname" id="" class="form-control @error('lname') is-invalid @enderror"
-                value="{{old('lname')}}">
+            <input type="text" name="lname" id="" onkeypress="return isTextKey(event)"
+                class="form-control @error('lname') is-invalid @enderror" value="{{old('lname')}}">
             @error('lname')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>National Identity Card:</label>
-            <input type="text" name="nic" id="" class="form-control @error('nic') is-invalid @enderror"
-                value="{{old('nic')}}">
+            <input type="text" name="nic" id="nic" onblur="nicnumber()"
+                class="form-control @error('nic') is-invalid @enderror" value="{{old('nic')}}">
             @error('nic')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Date of Birth:</label>
-            <input type="date" name="dob" id="" class="form-control @error('dob') is-invalid @enderror"
-                value="{{old('dob')}}">
+            <input type="date" name="dob" id="dob" class="form-control @error('dob') is-invalid @enderror"
+                value="{{old('dob')}}" readonly>
             @error('dob')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Gender:</label>
-            <input type="text" name="gender" id="" class="form-control @error('gender') is-invalid @enderror"
-                value="{{old('gender')}}">
+            <input type="text" name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror"
+                value="{{old('gender')}}" readonly>
             @error('gender')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Mobile No:</label>
-            <input type="text" name="mobile" id="" class="form-control @error('mobile') is-invalid @enderror"
-                value="{{old('mobile')}}">
+            <input type="text" name="mobile" id="mobile" onblur=" return phonenumber(mobile)"
+                class="form-control @error('mobile') is-invalid @enderror" value="{{old('mobile')}}">
             @error('mobile')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Permenant Address:</label>
-            <input type="text" name="p_address" id="" class="form-control @error('p_address') is-invalid @enderror"
-                value="{{old('p_address')}}">
+            <input type="text" name="p_address" id="" onkeypress="return isTextKey(event)"
+                class="form-control @error('p_address') is-invalid @enderror" value="{{old('p_address')}}">
             @error('p_address')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Temporary Address:</label>
-            <input type="text" name="t_address" id="" class="form-control @error('t_address') is-invalid @enderror"
-                value="{{old('t_address')}}">
+            <input type="text" name="t_address" id="" onkeypress="return isTextKey(event)"
+                class="form-control @error('t_address') is-invalid @enderror" value="{{old('t_address')}}">
             @error('t_address')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -80,16 +80,25 @@
         </div>
         <div class="form-group">
             <label>Card Type:</label>
-            <input type="text" name="card_type" id="" class="form-control @error('card_type') is-invalid @enderror"
+            <select name="card_type" id="" class="form-control @error('card_type') is-invalid @enderror"
                 value="{{old('card_type')}}">
+                <option>-- Select a card type --</option>
+                <option value='U'>U</option>
+                <option value='A'>A</option>
+            </select>
             @error('card_type')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>Internet:</label>
-            <input type="text" name="internet" id="" class="form-control @error('internet') is-invalid @enderror"
+            <select name="internet" id="" class="form-control @error('internet') is-invalid @enderror"
                 value="{{old('internet')}}">
+                <option>-- Select type of internet service you have --</option>
+                <option value="ADSL">ADSL</option>
+                <option value="Fiber">Fiber</option>
+                <option value="Internet Card">Internet Card</option>
+            </select>
             @error('internet')
             <div class="text-danger">{{ $message }}</div>
             @enderror

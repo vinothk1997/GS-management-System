@@ -8,7 +8,8 @@
         @csrf
         <div class="form-group">
             <label>Vehicle Brand:</label>
-            <input type="text" name="brand" id="" value="{{$vehicleBrand->brand}}" class="form-control">
+            <input type="text" name="brand" id="" onkeypress="return isTextKey(event)" value="{{$vehicleBrand->brand}}"
+                class="form-control">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>

@@ -7,11 +7,11 @@
         <p class="h3">Add Voting Detail Form</p>
         <div class="form-group">
             <label>Vote No:</label>
-            <input type="text" name="vote_no" class="form-control" id="">
+            <input type="text" name="vote_no" onkeypress="return isTextKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
             <label>Year:</label>
-            <input type="text" name="year" class="form-control" id="">
+            <input type="text" name="year" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
 
         <div>

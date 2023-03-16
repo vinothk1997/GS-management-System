@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('user_id',12)->primary();
             $table->string('name');
             $table->string('password');
-            $table->string('user_type');
+            $table->string('user_type')->nullable();
             $table->string('attempt');
             $table->string('status');
-            $table->string('verification_code');
-            $table->string('staff_id','5');
-            $table->string('family_id','12');
-            $table->foreign('staff_id')->references('staff_id')->on('staff');
-            $table->foreign('family_id')->references('family_id')->on('family_heads');
+            $table->string('verification_code')->nullable();
+            // $table->string('staff_id','5');
+            // $table->string('family_id','12');
+            // $table->foreign('staff_id')->references('staff_id')->on('staff');
+            // $table->foreign('family_id')->references('family_id')->on('family_heads');
         });
     }
 

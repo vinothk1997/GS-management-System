@@ -16,7 +16,8 @@
         </div>
         <div class="form-group">
             <label>Number of Animals:</label>
-            <input type="text" name="noOfAnimal" class="form-control" id="" value="{{$animal->no_of_animal}}">
+            <input type="text" name="noOfAnimal" class="form-control" id="" onkeypress="return isNumberKey(event)"
+                value="{{$animal->no_of_animal}}">
         </div>
         <div>
             <!-- want to change to hidden values -->

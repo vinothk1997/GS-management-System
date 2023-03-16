@@ -20,7 +20,8 @@
         </div>
         <div class="form-group">
             <label>Amount:</label>
-            <input type="text" name="amount" class="form-control" id="" value="{{$livelihood->amount}}">
+            <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id=""
+                value="{{$livelihood->amount}}">
         </div>
         <input type="hidden" name="livelihood_id" class="form-control" id="" value="{{$livelihood->livelihood_id}}">
 

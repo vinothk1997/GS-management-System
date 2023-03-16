@@ -8,7 +8,7 @@
         @csrf
         <div class="form-group">
             <label>First Name:</label>
-            <input type="text" name="fname" value="{{old('fname')}}" id=""
+            <input type="text" name="fname" onkeypress="return isTextKey(event)" value="{{old('fname')}}" id=""
                 class="form-control @error('fname') is-invalid @enderror">
             @error('fname')
             <div class="text-danger">{{ $message }}</div>
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label>Last Name:</label>
-            <input type="text" name="lname" value="{{old('lname')}}" id=""
+            <input type="text" name="lname" onkeypress="return isTextKey(event)" value="{{old('lname')}}" id=""
                 class="form-control @error('lname') is-invalid @enderror">
             @error('lname')
             <div class="text-danger">{{ $message }}</div>
@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
             <label>Address:</label>
-            <input type="text" name="address" value="{{old('address')}}" id=""
+            <input type="text" name="address" onkeypress="return isTextKey(event)" value="{{old('address')}}" id=""
                 class="form-control @error('address') is-invalid @enderror">
             @error('address')
             <div class="text-danger">{{ $message }}</div>
@@ -56,7 +56,8 @@
         </div>
         <div class="form-group">
             <label>Mobile No:</label>
-            <input type="text" name="mobile" value="{{old('mobile')}}" id=""
+            <input type="text" name="mobile" onkeypress="return isNumberKey(event)"
+                onblur="return phonenumber('mobile')" value="{{old('mobile')}}" id=""
                 class="form-control @error('mobile') is-invalid @enderror">
             @error('mobile')
             <div class="text-danger">{{ $message }}</div>

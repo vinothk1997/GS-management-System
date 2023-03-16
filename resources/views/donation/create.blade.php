@@ -27,10 +27,10 @@
         </div>
         <div class="form-group">
             <label>Amount:</label>
-            <input type="text" name="amount" class="form-control" id="">
+            <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="description" rows="4"></textarea>
+            <textarea class="form-control" name="description" onkeypress="return isTextKey(event)" rows="4"></textarea>
         </div>
 
         <div>

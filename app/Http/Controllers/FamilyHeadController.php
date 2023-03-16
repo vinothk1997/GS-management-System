@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreFamilyHeadRequest;
 use App\Models\Ethnic;
 use App\Models\Occupation;
 use App\Models\Religion;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
+use App\Models\User;
 
 class FamilyHeadController extends Controller
 {
@@ -52,6 +54,15 @@ class FamilyHeadController extends Controller
         $familyHead->ethnic_id=$ethnicId;
         $familyHead->occupation_id=$occupationId;
         $familyHead->save();
+        // insert to user table
+        $user=new User;
+        $user->user_id=$familyId;
+        $user->name=$req->nic;
+        $user->password= Hash::make($req->nic);
+        $user->user_type='family head';
+        $user->attempt='0';
+        $user->status='active';
+        $user->save();
         return redirect()->back();
     }
     function show(Request $req,$familyId=null){

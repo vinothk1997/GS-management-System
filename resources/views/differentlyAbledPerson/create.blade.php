@@ -19,15 +19,15 @@
         </div>
         <div class="form-group">
             <label>Reason:</label>
-            <input type="text" name="reason" class="form-control" id="">
+            <input type="text" name="reason" onkeypress="return isTextKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
             <label>Monthly Assist:</label>
-            <input type="text" name="monthly_assist" class="form-control" id="">
+            <input type="text" name="monthly_assist" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div class="form-group">
             <label>Amount:</label>
-            <input type="text" name="amount" class="form-control" id="">
+            <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div>
             <input type="text" name="member_id" placeholder="member id want to be loaded" value="">

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Staff;
 use App\Http\Requests\StoreStaffRequest;
 use App\Models\StaffWorkplace;
+use App\Models\User;
 use DB;
 
 class StaffController extends Controller
@@ -35,6 +37,14 @@ class StaffController extends Controller
         $staff->mobile=$req->mobile;
         $staff->address=$req->address;
         $staff->save();
+        // Insert user table
+        $user=new User;
+        $user->user_id=$StaffId;
+        $user->name=$req->nic;
+        $user->password=Hash::make($req->nic);
+        $user->attempt='0';
+        $user->status='active';
+        $user->save();
         return redirect()->back();
     }
     function show($staff){

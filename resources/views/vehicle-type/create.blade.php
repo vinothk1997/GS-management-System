@@ -8,7 +8,7 @@
         @csrf
         <div class="form-group">
             <label>Vehicle Type:</label>
-            <input type="text" name="vehicle_type" id="" class="form-control">
+            <input type="text" name="vehicle_type" onkeypress="return isTextKey(event)" id="" class="form-control">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
     </Form>
