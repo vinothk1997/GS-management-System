@@ -8,16 +8,35 @@ use App\Models\Staff;
 use App\Http\Requests\StoreStaffRequest;
 use App\Models\StaffWorkplace;
 use App\Models\User;
+use App\Models\Division;
+use App\Models\GNDivision;
 use DB;
+use Session;
+use Carbon\Carbon;
 
 class StaffController extends Controller
 {
     function index(){
-        $staffs=Staff::all();
+        $staffs=DB::table('staff')
+        ->join('users','staff.staff_id','users.user_id')
+        ->select('staff.*','users.status')->get();
+        // return $staff;
+        // $staffs=Staff::all();
         return view('staff.index',compact('staffs'));
     }
     function create(){
-        return view('staff.create');
+        $designationForDS=['DS','GS','Clerk'];
+        $designationForGS=['GS','Clerk'];
+        if(session()->get('user.user_type')=='DS'){
+            $designations=$designationForDS;
+        }
+        elseif(session()->get('user.user_type')=='GS'){
+            $designations=$designationForGS;
+        }
+        else{
+            $designations=['DS'];
+        }
+        return view('staff.create',compact('designations'));
     }
     function store(StoreStaffRequest $req){
         $lastStaffId=Staff::pluck('staff_id')->last();
@@ -37,20 +56,45 @@ class StaffController extends Controller
         $staff->mobile=$req->mobile;
         $staff->address=$req->address;
         $staff->save();
+        // insert to staffworkplace table
+        if($req->designation="DS"){
+            $placeId=Division::where('name',$req->workplace)->pluck('division_id')->first();
+        }
+        else{
+            $placeId=GNDivision::where('name',$req->workplace)->pluck('gn_id')->first();
+        }
+        $staffWorkplace=new StaffWorkplace;
+        $staffWorkplace->staff_id=$StaffId;
+        $staffWorkplace->start_date=Carbon::now();
+        $staffWorkplace->designation=$req->designation;
+        $staffWorkplace->place_id=$placeId;
+        $staffWorkplace->save();
         // Insert user table
+
         $user=new User;
         $user->user_id=$StaffId;
         $user->name=$req->nic;
         $user->password=Hash::make($req->nic);
         $user->attempt='0';
+        $user->user_type='staff';
         $user->status='active';
         $user->save();
         return redirect()->back();
     }
     function show($staff){
         $staffId=$staff;
-        $staffWorkplaces=StaffWorkplace::where('staff_id',$staff)->get();
-        return view('staff.show',compact('staffWorkplaces','staffId'));
+        $staff=DB::table('staff')
+        ->join('users','staff.staff_id','users.user_id')
+        ->where('staff.staff_id',$staff)
+        ->select('staff.*','users.status')->first();
+
+        $staffWorkplaces=DB::table('staff_workplaces')
+        ->join('divisions','staff_workplaces.place_id','divisions.division_id')
+        ->join('gn_divisions','staff_workplaces.place_id','gn_divisions.gn_id')
+        ->get();
+        return $staffWorkplaces;
+        $staffWorkplaces=StaffWorkplace::where('staff_id',$staffId)->get();
+        return view('staff.show',compact('staffWorkplaces','staffId','staff'));
     }
     function edit($staff){
         $staff=Staff::find($staff);
@@ -69,7 +113,27 @@ class StaffController extends Controller
         return redirect()->route('staff.index');
     }
     function destroy($staff){
-        Staff::destroy($staff);
+        $staff=User::where('user_id',$staff)->first();
+        $staff->status='inactive';
+        $staff->save();
+        // return $staff;
+        // Staff::destroy($staff);
         return redirect()->back();
+    }
+    function loadDesignation($designation){
+        // return $designation;
+        if($designation=="DS"){
+            $workPlaces=Division::pluck('name');
+            foreach($workPlaces as $workplace){
+                echo '<option>'.$workplace.'</option>';
+            }
+        }
+        else{
+            $workPlaces=GNDivision::pluck('name');
+            foreach($workPlaces as $workplace){
+                echo '<option>'.$workplace.'</option>';
+            }
+        }
+
     }
 }

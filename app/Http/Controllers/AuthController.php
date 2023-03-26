@@ -36,7 +36,8 @@ class AuthController extends Controller
                     $user->save();
 
                     if($user->status=='active'){
-                        session([
+                        session()->put("user",[
+                            "user_id"=>$user->user_id,
                             'name' => $user->name,
                             "user_type"=>$user->user_type
                         ]);
@@ -82,38 +83,36 @@ class AuthController extends Controller
             }
             // determine request mobile and database mobile is matched.
             if($user_mobile==$req->mobile){
-             return view('auth.verification_code',['user_name'=>$user->name]);
+                $verificationCode=rand(1000,9999);
+                $verifiedUser= User::where('name',$req->user_name)->first();
+                $verifiedUser->verification_code=$verificationCode;
+                $verifiedUser->save();
+                // sms gateway
+                $gateUser = "94769669804";
+                $password = "3100";
+                $text = urlencode("Your verification code: ".$verificationCode);
+                $to = "94".$user_mobile;
 
-            //     $verificationCode=rand(1000,9999);
-            //     $verifiedUser= User::where('name',$req->user_name)->first();
-            //     $verifiedUser->verification_code=$verificationCode;
-            //     $verifiedUser->save();
-            //     // sms gateway
-            //     $gateUser = "94769669804";
-            //     $password = "3100";
-            //     $text = urlencode("Your verification code: ".$verificationCode);
-            //     $to = "94".$user_mobile;
+                $baseurl ="http://www.textit.biz/sendmsg";
+                $url = "$baseurl/?id=$gateUser&pw=$password&to=$to&text=$text";
+                $ret = file($url);
 
-            //     $baseurl ="http://www.textit.biz/sendmsg";
-            //     $url = "$baseurl/?id=$gateUser&pw=$password&to=$to&text=$text";
-            //     $ret = file($url);
+                $res= explode(":",$ret[0]);
 
-            //     $res= explode(":",$ret[0]);
-
-            //     if (trim($res[0])=="OK")
-            //     {
-            //     // echo "Message Sent - ID : ".$res[1];
-            //     return view('auth.verification_code',['user_name'=>$user->name]);
-            //     }
-            //     else
-            //     {
-            //     // echo "Sent Failed - Error : ".$res[1].
-            //     return redirect()->back()->with(['IsNotconnection'=>true]);
-            //     }
-            //     // return "matched mobile number ";
-            // }
-            // else{
-            //     return view('auth.forget_password',['wrong_mobile'=>true]);
+                if (trim($res[0])=="OK")
+                {
+                // echo "Message Sent - ID : ".$res[1];
+                return view('auth.verification_code',['user_name'=>$user->name]);
+                }
+                else
+                {
+                // echo "Sent Failed - Error : ".$res[1].
+                return redirect()->back()->with(['IsNotconnection'=>true]);
+                }
+                // return "matched mobile number ";
+            }
+            else{
+                return view('auth.forget_password',['wrong_mobile'=>true]);
             }
         }
         
@@ -134,9 +133,36 @@ class AuthController extends Controller
             $newHashedPassword=Hash::make($newPassword);
             $updateUser=User::where('name',$req->user_name)->first();
             $updateUser->password=$newHashedPassword;
+            $updateUser->attempt='0';
             $updateUser->save();
             return redirect()->route('auth.index')->with(['updated'=>'Your new password has been updated']);
         }
+    }
+    function changePasswordView(){
+        return view('auth.change_password');
+    }
+    function changePassword (Request $req){
+        $newPassword=$req->new_password;
+        $confirmNewPassword=$req->confirm_new_password;
+        $enteredCurrentPassword=$req->current_password; 
+        $loggedCurrentPassword=User::where('name',$req->user_name)->first()->pluck('password')[0];
+        if(Hash::check($enteredCurrentPassword,$loggedCurrentPassword)){
+            if($newPassword===$confirmNewPassword){
+                $user =User::where('name',$req->user_name)->first();
+                $user->password=Hash::make($newPassword);
+                $user->save();
+                session()->flush();
+                return view('auth.login',['changed'=>"changed password"]);
+            }
+            else{
+                return view('auth.change_password',['mismatched_pw'=>"You entered password not mached with confirm password"]);
+            }
+        }
+        else{
+            return view('auth.change_password',['wrong_current_pw'=>"Wrong current password"]);
+        }
+        
+        
     }
     
 }

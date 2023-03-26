@@ -4,6 +4,51 @@
 <p class="h3">Working History Details</p>
 <a href="{{route('staff.index')}}" class="">Go Back</a>
 <a href="{{route('staffWorkplace.create',$staffId)}}" class="btn btn-primary btn-sm px-4">Add</a>
+<table class="table my-3 w-auto table-borderless ">
+    <h5 class="mt-3">Summary Details</h5>
+    <tr>
+        <td>First Name</td>
+        <td>{{$staff->first_name}}</td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td>{{$staff->last_name}}</td>
+
+    </tr>
+    <tr>
+        <td>National Identity Card No</td>
+        <td>{{$staff->nic}}</td>
+
+    </tr>
+    <tr>
+        <td>Date of Birth</td>
+        <td>{{$staff->dob}}</td>
+
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td>{{$staff->gender}}</td>
+
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td>{{$staff->address}}</td>
+
+    </tr>
+    <tr>
+        <td>Mobile</td>
+        <td>0{{$staff->mobile}}</td>
+
+    </tr>
+    <tr>
+        @if($staff->status=='active')
+        <td>
+            <a href="{{route('staff.edit',$staff->staff_id)}}" class=" btn btn-success w-100">Edit Staff</a>
+
+        </td>
+        @endif
+    </tr>
+</table>
 <table class="table">
     <tr>
         <th>Start Date</th>

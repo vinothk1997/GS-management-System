@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label>National Identity Card No:</label>
-            <input type="text" name="nic" value="{{old('nic')}}" id=""
+            <input type="text" name="nic" value="{{old('nic')}}" id="nic" onblur="nicnumber()"
                 class="form-control @error('nic') is-invalid @enderror">
             @error('nic')
             <div class="text-danger">{{ $message }}</div>
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             <label>Date of Birth:</label>
-            <input type="date" name="dob" value="{{old('dob')}}" id=""
+            <input type="date" name="dob" value="{{old('dob')}}" id="dob" readonly
                 class="form-control @error('dob') is-invalid @enderror">
             @error('dob')
             <div class="text-danger">{{ $message }}</div>
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label>Gender:</label>
-            <input type="text" name="gender" value="{{old('gender')}}" id=""
+            <input type="text" name="gender" value="{{old('gender')}}" id="gender" readonly
                 class="form-control @error('gender') is-invalid @enderror">
             @error('gender')
             <div class="text-danger">{{ $message }}</div>
@@ -63,8 +63,37 @@
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group">
+            <label>Designation:</label>
+            <select class="form-control" name="designation" id="designation" onblur="loadDesignations();">
+                <option>-- Choose designation --</option>
+                @foreach($designations as $designation )
+                <option>{{$designation}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label id="work_place">Work place :</label>
+            <select class="form-control" name="workplace" id="workplace">
+                <option> --choose work place </option>
+                <div id="workplace"></div>
+            </select>
+        </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
     </Form>
 </div>
-
+<script>
+function loadDesignations() {
+    var designation = document.getElementById('designation').value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        var workplaceArray = [];
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById('workplace').innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.open("GET", "/loadDesignation/" + designation, true);
+    xhttp.send();
+}
+</script>
 @endsection

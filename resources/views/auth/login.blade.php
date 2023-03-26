@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','login')
 @section('content')
-<div class="alert alert-info" id="updated"></div>
+<div id="updated"></div>
 <div class="w-100 d-flex justify-content-center align-items-center">
 
     <form class="h-100" action="{{route('auth.login')}}" method="POST">
@@ -45,17 +45,24 @@
 
         function clear() {
             clearTimeout(updating);
-            document.getElementById('updated').innerText = ""
+            document.getElementById('updated').innerText = "";
             document.getElementById('updated').className = "";
 
         }
 
         function update() {
-            document.getElementById('updated').innerText = "Your new password has been updated."
+            document.getElementById('updated').innerText = "Your new password has been updated.";
+            document.getElementById('updated').classList.add('alert', 'alert-info');
+
         }
         </script>
         @endif
+        @if(isset($changed))
+        <script>
+        alert('Your password  has been changed, Login again!');
+        </script>
 
+        @endif
     </form>
 </div>
 @endsection

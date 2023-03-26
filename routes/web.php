@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\EnsureUserLogged;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\AssistTypeController;
@@ -154,6 +154,7 @@ Route::group(['prefix'=>'staffs'],function(){
     Route::post('/',[StaffController::class,'store'])->name('staff.store');
     Route::put('/{staff}',[StaffController::class,'update'])->name('staff.update');
     Route::delete('/{staff}',[StaffController::class,'destroy'])->name('staff.destroy');
+    // ajax load designation to create page
 });
 // StaffWorkplace
 Route::group(['prefix'=>'staffworkplaces'],function(){
@@ -333,9 +334,10 @@ Route::group(['prefix'=>'auth'],function(){
     Route::post('/recover',[AuthController::class,'recover'])->name('auth.recover');
     Route::post('/verify',[AuthController::class,'verifyCode'])->name('auth.verifyCode');
     Route::post('/confirm',[AuthController::class,'storeConfirmedpassword'])->name('auth.storeConfirmedpassword');
-    Route::get('/change-password',[AuthController::class,'changePasswordView'])->name('auth.changePasswordView');
+    Route::get('/change-password',[AuthController::class,'changePasswordView'])->name('auth.changePasswordView')->middleware(EnsureUserLogged::class);
     Route::post('/change-password',[AuthController::class,'changePassword'])->name('auth.changePassword');
     Route::get('forget_password',[AuthController::class,'customForgetPassword'])->name('auth.customForgetPassword');
 });
 
 Route::get("/calculatenic/{nic}",[AjaxController::class,'calculateNic']);
+Route::get('/loadDesignation/{designtion}',[StaffController::class,'loadDesignation']);

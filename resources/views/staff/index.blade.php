@@ -24,15 +24,17 @@
         <td>{{$staff->dob}}</th>
         <td>{{$staff->gender}}</th>
         <td>{{$staff->address}}</th>
-        <td>{{$staff->mobile}}</th>
+        <td>0{{$staff->mobile}}</th>
         <td>
             <a href="{{route('staff.show',$staff->staff_id)}}" class="btn btn-sm btn-success">View</a>
+            @if($staff->status=='active')
             <a href="{{route('staff.edit',$staff->staff_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class="d-inline" action="{{route('staff.destroy',$staff->staff_id)}}" method="POST">
                 @method("DELETE")
                 @csrf
                 <button class="btn btn-sm btn-danger">Delete</button>
             </form>
+            @endif
         </td>
     </tr>
     @endforeach
