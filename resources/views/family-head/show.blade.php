@@ -1,9 +1,14 @@
 @extends('layouts.master')
 @section('title','familyHeads')
 @section('content')
+<!-- Button trigger modal -->
+<div class="position-absolute" style="top:40%; right:0">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+</div>
 <p class="h3">Family Members Table</p>
 <div class="my-3">
-
     <form class=d-inline action="{{route('familyMember.create')}}" method="GET">
         @csrf
         @method('GET')
@@ -11,22 +16,55 @@
         <button type="submit" class="btn btn-sm btn-primary">Add New</a>
     </form>
 </div>
-<div>
-    <p> Full Name:- {{$familyHead->first_name}} {{$familyHead->last_name}}</p>
-    <p> National Identity Card:- {{$familyHead->nic}}</p>
-    <p> Dateof Birth:- {{$familyHead->dob}}</p>
-    <p> Gender:- {{$familyHead->gender}}</p>
-    <p> Mobile:- {{$familyHead->mobile}}</p>
-    <p> Permanent Address:- {{$familyHead->permanent_address}}</p>
-    <p> Temporary Address:- {{$familyHead->temporary_address}}</p>
-    <p> House No:- {{$familyHead->house_no}}</p>
-    <p> Card Type:- {{$familyHead->card_type}}</p>
-    <p> Interest:- {{$familyHead->internet}}</p>
-    <p> Married Certificate No:- {{$familyHead->married_certificate_no}}</p>
-    <p> Religion:- {{$religion}}</p>
-    <p> Occupation:- {{$occupation}}</p>
-    <p> Ethnic:- {{$ethnic}}</p>
+<div class="rounded" style="background-color:white;">
+    <table class="table">
+        <tr>
+            <td class="fw-bold">Full Name:</td>
+            <td>{{$familyHead->first_name}} {{$familyHead->last_name}}</td>
+            <td class="fw-bold">Date of Birth:- </td>
+            <td >{{$familyHead->nic}}</td>
+        </tr>
+        <tr>
+            <td class="fw-bold"> Mobile:-</td>
+            <td> {{$familyHead->mobile}}</td>
+            <td class="fw-bold">Permanent Address:-</td>
+            <td>{{$familyHead->permanent_address}}</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">House No:- </td>
+            <td >{{$familyHead->house_no}}</td>
+            <td class="fw-bold">Interest:- </td>
+            <td>{{$familyHead->internet}}</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Card Type:- </td>
+            <td>{{$familyHead->card_type}}</td>
+            <td class="fw-bold">Married Certificate No:- </td>
+            <td>{{$familyHead->married_certificate_no}}</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Religion:- </td>
+            <td>{{$religion}}</td>
+            <td class="fw-bold"> Occupation:- </td>
+            <td>{{$occupation}}</td>
+        </tr>
+        <tr>
+            <td class="fw-bold"> Ethnic:-</td>
+            <td> {{$ethnic}}</td>
+        </tr>
+    </table>
 </div>
+<div>
+    @if($familyHead->status=='active')
+    <form class="d-inline" action="{{route('familyHead.edit')}}" method="POST">
+        @csrf
+        @method('POST')
+        <input type="hidden" name="familyId" value="{{$familyHead->family_id}}" />
+        <button type="submit" class="btn btn-sm btn-success px-5  mb-3 mx-2">Edit</a>
+    </form>
+    @endif
+</div>
+
 <table id="member" class="display" style="width:100%">
     <thead>
         <tr>
@@ -75,4 +113,38 @@ $(document).ready(function() {
     $('#member').DataTable();
 });
 </script>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="d-inline" action="{{route('infrastructure.create')}}" method="POST">
+                @csrf
+                <input type="hidden" value="{{$familyHead->family_id}}" name="family_id"/>
+                <input type="submit" class="btn btn-sm btn-primary m-2" value="Infrastructure">
+            </form>
+            <form class="d-inline" action="{{route('donation.familyHeadDonationIndex')}}" method="POST">
+                @csrf
+                <input type="hidden" value="{{$familyHead->family_id}}" name="family_id"/>
+                <input type="submit" class="btn btn-sm btn-primary" value="Donation">
+            </form>
+            <form class="d-inline" action="{{route('animal.create')}}" method="POST">
+                @csrf
+                <input type="hidden" value="{{$familyHead->family_id}}" name="family_id"/>
+                <input type="submit" class="btn btn-sm btn-primary" value="Animals">
+            </form>
+            <form class="d-inline" action="{{route('livelihood.indexByFamilyHead')}}" method="POST">
+                @csrf
+                <input type="hidden" value="{{$familyHead->family_id}}" name="family_id"/>
+                <input type="submit" class="btn btn-sm btn-primary" value="LiveliHood">
+            </form>
+        
+        </div>
+       
+      </div>
+    </div>
+  </div>
 @endsection

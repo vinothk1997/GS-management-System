@@ -3,29 +3,43 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Edit Working Histrory</p>
-    <a href="{{route('staff.show',$staffWorkplace->staff_id)}}">Back</a>
-    <Form action="{{route('staffWorkplace.update',[$staffWorkplace->staff_id,$staffWorkplace->start_date])}}"
-        method="POST">
+    <a href="">Back</a>
+    <Form action="{{route('staffWorkplace.update')}}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label>Start Date:</label>
-            <input type="date" name="startDate" value="{{$staffWorkplace->start_date}}" id="" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>National Identity Card No:</label>
-            <input type="date" name="endDate" value="{{$staffWorkplace->end_date}}" id="" class="form-control">
-        </div>
-        <div class="form-group">
             <label>Designation:</label>
-            <input type="text" name="designation" onkeypress="return isTextKey(event)"
-                value="{{$staffWorkplace->designation}}" id="" class="form-control">
+            <select class="form-control" name="designation" id="designation" onblur="loadDesignations();">
+                <option>-- Choose designation --</option>
+                @foreach($designations as $designation )
+                <option>{{$designation}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label>Place ID:</label>
-            <input type="text" name="placeId" value="{{$staffWorkplace->place_id}}" id="" class="form-control">
+            <label id="work_place">Work place :</label>
+            <select class="form-control" name="workplace" id="workplace">
+                <option> --choose work place </option>
+                <div id="workplace"></div>
+            </select>
+            <input type="hidden" name="staff_id" value="{{$staff_id}}" />
+            <input type="hidden" name="start_date" value="{{$start_date}}" />
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
     </Form>
 </div>
+<script>
+function loadDesignations() {
+    var designation = document.getElementById('designation').value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        var workplaceArray = [];
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById('workplace').innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.open("GET", "/loadDesignation/" + designation, true);
+    xhttp.send();
+}
+</script>
 @endsection

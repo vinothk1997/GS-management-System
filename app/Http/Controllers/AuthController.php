@@ -14,6 +14,7 @@ class AuthController extends Controller
     function showLogin(){
         return view('auth.login');
     }
+
     function login(Request $req){
         $user=User::where('name',$req->user_name)->first();
         if(!$user){
@@ -58,6 +59,7 @@ class AuthController extends Controller
         }
       
     }
+    
     function customForgetPassword(){
         if(session()->has('name')){
              session::forget('name');
@@ -75,11 +77,11 @@ class AuthController extends Controller
         }
         else{
             //determin as to select family head or staff to find mobile 
-            if($user->status="family head"){
+            if($user->user_type=="family head"){
                 $user_mobile=FamilyHead::where('nic',$user->name)->pluck('mobile')->first();
             }
             else{
-                $user_mobile=Staff::where('nic',$user->nic)->pluck('mobile')->first();
+                $user_mobile=Staff::where('nic',$user->name)->pluck('mobile')->first();
             }
             // determine request mobile and database mobile is matched.
             if($user_mobile==$req->mobile){

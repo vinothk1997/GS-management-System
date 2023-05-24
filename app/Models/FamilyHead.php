@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class FamilyHead extends Model
 {
@@ -15,4 +16,8 @@ class FamilyHead extends Model
     'temporary_address','house_no','card_type','internet',
     'married_certificate_no','gn_id','religion_id','ethnic_id','occupation_id'];
     public $timestamps = false;
+
+    public function User(){
+        return $this->hasOne(User::class,'user_id','family_id');
+    }
 }

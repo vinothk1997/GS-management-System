@@ -2,7 +2,11 @@
 @section('title','add-assistType')
 @section('content')
 <p class="h3">GN-Division Table</p>
-<a href="{{route('animal.create')}}" class="btn btn-primary">Add New</a>
+    <form class="d-inline" action="{{route('animal.create')}}" method="POST">
+        @csrf
+        <input type="hidden" value="{{$family_id}}" name="family_id"/>
+        <input type="submit" class="btn btn-sm btn-primary" value="Add New">
+    </form>
 <table class="table">
     <tr>
         <th>Type of Animal</th>

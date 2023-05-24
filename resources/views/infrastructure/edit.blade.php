@@ -2,9 +2,15 @@
 @section('title','edit infrastructure')
 @section('content')
 <div class="container">
+    <div class="my-2">
+        <form class="d-inline" action="{{route('familyHead.show')}}" method="GET">
+            <input type="hidden" value="{{$family_id}}" name="familyId"/>
+            <input type="submit" class="btn btn-sm btn-primary" value="Back">
+        </form>
+    </div>
     <Form action="{{route('infrastructure.store')}}" method="POST">
         @csrf
-        @method('PUT')
+        @method('POST')
         <p class="h3">Edit Infrastructure Form</p>
         <div class="form-group">
             <label>Type of Residence:</label>
@@ -18,15 +24,15 @@
             <label>Type of House:</label>
             <select class="form-control" name="type_of_house">
                 <option @if($infrastructure->type_of_house=='A' )selected @endif>A</option>
-                <option @if($infrastructure->type_of_house=='A' )selected @endif>B</option>
-                <option @if($infrastructure->type_of_house=='A' )selected @endif>C</option>
+                <option @if($infrastructure->type_of_house=='B' )selected @endif>B</option>
+                <option @if($infrastructure->type_of_house=='B' )selected @endif>C</option>
             </select>
         </div>
         <label>Type of Roof</label>
         <select name="type_of_roof" class="form-control">
             <option @if($infrastructure->roof=='A' )selected @endif>A</option>
-            <option @if($infrastructure->roof=='A' )selected @endif>B</option>
-            <option @if($infrastructure->roof=='A' )selected @endif>C</option>
+            <option @if($infrastructure->roof=='B' )selected @endif>B</option>
+            <option @if($infrastructure->roof=='C' )selected @endif>C</option>
         </select>
         <div class="row">
 
@@ -82,9 +88,9 @@
 
 
         <div>
-            <input type="text" name="familyId" placeholder="family id want to be loaded" value="">
+            <input type="hidden" name="familyId" placeholder="family id want to be loaded" value="{{$infrastructure->family_id}}">
         </div>
-        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
+        <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
 
     </Form>
 </div>

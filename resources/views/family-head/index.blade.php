@@ -31,6 +31,7 @@
                     <input type="hidden" name="familyId" value="{{$familyHead->family_id}}" />
                     <button type="submit" class="btn btn-sm btn-primary">View</a>
                 </form>
+                @if($familyHead->status=='active')
                 <form class="d-inline" action="{{route('familyHead.edit')}}" method="POST">
                     @csrf
                     @method('POST')
@@ -43,6 +44,7 @@
                     @method('DELETE') <button type="submit" onclick="return deletedata()"
                         class="btn btn-sm btn-danger">Delete</a>
                 </form>
+                @endif
             </td>
         </tr>
         @endforeach
@@ -50,7 +52,10 @@
 </table>
 <script>
 $(document).ready(function() {
-    $('#example').DataTable();
+    var table = $('#example').DataTable();
 });
+table
+    .order([1, 'desc'])
+    .draw();
 </script>
 @endsection

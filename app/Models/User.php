@@ -13,4 +13,8 @@ class User extends Model
     protected $primaryKey="user_id";
     protected $fillable=['user_id','name','password','user_type	','attempt','status','verification_code'];
     public $timestamps=false;
+
+    public function getDesignation(){
+        return User::select('user_type')->where('user_id',$this->user_id)->get()[0]->user_type;
+    }
 }

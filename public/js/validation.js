@@ -50,7 +50,7 @@ function phonenumber(mobile) // Mobile No
 		{
 			alert("Enter 10 digit Mobile Number");
 			document.getElementById(mobile).value="";
-			document.getElementById(mobile).focus()=true;		
+			document.getElementById(mobile).focus()==true;
 			return false;
 		}
 	}	 

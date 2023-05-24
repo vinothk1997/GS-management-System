@@ -1,33 +1,72 @@
 @extends('layouts.master')
-@section('title','edit animal')
+@section('title','add animal')
 @section('content')
 <div class="container">
-    <Form action="{{route('animal.update')}}" method="POST">
+    <Form action="{{route('animal.store')}}" method="POST" id="animalForm">
         @csrf
-        @method("PUT")
+        @php
+        $animals=['Cat','Dog'];
+        @endphp
+
         <p class="h3">Add Animal Form</p>
-        <div class="form-group">
-            <label>Type of Animal:</label>
-            <select class="form-control" name="typeOfAnimal">
-                <option @if($animal->type_of_animal=='A')selected @endif)>A</option>
-                <option @if($animal->type_of_animal=='B')selected @endif)>B</option>
-                <option @if($animal->type_of_animal=='C')selected @endif)>C</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Number of Animals:</label>
-            <input type="text" name="noOfAnimal" class="form-control" id="" onkeypress="return isNumberKey(event)"
-                value="{{$animal->no_of_animal}}">
+        @foreach($animals as $animal)
+        <div class="row mw-50">
+            <div class="col">
+                <input type="checkbox" class="status"  value="checked">
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <input type="text" class="form-control type_of_animal" value="{{$animal}}" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <input type="text"  class="form-control no_of_animal"
+                    onkeypress="return isNumberKey(event)">
+                </div>
+            </div>
+            @endforeach
         </div>
         <div>
-            <!-- want to change to hidden values -->
-            <input type="text" name="familyId" placeholder="family id want to be loaded" value="{{$animal->family_id}}">
-            <input type="text" name="type" placeholder="family id want to be loaded"
-                value="{{$animal->type_of_animal}}">
+            <input type="hidden" name="animals" id='animal_list' value=''/>
+            <input type="text" name="familyId" placeholder="family id want to be loaded" value="{{$family_id}}">
         </div>
-        <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
+        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
 
     </Form>
 </div>
-
+<script>
+    let animals=[]
+    let animal={
+        status:'',
+        type_of_animal:'',
+        no_of_animal:''
+    }
+    $(document).ready(function() {
+  $('#animalForm').submit(function(event) {
+    event.preventDefault(); // Prevent form submission
+    $('.row').each(function()
+    {
+        if ($(this).find('.status').is(':checked')){
+            var $status='checked';
+        }
+        else{
+            var $status='unchecked';
+        }
+        var $type_of_animal=$(this).find('.type_of_animal').val();
+        var $no_of_animal=$(this).find('.no_of_animal').val();
+        // console.log($status,$type_of_animal,$no_of_animal,'new')
+        animals.push(
+        {
+            status:$status,
+            type_of_animal:$type_of_animal,
+            no_of_animal:$no_of_animal
+        });
+        var jsonAnimals=JSON.stringify(animals);
+        $('#animal_list').val(jsonAnimals);
+    });
+    event.currentTarget.submit(); // Submit the form
+  })});
+    
+</script>
 @endsection

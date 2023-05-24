@@ -9,9 +9,9 @@ class Animal extends Model
 {
 
     use HasFactory;
-    protected $fillable=['family_id','type_of_animal','type_of_animal'];
+    protected $fillable=['family_id','type_of_animal','no_of_animal'];
     protected $primaryKey=['family_id','type_of_animal'];
-    protected $keyType='string';
+    protected $keyType='array';
     public $incrementing=false;
     public $timestamps=false;
 

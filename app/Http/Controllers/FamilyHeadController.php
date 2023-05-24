@@ -11,11 +11,16 @@ use App\Models\Religion;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
 use App\Models\User;
+use DB;
 
 class FamilyHeadController extends Controller
 {
     function index(){
-        $familyHeads=FamilyHead::all();
+
+        $familyHeads=DB::table('family_heads')
+        ->join('users','family_id','user_id')
+        ->select('family_heads.*','users.status')
+        ->get();
         return view('family-head.index',compact('familyHeads'));
     }
     function create(){
@@ -67,7 +72,11 @@ class FamilyHeadController extends Controller
     }
     function show(Request $req,$familyId=null){
         $familyId=$req->familyId;
-        $familyHead=FamilyHead::find($familyId);
+        $familyHead=DB::table('family_heads')
+        ->join('users','family_id','user_id')
+        ->first();
+        // return $familyHead;
+        // $familyHead=FamilyHead::find($familyId);
         $familyMembers=FamilyMember::where('family_id',$familyId)->get();
         $religion=Religion::find($familyHead->religion_id)->pluck('name')->first();
         $ethnic=Ethnic::find($familyHead->ethnic_id)->pluck('name')->first();
@@ -109,7 +118,9 @@ class FamilyHeadController extends Controller
         return redirect()->route('familyHead.index');
     }
     function destroy(Request $req){
-        FamilyHead::destroy($req->familyId);
-        return redirect()->back();
+        $familyHead=DB::table('users')
+        ->where('user_id',$req->familyId)
+        ->update(['status'=>'inactive']);
+        return redirect()->back();  
     }
 }

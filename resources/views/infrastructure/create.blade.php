@@ -2,6 +2,12 @@
 @section('title','add infrastructure')
 @section('content')
 <div class="container">
+    <div class="my-2">
+        <form class="d-inline" action="{{route('familyHead.show')}}" method="GET">
+            <input type="hidden" value="{{$family_id}}" name="familyId"/>
+            <input type="submit" class="btn btn-sm btn-primary" value="Back">
+        </form>
+    </div>
     <Form action="{{route('infrastructure.store')}}" method="POST">
         @csrf
         <p class="h3">Add Infrastructure Form</p>
@@ -73,7 +79,7 @@
 
 
         <div>
-            <input type="text" name="familyId" placeholder="family id want to be loaded" value="">
+            <input type="hidden" name="familyId" placeholder="family id want to be loaded" value="{{$family_id}}">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
 

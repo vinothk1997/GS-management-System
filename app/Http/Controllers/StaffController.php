@@ -57,10 +57,11 @@ class StaffController extends Controller
         $staff->address=$req->address;
         $staff->save();
         // insert to staffworkplace table
-        if($req->designation="DS"){
+        if($req->designation=="DS"){
             $placeId=Division::where('name',$req->workplace)->pluck('division_id')->first();
         }
         else{
+            // return 'hello';
             $placeId=GNDivision::where('name',$req->workplace)->pluck('gn_id')->first();
         }
         $staffWorkplace=new StaffWorkplace;
@@ -76,7 +77,7 @@ class StaffController extends Controller
         $user->name=$req->nic;
         $user->password=Hash::make($req->nic);
         $user->attempt='0';
-        $user->user_type='staff';
+        $user->user_type=$req->designation;
         $user->status='active';
         $user->save();
         return redirect()->back();
@@ -86,14 +87,27 @@ class StaffController extends Controller
         $staff=DB::table('staff')
         ->join('users','staff.staff_id','users.user_id')
         ->where('staff.staff_id',$staff)
-        ->select('staff.*','users.status')->first();
-
-        $staffWorkplaces=DB::table('staff_workplaces')
-        ->join('divisions','staff_workplaces.place_id','divisions.division_id')
-        ->join('gn_divisions','staff_workplaces.place_id','gn_divisions.gn_id')
-        ->get();
-        return $staffWorkplaces;
-        $staffWorkplaces=StaffWorkplace::where('staff_id',$staffId)->get();
+        ->select('staff.*','users.status','users.user_type')->first();
+        
+         $staffs=DB::table('staff')
+        ->join('staff_workplaces','staff.staff_id','staff_workplaces.staff_id')
+        ->join('users','staff.staff_id','users.user_id')
+        ->where('staff.staff_id',$staffId)
+        ->select('staff.*','staff_workplaces.designation','users.status')->get();
+        $staffWorkplaces=[];
+        foreach($staffs as $obj){
+            if($obj->designation =="DS"){
+                    $staffWorkplaces=DB::table('staff_workplaces')
+                    ->join('divisions','staff_workplaces.place_id','divisions.division_id')
+                    ->get();
+            }
+            else{
+                $staffWorkplaces=DB::table('staff_workplaces')
+                    ->join('gn_divisions','staff_workplaces.place_id','gn_divisions.gn_id')
+                    ->get();
+                
+            }
+        }
         return view('staff.show',compact('staffWorkplaces','staffId','staff'));
     }
     function edit($staff){
@@ -116,8 +130,11 @@ class StaffController extends Controller
         $staff=User::where('user_id',$staff)->first();
         $staff->status='inactive';
         $staff->save();
-        // return $staff;
-        // Staff::destroy($staff);
+        // Update End date when deleteing staff
+        $staffWorkplace=DB::table('staff_workplaces')
+        ->where('staff_id',$staff)
+        ->where('end_date',null)
+        ->update(['end_date'=>Carbon::now()]);
         return redirect()->back();
     }
     function loadDesignation($designation){

@@ -30,6 +30,8 @@ use App\Http\Controllers\DeathController;
 use App\Http\Controllers\DifferentlyAbledPersonController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -158,13 +160,10 @@ Route::group(['prefix'=>'staffs'],function(){
 });
 // StaffWorkplace
 Route::group(['prefix'=>'staffworkplaces'],function(){
-    Route::get('/',[StaffWorkplaceController::class,'index'])->name('staffWorkplace.index');
     Route::get('/{staffworkplace}/create',[StaffWorkplaceController::class,'create'])->name('staffWorkplace.create');
-    Route::get('/{staffworkplace}/{startDate}/show',[StaffWorkplaceController::class,'show'])->name('staffWorkplace.show');
     Route::get('/{staffworkplace}/{startDate}/edit',[StaffWorkplaceController::class,'edit'])->name('staffWorkplace.edit');
     Route::post('/',[StaffWorkplaceController::class,'store'])->name('staffWorkplace.store');
-    Route::put('/{staffworkplace}/{startDate}',[StaffWorkplaceController::class,'update'])->name('staffWorkplace.update');
-    Route::delete('/{staffworkplace}/{startDate}',[StaffWorkplaceController::class,'destroy'])->name('staffWorkplace.destroy');
+    Route::put('/',[StaffWorkplaceController::class,'update'])->name('staffWorkplace.update');
 });
 // Division
 Route::group(['prefix'=>'divisions'],function(){
@@ -198,7 +197,7 @@ Route::group(['prefix'=>'family-Heads'],function(){
 });
 // Family Members
 Route::group(['prefix'=>'family-Members'],function(){
-    Route::get('/',[Infrastructure::class,'index'])->name('familyMember.index');
+    Route::get('/',[FamilyMemberController::class,'index'])->name('familyMember.index');
     Route::get('/create',[FamilyMemberController::class,'create'])->name('familyMember.create');
     Route::get('/show',[FamilyMemberController::class,'show'])->name('familyMember.show');
     Route::post('/edit',[FamilyMemberController::class,'edit'])->name('familyMember.edit');
@@ -209,7 +208,7 @@ Route::group(['prefix'=>'family-Members'],function(){
 // Infrastructure
 Route::group(['prefix'=>'infrastructures'],function(){
     Route::get('/',[InfrastructureController::class,'index'])->name('infrastructure.index');
-    Route::get('/create',[InfrastructureController::class,'create'])->name('infrastructure.create');
+    Route::post('/create',[InfrastructureController::class,'create'])->name('infrastructure.create');
     Route::get('/show',[InfrastructureController::class,'show'])->name('infrastructure.show');
     Route::post('/edit',[InfrastructureController::class,'edit'])->name('infrastructure.edit');
     Route::post('/',[InfrastructureController::class,'store'])->name('infrastructure.store');
@@ -219,7 +218,8 @@ Route::group(['prefix'=>'infrastructures'],function(){
 // Animals
 Route::group(['prefix'=>'animals'],function(){
     Route::get('/',[AnimalController::class,'index'])->name('animal.index');
-    Route::get('/create',[AnimalController::class,'create'])->name('animal.create');
+    Route::post('/create',[AnimalController::class,'create'])->name('animal.create');
+    Route::post('/get-animals',[AnimalController::class,'getAnimalsByFamily'])->name('get-animals.create');
     Route::get('/show',[AnimalController::class,'show'])->name('animal.show');
     Route::post('/edit',[AnimalController::class,'edit'])->name('animal.edit');
     Route::post('/',[AnimalController::class,'store'])->name('animal.store');
@@ -229,6 +229,7 @@ Route::group(['prefix'=>'animals'],function(){
 // Donation
 Route::group(['prefix'=>'donations'],function(){
     Route::get('/',[DonationController::class,'index'])->name('donation.index');
+    Route::post('/familyhead-donation-index',[DonationController::class,'familyHeadIndex'])->name('donation.familyHeadDonationIndex');
     Route::get('/create',[DonationController::class,'create'])->name('donation.create');
     Route::get('/show',[DonationController::class,'show'])->name('donation.show');
     Route::post('/edit',[DonationController::class,'edit'])->name('donation.edit');
@@ -259,12 +260,13 @@ Route::group(['prefix'=>'trees'],function(){
 // Livelihood
 Route::group(['prefix'=>'livelihoods'],function(){
     Route::get('/',[LivelihoodController::class,'index'])->name('livelihood.index');
+    Route::post('/familyhead-livelihood-index',[LivelihoodController::class,'indexByFamilyHead'])->name('livelihood.indexByFamilyHead');
     Route::get('/create',[LivelihoodController::class,'create'])->name('livelihood.create');
     Route::get('/show',[LivelihoodController::class,'show'])->name('livelihood.show');
     Route::post('/edit',[LivelihoodController::class,'edit'])->name('livelihood.edit');
     Route::post('/',[LivelihoodController::class,'store'])->name('livelihood.store');
     Route::put('/',[LivelihoodController::class,'update'])->name('livelihood.update');
-    Route::delete('/delete',[LivelihoodController::class,'destroy'])->name('livelihood.destroy');
+    Route::post('/delete',[LivelihoodController::class,'destroy'])->name('livelihood.destroy');
 });
 // Social service
 Route::group(['prefix'=>'socialServices'],function(){
@@ -324,7 +326,10 @@ Route::group(['prefix'=>'messages'],function(){
     Route::post('/edit',[MessageController::class,'edit'])->name('message.edit');
     Route::post('/',[MessageController::class,'store'])->name('message.store');
     Route::put('/',[MessageController::class,'update'])->name('message.update');
-    Route::delete('/delete',[MessageController::class,'destroy'])->name('message.destroy');
+    Route::get('/delete/{id}',[MessageController::class,'delete'])->name('message.delete');
+    Route::get('/read/{id}',[MessageController::class,'read'])->name('message.read');
+    Route::get('/sent',[MessageController::class,'sentMessages'])->name('message.sentMessages');
+    Route::get('/sent-deleted/{id}',[MessageController::class,'sentDeleted'])->name('message.sentDeleted');
 });
 // authentication
 Route::group(['prefix'=>'auth'],function(){
@@ -338,6 +343,12 @@ Route::group(['prefix'=>'auth'],function(){
     Route::post('/change-password',[AuthController::class,'changePassword'])->name('auth.changePassword');
     Route::get('forget_password',[AuthController::class,'customForgetPassword'])->name('auth.customForgetPassword');
 });
-
+// Profile
+Route::group(['prefix'=>'profile'],function(){
+    Route::get('/',[ProfileController::class,'showUserDetails'])->name('profile.showUserDetails');
+    Route::get('/edit',[ProfileController::class,'editProfileDetails'])->name('profile.editProfileDetails');
+    Route::put('/update',[ProfileController::class,'updateProfileDetail'])->name('profile.updateProfileDetail');
+    Route::post('/verify-code',[ProfileController::class,'verifyCode'])->name('profile.verifyCode');
+});
 Route::get("/calculatenic/{nic}",[AjaxController::class,'calculateNic']);
 Route::get('/loadDesignation/{designtion}',[StaffController::class,'loadDesignation']);
