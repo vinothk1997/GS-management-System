@@ -4,7 +4,7 @@
 <div id="updated"></div>
 <div class="w-100 d-flex justify-content-center align-items-center">
 
-    <form class="h-100" action="{{route('auth.login')}}" method="POST">
+    <form class="h-100 m-5" action="{{route('auth.login')}}" method="POST">
         @csrf
         <div>
             <label class="form-label">User Name:</label>

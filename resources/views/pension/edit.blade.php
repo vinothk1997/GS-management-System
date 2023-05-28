@@ -2,6 +2,10 @@
 @section('title','add pension')
 @section('content')
 <div class="container">
+    <form action="{{ route('familyMember.show') }}">
+        <input type="hidden" name="memberId" value="{{ $member_id }}">
+        <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+    </form>
     <Form action="{{route('pension.store')}}" method="POST">
         @csrf
         @method('PUT')

@@ -8,7 +8,7 @@
             <p class="h3">Edit Donation Form</p>
             <div class="form-group">
                 <label>Donated Date:</label>
-                <input type="date" name="donated_date" class="form-control" id="" value="{{ $donation->date }}">
+                <input type="date" name="donated_date" class="form-control" id="" value="{{ $donation->date }}" readonly>
             </div>
             <div class="form-group">
                 <label>Organization:</label>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VotingDetail;
+use App\Models\FamilyMember;
+use App\Http\Requests\StoreVoteDetailRequest;
 
 class VotingDetailController extends Controller
 {
@@ -13,17 +15,21 @@ class VotingDetailController extends Controller
 
   }
   
-  public function create(){
-    return view('voting-detail.create');
+  public function create($id){
+    $member_id=urldecode($id);
+    $member=FamilyMember::find($member_id);
+    return view('voting-detail.create',compact('member'));
   }
   
-  public function store(Request $req){
+  public function store(StoreVoteDetailRequest $req){
     $votingDetail=new VotingDetail;
     $votingDetail->vote_no=$req->vote_no;
     $votingDetail->year=$req->year;
     $votingDetail->family_id=$req->family_id;
-    $votingDetail->family_id=$req->family_id;
+    $votingDetail->member_id=$req->member_id;
     $votingDetail->save();
+
+    return redirect()->back();
 
   }
   
@@ -33,17 +39,17 @@ class VotingDetailController extends Controller
 
   }
   
-  public function update(Request $req){
+  public function update(StoreVoteDetailRequest $req){
     $votingDetail=VotingDetail::find($req->voting_id);
     $votingDetail->vote_no=$req->vote_no;
     $votingDetail->year=$req->year;
     $votingDetail->save();
-    return redirect()->route('votingDetail.index');
+    return redirect()->to('/family-Members/show?memberId='.$votingDetail->member_id);
   }
   
   public function destroy(Request $req){
-    VotingDetail::destroy($req->voting_id);
-    return redirect()->route('votingDetail.index');
+    VotingDetail::find($req->voting_id)->delete();
+    return redirect()->back();
 
   }
   

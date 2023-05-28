@@ -2,7 +2,6 @@
 @section('title','social services')
 @section('content')
 <p class="h3">Social Service Table</p>
-<a href="{{route('socialService.create')}}" class="btn btn-primary">Add New</a>
 <table class="table">
     <tr>
         <th>Social Service Id</th>

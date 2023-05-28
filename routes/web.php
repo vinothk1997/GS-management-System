@@ -32,6 +32,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -240,7 +241,7 @@ Route::group(['prefix'=>'donations'],function(){
 // Land
 Route::group(['prefix'=>'lands'],function(){
     Route::get('/',[LandController::class,'index'])->name('land.index');
-    Route::get('/create',[LandController::class,'create'])->name('land.create');
+    Route::get('/create/{id}',[LandController::class,'create'])->where('id', '.*')->name('land.create');
     Route::get('/show',[LandController::class,'show'])->name('land.show');
     Route::post('/edit',[LandController::class,'edit'])->name('land.edit');
     Route::post('/',[LandController::class,'store'])->name('land.store');
@@ -250,7 +251,7 @@ Route::group(['prefix'=>'lands'],function(){
 // Tree
 Route::group(['prefix'=>'trees'],function(){
     Route::get('/',[TreeController::class,'index'])->name('tree.index');
-    Route::get('/create',[TreeController::class,'create'])->name('tree.create');
+    Route::get('/create/{id}',[TreeController::class,'create'])->name('tree.create');
     Route::get('/show',[TreeController::class,'show'])->name('tree.show');
     Route::post('/edit',[TreeController::class,'edit'])->name('tree.edit');
     Route::post('/',[TreeController::class,'store'])->name('tree.store');
@@ -271,7 +272,8 @@ Route::group(['prefix'=>'livelihoods'],function(){
 // Social service
 Route::group(['prefix'=>'socialServices'],function(){
     Route::get('/',[SocialServiceController::class,'index'])->name('socialService.index');
-    Route::get('/create',[SocialServiceController::class,'create'])->name('socialService.create');
+    Route::get('social-service-by-family',[SocialServiceController::class,'socialServiceByFamily'])->name('socialService.socialServiceByFamily');
+    Route::get('/create/{id}',[SocialServiceController::class,'create'])->where('id', '.*')->name('socialService.create');
     Route::get('/show',[SocialServiceController::class,'show'])->name('socialService.show');
     Route::post('/edit',[SocialServiceController::class,'edit'])->name('socialService.edit');
     Route::post('/',[SocialServiceController::class,'store'])->name('socialService.store');
@@ -281,7 +283,7 @@ Route::group(['prefix'=>'socialServices'],function(){
 // Social service
 Route::group(['prefix'=>'pensions'],function(){
     Route::get('/',[PensionController::class,'index'])->name('pension.index');
-    Route::get('/create',[PensionController::class,'create'])->name('pension.create');
+    Route::get('/create/{id}',[PensionController::class,'create'])->where('id','.*')->name('pension.create');
     Route::get('/show',[PensionController::class,'show'])->name('pension.show');
     Route::post('/edit',[PensionController::class,'edit'])->name('pension.edit');
     Route::post('/',[PensionController::class,'store'])->name('pension.store');
@@ -291,7 +293,7 @@ Route::group(['prefix'=>'pensions'],function(){
 // Voting Detail
 Route::group(['prefix'=>'votingDetails'],function(){
     Route::get('/',[VotingDetailController::class,'index'])->name('votingDetail.index');
-    Route::get('/create',[VotingDetailController::class,'create'])->name('votingDetail.create');
+    Route::get('/create/{id}',[VotingDetailController::class,'create'])->where('id', '.*')->name('votingDetail.create');
     Route::get('/show',[VotingDetailController::class,'show'])->name('votingDetail.show');
     Route::post('/edit',[VotingDetailController::class,'edit'])->name('votingDetail.edit');
     Route::post('/',[VotingDetailController::class,'store'])->name('votingDetail.store');
@@ -301,9 +303,9 @@ Route::group(['prefix'=>'votingDetails'],function(){
 // Death
 Route::group(['prefix'=>'deaths'],function(){
     Route::get('/',[DeathController::class,'index'])->name('death.index');
-    Route::get('/create',[DeathController::class,'create'])->name('death.create');
+    Route::get('/create/{id}',[DeathController::class,'create'])->where('id','.*')->name('death.create');
     Route::get('/show',[DeathController::class,'show'])->name('death.show');
-    Route::post('/edit',[DeathController::class,'edit'])->name('death.edit');
+    Route::get('/edit',[DeathController::class,'edit'])->name('death.edit');
     Route::post('/',[DeathController::class,'store'])->name('death.store');
     Route::put('/',[DeathController::class,'update'])->name('death.update');
     Route::delete('/delete',[DeathController::class,'destroy'])->name('death.destroy');
@@ -311,7 +313,7 @@ Route::group(['prefix'=>'deaths'],function(){
 // DiffrentlyAbledPerson
 Route::group(['prefix'=>'DifferentlyAbledPersons'],function(){
     Route::get('/',[DifferentlyAbledPersonController::class,'index'])->name('differentlyAbledPerson.index');
-    Route::get('/create',[DifferentlyAbledPersonController::class,'create'])->name('differentlyAbledPerson.create');
+    Route::get('/create/{id}',[DifferentlyAbledPersonController::class,'create'])->where('id','.*')->name('differentlyAbledPerson.create');
     Route::get('/show',[DifferentlyAbledPersonController::class,'show'])->name('differentlyAbledPerson.show');
     Route::post('/edit',[DifferentlyAbledPersonController::class,'edit'])->name('differentlyAbledPerson.edit');
     Route::post('/',[DifferentlyAbledPersonController::class,'store'])->name('differentlyAbledPerson.store');
@@ -352,3 +354,9 @@ Route::group(['prefix'=>'profile'],function(){
 });
 Route::get("/calculatenic/{nic}",[AjaxController::class,'calculateNic']);
 Route::get('/loadDesignation/{designtion}',[StaffController::class,'loadDesignation']);
+
+// Report
+Route::group(['prefix'=>'Report'],function(){
+    Route::get('/generateFamilyReport',[ReportController::class,'generateFamilyReport'])->name('report.generateFamilyReport');
+    Route::get('/generateStaffReport',[ReportController::class,'generateStaffReport'])->name('report.generateStaffReport');
+});

@@ -15,9 +15,9 @@ class TreeController extends Controller
         return view('tree.index',compact('trees'));
 
     }
-    public function create()
+    public function create($id)
     {
-        return view('tree.create');
+        return view('tree.create',['land_id'=>$id]);
 
     }
     public function store(Request $req)
@@ -28,6 +28,7 @@ class TreeController extends Controller
         $tree->tree_type=$req->tree_type;
         $tree->no_of_tree=$req->no_of_tree;
         $tree->save();
+        return redirect()->back();
     }
     public function edit(Request $req)
     {

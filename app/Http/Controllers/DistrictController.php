@@ -13,9 +13,11 @@ class DistrictController extends Controller
         // return $districts;
         return view('district.index',compact('districts'));
     }
+
     function create(){
         return view('district.create');
     }
+
     function store(StoreDistrictRequest $req){
 
         $lastDistrict=District::pluck('district_id')->last();
@@ -41,7 +43,7 @@ class DistrictController extends Controller
         $district=District::find($district);
         return view('district.edit',compact('district'));
     }
-    function update(Request $req,$district){
+    function update(StoreDistrictRequest $req,$district){
         $district= District::find($district);
         $district->name=$req->name;
         $district->save();

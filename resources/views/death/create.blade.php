@@ -2,6 +2,10 @@
 @section('title','add deaths')
 @section('content')
 <div class="container">
+    <form action="{{ route('familyMember.show') }}">
+        <input type="hidden" name="memberId" value="{{ $member_id }}">
+        <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+    </form>
     <Form action="{{route('death.store')}}" method="POST">
         @csrf
         <p class="h3">Add Death Form</p>
@@ -20,8 +24,8 @@
                 rows="5"></textarea>
         </div>
         <div>
-            <input type="text" name="member_id" placeholder="member id want to be loaded" value="">
-            <input type="text" name="family_id" placeholder="family id want to be loaded" value="">
+            <input type="hidden" name="member_id" placeholder="member id want to be loaded" value="{{$member_id}}">
+            <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
 

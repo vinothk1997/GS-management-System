@@ -2,7 +2,6 @@
 @section('title','add-pension')
 @section('content')
 <p class="h3">Pension Table</p>
-<a href="{{route('pension.create')}}" class="btn btn-primary">Add New</a>
 <table class="table">
     <tr>
         <th>Pension No</th>

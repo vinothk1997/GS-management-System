@@ -31,7 +31,6 @@
         <td>{{$donation->description}}</th>
         <td>
             {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
-            @if(!empty($donation->end_date))
             <form class=d-inline action="{{route('donation.edit')}}" method="POST">
                 @csrf
                 @method('POST')
@@ -39,7 +38,6 @@
                 <input type="hidden" name="family_id" value="{{$donation->family_id}}">
                 <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
             </form>
-            @endif
             {{-- <form class=d-inline action="{{route('donation.destroy')}}" method="POST">
                 @csrf
                 @method('DELETE')

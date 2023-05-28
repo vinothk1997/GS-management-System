@@ -2,7 +2,6 @@
 @section('title','add-assistType')
 @section('content')
 <p class="h3">Differently Abled Persons Table</p>
-<a href="{{route('differentlyAbledPerson.create')}}" class="btn btn-primary">Add New</a>
 <table class="table">
     <tr>
         <th>Type of Disability</th>

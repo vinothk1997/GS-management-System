@@ -54,7 +54,7 @@ class DivisionController extends Controller
         // return $division;
         return view('division.edit',compact('division','districts'));
     }
-    function update(Request $req,$division){
+    function update(StoreDivisionRequest $req,$division){
         $districtId=District::where('name',$req->district)->pluck('district_id')[0];
         $division= Division::find($division);
         $division->name=$req->name;

@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pension;
+use App\Http\Requests\StorePensionRequest;
 
 class PensionController extends Controller
 {
   
-    public $banks=['Bank of ceylon','Peoples bank'];
+    public $banks=['Bank of ceylon','Peoples bank','HNB','Commercial'];
 
     public function index(){
         $pensions=Pension::all();
         // return $pensions;
         return view('pension.index',compact('pensions'));
     }
-    public function create(){
-        $categories=$this->categories;
-        return view('pension.create',compact('categories'));
+    public function create($id){
+        $member_id=$id;
+        $banks=$this->banks;
+        return view('pension.create',compact('banks','member_id'));
 
     }
-    public function store(Request $req){
+    public function store(StorePensionRequest $req){
         $pension = new Pension;
         $pension->pension_no=$req->pension_no;
         $pension->bank=$req->bank;
@@ -29,7 +31,7 @@ class PensionController extends Controller
         $pension->family_id=$req->family_id;
         $pension->member_id=$req->member_id;
         $pension->save();
-        return redirect()->route('pension.index');
+        return redirect()->back();
 
     }
     public function edit(Request $req){
@@ -45,7 +47,7 @@ class PensionController extends Controller
         $pension->amount=$req->amount;
         $pension->category=$req->category;
         $pension->save();
-        return redirect()->route('pension.index');
+        return redirect()->to('/family-Members/show?memberId='.$pension->member_id);
 
     }
     public function confirmDelete(){

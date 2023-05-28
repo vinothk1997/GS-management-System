@@ -70,7 +70,7 @@ class FamilyHeadController extends Controller
         $user->save();
         return redirect()->back();
     }
-    function show(Request $req,$familyId=null){
+    function show(Request $req){
         $familyId=$req->familyId;
         $familyHead=DB::table('family_heads')
         ->join('users','family_id','user_id')

@@ -9,7 +9,10 @@
         <div class="form-group">
             <label>District:</label>
             <input type="text" name="name" onkeypress="return isTextKey(event)" id="" value="{{$district->name}}"
-                class="form-control">
+                class="form-control @error('name') is-invalid @enderror">
+                @error('name')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>

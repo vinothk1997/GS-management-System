@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label>Start Date:</label>
-                <input type="date" name="start_date" class="form-control" id="" value="">
+                <input type="date" name="start_date" class="form-control" id="" value="@php echo date('Y-m-d') @endphp" readonly >
             </div>
             <div class="form-group">
                 <label>Amount:</label>

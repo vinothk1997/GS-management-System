@@ -7,6 +7,13 @@ use App\Http\Requests\StoreFamilyMemberRequest;
 use App\Models\FamilyMember;
 use App\Models\Education;
 use App\Models\Occupation;
+use App\Models\SocialService;
+use App\Models\VotingDetail;
+use App\Models\Pension;
+use App\Models\Death;
+use App\Models\DifferentlyAbledPerson;
+use App\Models\Land;
+use Carbon\Carbon;
 
 class FamilyMemberController extends Controller
 {
@@ -58,7 +65,16 @@ class FamilyMemberController extends Controller
         $education=Education::where('education_id',$familyMember->education_id)->pluck('name')->first();
         $familyMember->setAttribute('occupation',$occupation );
         $familyMember->setAttribute('education',$education);
-        return view('family-member.show',compact('familyMember'));
+
+        $socialServices=SocialService::where('member_id',$req->memberId)->get();
+        $votingDetails=VotingDetail::where('member_id',$req->memberId)->get();
+        $pensions=Pension::where('member_id',$req->memberId)->get();
+        $deaths=Death::where('member_id',$req->memberId)->get();
+        $defferentlyAbledPersons=DifferentlyAbledPerson::where('member_id',$req->memberId)->get();
+        $lands=Land::where('member_id',$req->memberId)->get();
+        $familyMember->setAttribute('vote',self::checkVote($familyMember->dob));
+        return view('family-member.show',compact('familyMember','socialServices','votingDetails'
+        ,'pensions','deaths','defferentlyAbledPersons','lands'));
     }
 
     function edit(Request $req){
@@ -93,8 +109,21 @@ class FamilyMemberController extends Controller
             [FamilyHeadController::class, 'show'], ['familyId' => $member->family_id]
         );
     }
+
     function destroy(Request $req){
         FamilyMember::destroy($req->memberId);
         return redirect()->back();
+    }
+
+   public static function checkVote($dob){
+     // check voting Eligibility
+     $yearOfBirth=Carbon::parse($dob)->year;
+     $age=Carbon::today()->year-$yearOfBirth;
+     if($age>18){
+        return 'EligibleForVote';
+     }
+     else{
+         return '';
+     }
     }
 }

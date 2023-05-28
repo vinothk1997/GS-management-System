@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label>Start Date:</label>
                 <input type="text" name="start_date" class="form-control" id=""
-                    value="{{ $livelihood->start_date }}">
+                    value="{{ $livelihood->start_date }}" readonly>
             </div>
             <div class="form-group">
                 <label>Amount:</label>

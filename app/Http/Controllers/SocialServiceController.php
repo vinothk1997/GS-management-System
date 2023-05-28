@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SocialService;
+use App\Http\Requests\StoreSocialServiceRequest;
 
 class SocialServiceController extends Controller
 {
@@ -13,11 +14,12 @@ class SocialServiceController extends Controller
 
     }
 
-    public function create(){
-        return view('social-service.create');
+    public function create($id){
+        $family_member_id = urldecode($id);
+        return view('social-service.create',compact('family_member_id'));
 
     }
-    public function store(Request $req){
+    public function store(StoreSocialServiceRequest $req){
         $lastSocialServiceId=SocialService::pluck('social_service_id')->last();
         if(!$lastSocialServiceId){
             $socialServiceId="SS00000001";
@@ -51,7 +53,7 @@ class SocialServiceController extends Controller
         $socialService->year=$req->year;
         $socialService->save();
 
-        return redirect()->route('socialService.index');
+        return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
 
     }
     public function confirmDelete(){

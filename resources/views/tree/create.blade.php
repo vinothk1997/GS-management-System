@@ -2,6 +2,7 @@
 @section('title','add tree')
 @section('content')
 <div class="container">
+    <a href="/lands/show/{{$land_id}}" class="btn btn-sm btn-primary">Back</a>
     <Form action="{{route('tree.store')}}" method="POST">
         @csrf
         <p class="h3">Add Tree Form</p>
@@ -22,9 +23,9 @@
             <input type="text" name="no_of_tree" onkeypress="return isNumberKey(event)" class="form-control" id="">
         </div>
         <div>
-            <input type="text" name="land_id" placeholder="land id want to be loaded" value="">
+            <input type="hidden" name="land_id" placeholder="land id want to be loaded" value="{{$land_id}}">
         </div>
-        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
+        <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>
 
     </Form>
 </div>

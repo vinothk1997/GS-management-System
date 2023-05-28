@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DifferentlyAbledPerson;
+use App\Http\Requests\StoreDifferentlyAbledPersonRequest;
 
 class DifferentlyAbledPersonController extends Controller
 {
@@ -12,11 +13,12 @@ class DifferentlyAbledPersonController extends Controller
         return view('differentlyAbledPerson.index',compact('differentlyAbledPersons'));
 
     }
-    public function create(){
-        return view('differentlyAbledPerson.create');
+    public function create($id){
+        $member_id=urldecode($id);
+        return view('differentlyAbledPerson.create',compact('member_id'));
 
     }
-    public function store(Request $req){
+    public function store(StoreDifferentlyAbledPersonRequest $req){
         $differentlyAbledPerson=new DifferentlyAbledPerson;
         $differentlyAbledPerson->type=$req->type;
         $differentlyAbledPerson->date=$req->date;
@@ -26,7 +28,7 @@ class DifferentlyAbledPersonController extends Controller
         $differentlyAbledPerson->family_id=$req->family_id;
         $differentlyAbledPerson->member_id=$req->member_id;
         $differentlyAbledPerson->save();
-        return redirect()->route('differentlyAbledPerson.index');
+        return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
 
     }
     public function edit(Request $req){
@@ -41,7 +43,7 @@ class DifferentlyAbledPersonController extends Controller
         $differentlyAbledPerson->monthly_assist=$req->monthly_assist;
         $differentlyAbledPerson->amount=$req->amount;
         $differentlyAbledPerson->save();
-        return redirect()->route('differentlyAbledPerson.index');
+        return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
 
 
     }

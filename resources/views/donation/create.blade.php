@@ -21,7 +21,7 @@
             <p class="h3">Add Donation Form</p>
             <div class="form-group">
                 <label>Donated Date:</label>
-                <input type="date" name="donated_date" class="form-control" id="">
+                <input type="date" name="donated_date" class="form-control" id="" max=@php echo date('Y-m-d') @endphp>
             </div>
 
             <div class="form-group">

@@ -2,7 +2,6 @@
 @section('title','add-assistType')
 @section('content')
 <p class="h3">Voting Detail Table</p>
-<a href="{{route('votingDetail.create')}}" class="btn btn-primary">Add New</a>
 <table class="table">
     <tr>
         <th>Vote No</th>
