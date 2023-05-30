@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\GnDivision;
 
 class Land extends Model
 {
@@ -13,4 +14,8 @@ class Land extends Model
     protected $keyType='string';
     public $incrementing=false;
     public $timestamps=false;
+    public function GN(){
+        return $this->belongsTo(GnDivision::class,'land_gn_id','gn_id');
+    }
 }
+

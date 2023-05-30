@@ -46,18 +46,35 @@ class TreeController extends Controller
             'tree_type'=>$req->tree_type,
             'no_of_tree'=>$req->no_of_tree
         ]);
-        return redirect()->route('tree.index');
+
+        $land=Land::where('land_id',$req->land_id)->first();
+        $member_id=$land->member_id;
+        $land_id=$req->land_id;
+        $trees=Tree::where('land_id',$req->land_id)->get(); 
+        return view('land.show',compact('trees','land'),[
+            'member_id'=>$member_id,
+            'land_id'=>$land_id
+        ]);
     }
+
     public function confirmDelete()
     {
 
     }
+
     public function destroy(Request $req)
     {
      
         Tree::where('land_id',$req->land_id)
         ->where('tree_name',$req->tree_name)->delete();
-        return redirect()->route('tree.index');
+           $member_id=Land::where('land_id',$req->land_id)->first()->member_id;
+
+            $land_id=$req->land_id;
+            $trees=Tree::where('land_id',$req->land_id)->get(); 
+            return view('land.show',compact('trees'),[
+                'member_id'=>$member_id,
+                'land_id'=>$land_id
+            ]);
     }
     
 }

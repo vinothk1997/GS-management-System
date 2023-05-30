@@ -17,9 +17,17 @@
                 <option>C</option>
             </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label>Land GN Id:</label>
             <input type="text" name="land_gn_id" class="form-control" id="">
+        </div> --}}
+        <div class="form-group">
+            <label>Land GN:</label>
+            <select name="land_gn_id" class="form-control">
+                @foreach($gns as $gn)
+                <option value="{{$gn->gn_id}}">{{$gn->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label>Address:</label>

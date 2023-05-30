@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Land;
 use App\Models\Tree;
+use App\Models\GnDivision;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +18,8 @@ class LandController extends Controller
     }
     function create($id){
         $member_id=$id;
-        return view('land.create',compact('member_id'));
+        $gns=GnDivision::all();
+        return view('land.create',compact('member_id','gns'));
 
     }
     function store(Request $req){
@@ -52,7 +54,8 @@ class LandController extends Controller
 
     function edit(Request $req){
         $land=Land::find($req->id);
-        return view('land.edit',compact('land'));
+        $gns=GnDivision::all();
+        return view('land.edit',compact('land','gns'));
 
     }
 
@@ -68,12 +71,13 @@ class LandController extends Controller
         $land->reg_no=$req->reg_no;
         // $land->document_file= self::fileUpload($req);
         $land->save();
-        return redirect()->route('land.index');
+        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
     }
 
     public function show(Request $req){
+        $land=Land::where('land_id',$req->land_id)->first();
         $trees=Tree::where('land_id',$req->land_id)->get();
-        return view('land.show',compact('trees'),[
+        return view('land.show',compact('trees','land'),[
             'member_id'=>$req->member_id,
             'land_id'=>$req->land_id
         ]);
@@ -85,7 +89,7 @@ class LandController extends Controller
 
     function destroy(Request $req){
         Land::destroy($req->id);
-        return redirect()->route('land.index');
+        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
         
     }
 }

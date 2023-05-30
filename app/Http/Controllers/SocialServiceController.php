@@ -37,7 +37,7 @@ class SocialServiceController extends Controller
         $socialService->family_id=$req->family_id;
         $socialService->save();
 
-        return redirect()->route('socialService.index');
+        return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
 
     }
     public function edit(Request $req){
@@ -60,9 +60,14 @@ class SocialServiceController extends Controller
 
     }
     public function destroy(Request $req){
-        $socialService=SocialService::destroy($req->social_service_id);
-        return redirect()->route('socialService.index');
+        $socialService = SocialService::find($req->social_service_id);
 
+        if ($socialService) {
+            $memberId = $socialService->member_id;
+            $socialService->delete();
+        }
+
+        return redirect()->to('/family-Members/show?memberId=' . $memberId);
         
     }
 }

@@ -83,7 +83,7 @@
                                 <td>{{ $socialService->amount }}</td>
                                 <td>{{ $socialService->description }}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-success">View</a>
+                                    {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
                                     <form class=d-inline action="{{ route('socialService.edit') }}" method="POST">
                                         @csrf
                                         @method('POST')
@@ -124,24 +124,27 @@
                                 <th>Vote No</th>
                                 <th>Action</th>
                             </tr>
+
                             @foreach ($votingDetails as $votingDetail)
-                                <td>{{ $votingDetail->year }}</td>
-                                <td>{{ $votingDetail->vote_no }}</td>
-                                <td>
-                                    <a href="" class="btn btn-sm btn-success">View</a>
-                                    <form class=d-inline action="{{ route('votingDetail.edit') }}" method="POST">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="voting_id" value="{{ $votingDetail->Voting_id }}">
-                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                    </form>
-                                    <form class=d-inline action="{{ route('votingDetail.destroy') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="voting_id" value="{{ $votingDetail->Voting_id }}">
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                    </form>
-                                </td>
+                                <tr>
+                                    <td>{{ $votingDetail->year }}</td>
+                                    <td>{{ $votingDetail->vote_no }}</td>
+                                    <td>
+                                        {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
+                                        <form class=d-inline action="{{ route('votingDetail.edit') }}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="hidden" name="voting_id" value="{{ $votingDetail->Voting_id }}">
+                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                        </form>
+                                        <form class=d-inline action="{{ route('votingDetail.destroy') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="voting_id" value="{{ $votingDetail->Voting_id }}">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
                         </table>
                     </div>
@@ -178,17 +181,18 @@
                                     <td>{{ $pension->amount }}</td>
                                     <td>{{ $pension->category }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-success">View</a>
-                                        <form class=d-inline action="{{ route('votingDetail.edit') }}" method="POST">
+                                        <form class=d-inline action="{{ route('pension.edit') }}" method="POST">
                                             @csrf
                                             @method('POST')
-                                            <input type="hidden" name="voting_id" value="{{ $pension->pension_id }}">
+                                            <input type="hidden" name="pension_id" value="{{ $pension->pension_id }}">
+                                            <input type="hidden" name="member_id" value="{{ $pension->member_id }}">
                                             <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
                                         </form>
-                                        <form class=d-inline action="{{ route('votingDetail.destroy') }}" method="POST">
+                                        <form class=d-inline action="{{ route('pension.destroy') }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="hidden" name="voting_id" value="{{ $pension->pension_id }}">
+                                            <input type="hidden" name="pension_id" value="{{ $pension->pension_id }}">
+                                            <input type="hidden" name="member_id" value="{{ $pension->member_id }}">
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</a>
                                         </form>
                                     </td>
@@ -224,7 +228,6 @@
                             <td>{{ $death->place }}</td>
                             <td>{{ $death->reason }}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-success">View</a>
                                 <form class=d-inline action="{{ route('death.edit') }}" method="GET">
                                     @csrf
                                     @method('GET')
@@ -247,16 +250,14 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="land-head">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#land" aria-expanded="false"
-                    aria-controls="land">
-                   Land
+                    data-bs-target="#land" aria-expanded="false" aria-controls="land">
+                    Land
                 </button>
             </h2>
             <div id="land" class="accordion-collapse collapse" aria-labelledby="land"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <a href="{{ route('land.create', urlencode($familyMember->member_id)) }}"
-                        class="btn btn-primary">Add
+                    <a href="{{ route('land.create', urlencode($familyMember->member_id)) }}" class="btn btn-primary">Add
                         Land</a>
                     <table class="table">
                         <tr>
@@ -271,31 +272,32 @@
                         @foreach ($lands as $land)
                             <tr>
 
-                                <td>{{ $land->land_type}}</td>
-                                <td>{{ $land->land_gn_id }}</td>
+                                <td>{{ $land->land_type }}</td>
+                                <td>{{ $land->GN->name }}</td>
                                 <td>{{ $land->address }}</td>
                                 <td>{{ $land->area }}</td>
                                 <td>{{ $land->reg_no }}</td>
-                                <td><img src="{{ asset('storage/' .$land->document_file) }}" class="round" alt="Document Preview" width="100"></td>
+                                <td><img src="{{ asset('storage/' . $land->document_file) }}" class="round"
+                                        alt="Document Preview" width="100"></td>
                                 <td>
-                                    {{-- <a href="{{route('land.show',$land->land_id)}}" class="btn btn-sm btn-success">View</a> --}}
-                                    <form class=d-inline action="{{route('land.show')}}">
+                                    <form class=d-inline action="{{ route('land.show') }}">
                                         <input type="hidden" name="land_id" value="{{ $land->land_id }}">
                                         <input type="hidden" name="member_id" value="{{ $land->member_id }}">
-                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">View</a>
+                                        <button type="submit" class="btn btn-sm btn-success mx-1">View</a>
                                     </form>
-                                    <form class=d-inline action="{{ route('land.edit') }}"
-                                        method="POST">
+                                    <form class=d-inline action="{{ route('land.edit') }}" method="POST">
                                         @csrf
                                         @method('POST')
                                         <input type="hidden" name="id" value="{{ $land->land_id }}">
+                                        <input type="hidden" name="member_id" value="{{ $land->member_id }}">
                                         <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
                                     </form>
-                                    <form class=d-inline action="{{ route('land.destroy') }}"
-                                        method="POST">
+                                    <form class=d-inline action="{{ route('land.destroy') }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="id" value="{{ $land->land_id }}">
+                                        <input type="hidden" name="member_id" value="{{ $land->member_id }}">
+
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</a>
                                     </form>
                                 </td>
@@ -337,7 +339,7 @@
                                 <td>{{ $defferentlyAbledPerson->monthly_assist }}</td>
                                 <td>{{ $defferentlyAbledPerson->amount }}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-success">View</a>
+                                    {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
                                     <form class=d-inline action="{{ route('differentlyAbledPerson.edit') }}"
                                         method="POST">
                                         @csrf

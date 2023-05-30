@@ -9,11 +9,12 @@
 </div>
 <p class="h3">Family Members Table</p>
 <div class="my-3">
+    <a href="/family-Heads" class="btn btn-sm btn-primary">&#60;&#60;Back</a>
     <form class="d-inline" action="{{route('familyMember.create')}}" method="GET">
         @csrf
         @method('GET')
         <input type="hidden" value="{{$familyId}}" name="familyId">
-        <button type="submit" class="btn btn-sm btn-primary">Add New</a>
+        <button type="submit" class="btn btn-sm btn-success">Add New</a>
     </form>
     <form class="d-inline" action="{{route('report.generateFamilyReport')}}" method="GET">
         @csrf

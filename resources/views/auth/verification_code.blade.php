@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('title','verification')
 @section('content')
-<div class="w-100 d-flex justify-content-center align-items-center">
-    <form action="{{route('auth.verifyCode')}}" method="POST">
+<div class="w-100 d-flex justify-content-center align-items-center ">
+    <form action="{{route('auth.verifyCode')}}" method="POST" class="my- 5">
         @csrf
         <label class="form-label">Verification code:</label>
         <input onblur="return isNumberKey(event)" name="verification_code" type="text" id="verification_code"

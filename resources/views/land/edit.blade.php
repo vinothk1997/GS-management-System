@@ -7,8 +7,8 @@
             @method('PUT')
             <p class="h3">Edit Land Form</p>
             <div class="form-group">
-                <label>Member Id:</label>
-                <input type="text" name="member_id" class="form-control" id="" value="{{ $land->member_id }}">
+                {{-- <label>Member Id:</label> --}}
+                <input type="hidden" name="member_id" class="form-control" id="" value="{{ $land->member_id }}">
             </div>
             <div class="form-group">
                 <label>Land Type:</label>
@@ -19,8 +19,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Land GN Id:</label>
-                <input type="text" name="land_gn_id" class="form-control" id="" value="{{ $land->land_gn_id }}">
+                <label>Land GN:</label>
+                <select name="land_gn_id" class="form-control">
+                    @foreach($gns as $gn)
+                    <option @if($gn->gn_id==$land->land_gn_id) selected @endif value="{{$gn->gn_id}}">{{$gn->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label>Address:</label>
@@ -36,12 +40,7 @@
                 <label>Reg.No:</label>
                 <input type="text" name="reg_no" class="form-control" id="" value="{{ $land->reg_no }}">
             </div>
-            {{-- <div class="form-group">
-                <label>Upload Documents:</label>
-                <img src="{{ asset('storage/' .$land->document_file) }}" class="round" alt="Document Preview" width="50">
-                <input type="file" name="document" class="form-control" id=""
-                value="{{ $land->document_file }}">
-            </div> --}}
+        
             <div>
                 <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="">
                 <input type="hidden" name="land_id" value="{{ $land->land_id }}">

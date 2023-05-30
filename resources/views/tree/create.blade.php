@@ -2,7 +2,7 @@
 @section('title','add tree')
 @section('content')
 <div class="container">
-    <a href="/lands/show/{{$land_id}}" class="btn btn-sm btn-primary">Back</a>
+    <a href="/lands/show?land_id={{$land_id}}" class="btn btn-sm btn-primary">Back</a>
     <Form action="{{route('tree.store')}}" method="POST">
         @csrf
         <p class="h3">Add Tree Form</p>

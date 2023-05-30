@@ -4,6 +4,24 @@
 <p class="h3">Tree Table</p>
 <a href="/family-Members/show?memberId={{urlencode($member_id)}}" class="btn btn-primary" >Back</a>
 <a href="{{route('tree.create',$land_id)}}" class="btn btn-primary">Add New</a>
+<table class="table my-3">
+    <tr>
+        <td><b>Land Type</b></td>
+        <td>{{ $land->land_type }}</td>
+        <td><b>Land GN</b></td>
+        <td>{{ $land->GN->name }}</td>
+
+    </tr>
+    <tr>
+        <td><b>Area</b></td>
+        <td>{{ $land->area }}</td>
+        <td><b>Address</b></td>
+        <td>{{ $land->address }}</td>
+
+    </tr>
+</table>
+<hr>
+<h3>Tree List</h3>
 <table class="table">
     <tr>
         <th>Tree Name</th>

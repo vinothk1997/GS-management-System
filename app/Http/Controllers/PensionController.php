@@ -36,8 +36,9 @@ class PensionController extends Controller
     }
     public function edit(Request $req){
         $pension=Pension::find($req->pension_id);
+        $member_id=$req->member_id;
         $banks=$this->banks;
-        return view('pension.edit',compact('pension','banks'));
+        return view('pension.edit',compact('pension','banks','member_id'));
 
     }
     public function update(Request $req){
@@ -47,15 +48,17 @@ class PensionController extends Controller
         $pension->amount=$req->amount;
         $pension->category=$req->category;
         $pension->save();
-        return redirect()->to('/family-Members/show?memberId='.$pension->member_id);
+        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
 
     }
+
     public function confirmDelete(){
 
     }
+
     public function destroy(Request $req){
         Pension::destroy($req->pension_id);
-        return redirect()->route('pension.index');
+        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
         
     }
 }

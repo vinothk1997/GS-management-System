@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('title','login')
 @section('content')
-<div class="w-100 d-flex justify-content-center align-items-center">
-    <form class="h-100" action="{{route('auth.recover')}}" method="POST">
+<div class="w-100 d-flex justify-content-center align-items-center ">
+    <form class="h-100 my-5" action="{{route('auth.recover')}}" method="POST">
         @csrf
         <div>
             <label class="form-label">User Name:</label>
