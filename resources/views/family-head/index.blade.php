@@ -3,6 +3,7 @@
 @section('content')
 <p class="h3">Family Head Table</p>
 <a href="{{route('familyHead.create')}}" class="btn btn-sm btn-primary my-2">Add New</a>
+<a href="{{route('report.generateFamilyHeadListReport')}}" class="btn btn-sm btn-primary my-2" target="_blank">Generate Report</a>
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>

@@ -60,7 +60,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Mobile No:</label>
-                    <input type="text" name="mobile" id="mobile" onblur=" return phonenumber(mobile)"
+                    <input type="text" name="mobile" id="mobile" onblur="return phonenumber('mobile')"
                         class="form-control @error('mobile') is-invalid @enderror" value="{{old('mobile')}}">
                     @error('mobile')
                     <div class="text-danger">{{ $message }}</div>

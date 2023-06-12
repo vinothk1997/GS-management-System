@@ -11,7 +11,7 @@
         <p class="h3">Add Death Form</p>
         <div class="form-group">
             <label>Date of death:</label>
-            <input type="date" name="death_date" class="form-control" id="">
+            <input type="date" name="death_date" class="form-control" id="" max="@php echo date('Y-m-d') @endphp">
 
         </div>
         <div class="form-group">

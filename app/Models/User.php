@@ -15,6 +15,6 @@ class User extends Model
     public $timestamps=false;
 
     public function getDesignation(){
-        return User::select('user_type')->where('user_id',$this->user_id)->get()[0]->user_type;
+        return User::where('user_id',$this->user_id)->get()[0]->user_type;
     }
 }

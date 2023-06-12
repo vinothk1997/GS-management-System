@@ -2,6 +2,7 @@
 @section('title','add-assistType')
 @section('content')
 <p class="h3">GN-Division Table</p>
+<a href="{{route('district.show',$district_id)}}" class="btn btn-primary">Back</a>
 <a href="{{route('gn.create',$divisionId)}}" class="btn btn-primary">Add New</a>
 <table class="table">
     <tr>

@@ -3,7 +3,7 @@
 @section('content')
 <p class="h3">Staffs</p>
 <a href="{{route('staff.create')}}" class="btn btn-primary btn-sm">Add New</a>
-<a href="{{route('report.generateStaffReport')}}" class="btn btn-primary btn-sm">Generate Staff Report</a>
+<a href="{{route('report.generateStaffReport')}}" class="btn btn-primary btn-sm" target="_blank">Generate Staff Report</a>
 <table class="table" class="display" style="width:100%" id="staff">
     <thead>
         <tr>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','add-assistType')
+@section('title','add-vote')
 @section('content')
 <p class="h3">Voting Detail Table</p>
 <table class="table">

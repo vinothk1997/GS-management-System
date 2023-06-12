@@ -27,14 +27,58 @@ class ReportController extends Controller
         $pdf = Pdf::loadView('report.family-report', compact('familyHead','familyMembers','religion','ethnic','occupation'))
         ->setOptions(['defaultFont' => 'sans-serif'])
         ->setPaper('A4', 'portrait');
-        return $pdf->stream('invoice.pdf');
+        return $pdf->stream('Family.pdf');
     }
     public function generateStaffReport(){
         $staffs=Staff::all();
         $pdf = Pdf::loadView('report.staff-report', compact('staffs'))
         ->setOptions(['defaultFont' => 'sans-serif'])
         ->setPaper('A4', 'portrait');
-        return $pdf->stream('invoice.pdf');
+        return $pdf->stream('staffs.pdf');
 
+    }
+
+    function generateStaffDeatailReport($staff){
+        $staffId=$staff;
+        $staff=DB::table('staff')
+        ->join('users','staff.staff_id','users.user_id')
+        ->where('staff.staff_id',$staff)
+        ->select('staff.*','users.status','users.user_type')->first();
+        
+         $staffs=DB::table('staff')
+        ->join('staff_workplaces','staff.staff_id','staff_workplaces.staff_id')
+        ->join('users','staff.staff_id','users.user_id')
+        ->where('staff.staff_id',$staffId)
+        ->select('staff.*','staff_workplaces.designation','users.status')->get();
+        $staffWorkplaces=[];
+        foreach($staffs as $obj){
+            if($obj->designation =="DS"){
+                    $staffWorkplaces=DB::table('staff_workplaces')
+                    ->join('divisions','staff_workplaces.place_id','divisions.division_id')
+                    ->get();
+            }
+            else{
+                $staffWorkplaces=DB::table('staff_workplaces')
+                    ->join('gn_divisions','staff_workplaces.place_id','gn_divisions.gn_id')
+                    ->get();
+                
+            }
+        }
+        $pdf = Pdf::loadView('report.staff-workplace-report', compact('staffWorkplaces','staffId','staff'))
+        ->setOptions(['defaultFont' => 'sans-serif'])
+        ->setPaper('A4', 'portrait');
+        return $pdf->stream('staff_workplace.pdf');
+    }
+
+    function generateFamilyHeadListReport(){
+
+        $familyHeads=DB::table('family_heads')
+        ->join('users','family_id','user_id')
+        ->select('family_heads.*','users.status')
+        ->get();
+        $pdf = Pdf::loadView('report.family-head-list-report', compact('familyHeads'))
+        ->setOptions(['defaultFont' => 'sans-serif'])
+        ->setPaper('A4', 'portrait');
+        return $pdf->stream('FamilyHeads.pdf');
     }
 }

@@ -42,8 +42,8 @@ class DivisionController extends Controller
     function show($division){
         $divisionId=$division;
         $gns=GnDivision::where('division_id',$division)->get();
-        // return $gns; 
-        return view('division.show',compact('gns','divisionId'));
+        $district_id=Division::where('division_id',$division)->first()->district_id;
+        return view('division.show',compact('gns','divisionId','district_id'));
     }
     function edit($division){
         $districts=District::pluck('name');

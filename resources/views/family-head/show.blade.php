@@ -16,11 +16,11 @@
         <input type="hidden" value="{{$familyId}}" name="familyId">
         <button type="submit" class="btn btn-sm btn-success">Add New</a>
     </form>
-    <form class="d-inline" action="{{route('report.generateFamilyReport')}}" method="GET">
+    <form class="d-inline" action="{{route('report.generateFamilyReport')}}" method="GET" target="_blank">
         @csrf
         @method('GET')
         <input type="hidden" value="{{$familyId}}" name="familyId">
-        <button type="submit" class="btn btn-sm btn-primary ms-2">Generate Report</a>
+        <button type="submit" class="btn btn-sm btn-primary ms-2">Generate Report</button>
     </form>
 </div>
 <div class="rounded" style="background-color:white;">

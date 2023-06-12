@@ -9,9 +9,11 @@ use App\Models\Message;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
+use DB;
 
 class MessageController extends Controller
 {
+
     public function index(){
         $user=session()->get('user');
         $messages=Message::where('to_id',$user['user_id'])->orderby('message_id','desc')->get();
@@ -96,6 +98,26 @@ class MessageController extends Controller
         $message=Message::where('message_id',$id)
         ->update(['sent_deleted'=>false]);
         return redirect()->route('message.sentMessages');
+    }
+
+    public function getInboxMessages(){
+        $user=session()->get('user');
+        if($user['user_type']=='family head'){
+            $messages=DB::table('family_heads')
+            ->join('messages','family_heads.family_id','messages.to_id')
+            ->where('messages.to_id',$user['user_id'])
+            ->select('messages.*','family_heads.first_name','family_heads.last_name')
+            ->get();
+            return response()->json($messages);
+        }
+        else{
+            $messages=DB::table('staff')
+            ->join('messages','staff.staff_id','messages.to_id')
+            ->where('messages.to_id',$user['user_id'])
+            ->select('messages.*,staff.first_name,')
+            ->get();
+            return response()->json($messages);
+        }
     }
     
 }

@@ -81,27 +81,30 @@
                                 <input type="text" class="form-control" value="{{ $user['user_id'] }}" name="from"
                                     id="msg_from" placeholder="{{ $user['user_id'] }}" readonly>
                             </div>
-                            <select class="form-select" name="to" aria-label="Default select example">
-                                <option selected id="msg_to">Open this select menu</option>
-                                @if (isset($staffs) && isset($familyHeads))
-                                    @foreach ($staffs as $staff)
-                                        <option value="{{ $staff->staff_id }}">
-                                            {{ $staff->first_name }}:-{{ $staff->user->getDesignation() }}
-                                        </option>
-                                    @endforeach
-                                    @foreach ($familyHeads as $familyHead)
-                                        <option value="{{ $familyHead->family_id }}">
-                                            {{ $familyHead->first_name }}:-{{ $familyHead->user->getDesignation() }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                    @foreach ($staffs as $staff)
-                                        <option value="{{ $staff->staff_id }}">
-                                            {{ $staff->first_name }}:-{{ $staff->user->getDesignation() }}</option>
-                                    @endforeach
-                                @endif
-
-                            </select>
+                            <div class="form-group">
+                                <label for="from">To</label>
+                                <select class="form-select" name="to" aria-label="Default select example">
+                                    {{-- <option selected id="msg_to">Open this select menu</option> --}}
+                                    @if (isset($staffs) && isset($familyHeads))
+                                        @foreach ($staffs as $staff)
+                                            <option value="{{ $staff->staff_id }}">
+                                                {{ $staff->first_name }}:-{{ $staff->user->getDesignation() }}
+                                            </option>
+                                        @endforeach
+                                        @foreach ($familyHeads as $familyHead)
+                                            <option value="{{ $familyHead->family_id }}">
+                                                {{ $familyHead->first_name }}:-{{ $familyHead->user->getDesignation() }}
+                                            </option>
+                                        @endforeach
+                                    @else
+                                        @foreach ($staffs as $staff)
+                                            <option value="{{ $staff->staff_id }}">
+                                                {{ $staff->first_name }}:-{{ $staff->user->getDesignation() }}</option>
+                                        @endforeach
+                                    @endif
+    
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="from">Subject</label>
                                 <input type="text" class="form-control" name="subject" id="msg_subject"

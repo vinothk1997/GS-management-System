@@ -2,7 +2,8 @@
 @section('title','add-district')
 @section('content')
 <p class="h3">Division</p>
-<a href="{{route('division.create',$districtId)}}" class="btn btn-primary">Add New</a>
+<a href="{{route('district.index')}}" class="btn-sm btn btn-primary">&#60;Back</a>
+<a href="{{route('division.create',$districtId)}}" class="btn-sm btn btn-primary">Add New</a>
 <table class="table">
     <tr>
         <th>Division Id</th>

@@ -332,6 +332,7 @@ Route::group(['prefix'=>'messages'],function(){
     Route::get('/read/{id}',[MessageController::class,'read'])->name('message.read');
     Route::get('/sent',[MessageController::class,'sentMessages'])->name('message.sentMessages');
     Route::get('/sent-deleted/{id}',[MessageController::class,'sentDeleted'])->name('message.sentDeleted');
+    Route::get('/getInboxMessages',[MessageController::class,'getInboxMessages'])->name('message.getInboxMessages');
 });
 // authentication
 Route::group(['prefix'=>'auth'],function(){
@@ -344,6 +345,7 @@ Route::group(['prefix'=>'auth'],function(){
     Route::get('/change-password',[AuthController::class,'changePasswordView'])->name('auth.changePasswordView')->middleware(EnsureUserLogged::class);
     Route::post('/change-password',[AuthController::class,'changePassword'])->name('auth.changePassword');
     Route::get('forget_password',[AuthController::class,'customForgetPassword'])->name('auth.customForgetPassword');
+    Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 });
 // Profile
 Route::group(['prefix'=>'profile'],function(){
@@ -359,4 +361,6 @@ Route::get('/loadDesignation/{designtion}',[StaffController::class,'loadDesignat
 Route::group(['prefix'=>'Report'],function(){
     Route::get('/generateFamilyReport',[ReportController::class,'generateFamilyReport'])->name('report.generateFamilyReport');
     Route::get('/generateStaffReport',[ReportController::class,'generateStaffReport'])->name('report.generateStaffReport');
+    Route::get('/generateStaffDeatailReport/{staff}',[ReportController::class,'generateStaffDeatailReport'])->name('report.generateStaffDeatailReport');
+    Route::get('/generateFamilyHeadListReport',[ReportController::class,'generateFamilyHeadListReport'])->name('report.generateFamilyHeadListReport');
 });

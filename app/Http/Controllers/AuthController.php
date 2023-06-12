@@ -37,12 +37,20 @@ class AuthController extends Controller
                     $user->save();
 
                     if($user->status=='active'){
+                        if($user->user_type=='family head'){
+                            $real_name=FamilyHead::where('family_id',$user->user_id)->first();
+                        }
+                        else{
+                            $real_name=Staff::where('staff_id',$user->user_id)->first();
+                        }
                         session()->put("user",[
                             "user_id"=>$user->user_id,
                             'name' => $user->name,
-                            "user_type"=>$user->user_type
+                            "user_type"=>$user->user_type,
+                            "real_name"=>$real_name
+        
                         ]);
-                        return redirect()->route('staff.index');
+                        return redirect()->to('staffs');
                     }
                     else{
                         return "Your account has been disabled,contact administrator";
@@ -140,9 +148,11 @@ class AuthController extends Controller
             return redirect()->route('auth.index')->with(['updated'=>'Your new password has been updated']);
         }
     }
+
     function changePasswordView(){
         return view('auth.change_password');
     }
+
     function changePassword (Request $req){
         $newPassword=$req->new_password;
         $confirmNewPassword=$req->confirm_new_password;
@@ -165,6 +175,10 @@ class AuthController extends Controller
         }
         
         
+    }
+    public function logout(){
+        session()->flush();
+        return redirect()->to('/');
     }
     
 }
