@@ -39,15 +39,15 @@ class LandController extends Controller
         $land->address=$req->address;
         $land->area=$req->area;
         $land->reg_no=$req->reg_no;
-        $land->document_file= self::fileUpload($req);
+        $land->document_file= self::fileUpload($req,$landId);
         $land->save();
         return redirect()->back();
 
     }
 
-    public static function fileUpload($req){
+    public static function fileUpload($req,$landId){
         $file=$req->file('document');
-        $path = $file->storeAs('lands', time().'.'.$file->getClientOriginalExtension(),'public');
+        $path = $file->storeAs('lands', $landId.'.'.$file->getClientOriginalExtension(),'public');
         return $path;
 
     }

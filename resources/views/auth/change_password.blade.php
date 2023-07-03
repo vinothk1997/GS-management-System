@@ -6,7 +6,7 @@
         @csrf
         <div>
             <label class="form-label">User Name:</label>
-            <input type="text" name="user_name" id="user_name" value="{{Session::get('name')}}" readonly
+            <input type="text" name="user_name" id="user_name" value="{{Session::get('user')['name']}}" readonly
                 class="form-control">
         </div>
         <div>

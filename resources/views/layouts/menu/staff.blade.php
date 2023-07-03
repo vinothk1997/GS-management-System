@@ -39,12 +39,12 @@
                         <p>Ethnic</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('infrastructure.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Infrastructure</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('occupation.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -58,9 +58,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('vehicleBrand.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Vehicle</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('vehicleType.index')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Vehicle Type</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -81,7 +87,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('education.index') }}" class="nav-link ">
+                    <a href="{{ route('familyHead.index') }}" class="nav-link ">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Family Head</p>
                     </a>

@@ -17,7 +17,7 @@ class EnsureUserLogged
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->session()->has('name')){
+        if(!$request->session()->has('user')){
             return redirect()->route('auth.index');
         }
         return $next($request);

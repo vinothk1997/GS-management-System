@@ -8,6 +8,7 @@ use App\Http\Controllers\EthnicController;
 use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleBrandController;
 use App\Http\Controllers\VehicleModelController;
 use App\Http\Controllers\VehicleTypeController;
@@ -117,6 +118,12 @@ Route::group(['prefix'=>'religions'],function(){
     Route::post('/',[ReligionController::class,'store'])->name('religion.store');
     Route::put('/{religion}',[ReligionController::class,'update'])->name('religion.update');
     Route::delete('/{religion}',[ReligionController::class,'destroy'])->name('religion.destroy');
+});
+// vehicle 
+Route::group(['prefix'=>'vehicle'],function(){
+    Route::get('/create/{memberId}',[VehicleController::class,'create'])->where('memberId', '.*')->name('vehicle.create');
+    Route::get('/get-vehicle-models/{brandId}',[VehicleController::class,'getVehicleModels'])->name('vehicle.getVehicleModels');
+    Route::post('/',[VehicleController::class,'store'])->name('vehicle.store');
 });
 // Vehicle Brand
 Route::group(['prefix'=>'vehicleBrands'],function(){
@@ -342,7 +349,7 @@ Route::group(['prefix'=>'auth'],function(){
     Route::post('/recover',[AuthController::class,'recover'])->name('auth.recover');
     Route::post('/verify',[AuthController::class,'verifyCode'])->name('auth.verifyCode');
     Route::post('/confirm',[AuthController::class,'storeConfirmedpassword'])->name('auth.storeConfirmedpassword');
-    Route::get('/change-password',[AuthController::class,'changePasswordView'])->name('auth.changePasswordView')->middleware(EnsureUserLogged::class);
+    Route::get('/change-password',[AuthController::class,'changePasswordView'])->name('auth.changePasswordView');
     Route::post('/change-password',[AuthController::class,'changePassword'])->name('auth.changePassword');
     Route::get('forget_password',[AuthController::class,'customForgetPassword'])->name('auth.customForgetPassword');
     Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');

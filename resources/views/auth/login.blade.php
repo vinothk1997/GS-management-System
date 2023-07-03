@@ -20,7 +20,7 @@
         </div>
         <div>
             <label clas="form-label">Password:</label>
-            <input name="password" type="text" id="password" class="form-control">
+            <input name="password" type="password" id="password" class="form-control">
             <label class="text-danger text-center " id="password_error"></label>
             @if(isset($message))
             @if ( $message=="password_error" )

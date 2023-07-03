@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Death;
 
 class FamilyHead extends Model
 {
@@ -20,4 +21,7 @@ class FamilyHead extends Model
     public function User(){
         return $this->hasOne(User::class,'user_id','family_id');
     }
+
+   
+
 }

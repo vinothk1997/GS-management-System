@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VehicleModel;
+use App\Models\VehicleType;
 
 class VehicleModelController extends Controller
 {
@@ -13,7 +14,8 @@ class VehicleModelController extends Controller
     }
     function create($vehicleBrand){
         $brandId=$vehicleBrand;
-        return view('vehicle-model.create',compact('brandId'));
+        $vehicleTypes=vehicleType::all();
+        return view('vehicle-model.create',compact('brandId','vehicleTypes'));
     }
     function store(Request $req){
         $lastVehicleModelId=VehicleModel::pluck('model_id')->last();
@@ -26,6 +28,7 @@ class VehicleModelController extends Controller
         $vehicleModel = new VehicleModel;
         $vehicleModel->model_id=$vehicleModelId;
         $vehicleModel->name=$req->name;
+        $vehicleModel->vehicle_type_id=$req->vehicleType;
         $vehicleModel->brand_id=$req->brandId;
         $vehicleModel->save();
         return redirect()->back();

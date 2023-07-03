@@ -31,13 +31,13 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label>Date of Birth:</label>
-                        <input type="text" name="dob" id="dob" class="form-control" readonly>
+                        <input type="text" name="dob" id="dob" class="form-control" value="{{ $familyHead->dob }}" readonly>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label>Gender:</label>
-                        <input type="text" name="gender" id="gender" class="form-control" readonly>
+                        <input type="text" name="gender" id="gender" class="form-control" value="{{ $familyHead->gender }}" readonly>
                     </div>
                 </div>
                 <div class="col-6">

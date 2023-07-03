@@ -15,4 +15,11 @@ class FamilyMember extends Model
     'birth_certificate_no','relationship','school','learning_place_type',
     'monthly_income','driving_licence_no','occupation_id','education_id'];
     public $timestamps = false;
+
+    public function Death(){
+        
+        return $this->hasOne(Death::class,'member_id');
+    }
+
+
 }

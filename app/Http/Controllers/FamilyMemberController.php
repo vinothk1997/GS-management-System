@@ -11,6 +11,7 @@ use App\Models\SocialService;
 use App\Models\VotingDetail;
 use App\Models\Pension;
 use App\Models\Death;
+use App\Models\Vehicle;
 use App\Models\DifferentlyAbledPerson;
 use App\Models\Land;
 use Carbon\Carbon;
@@ -72,9 +73,16 @@ class FamilyMemberController extends Controller
         $deaths=Death::where('member_id',$req->memberId)->get();
         $defferentlyAbledPersons=DifferentlyAbledPerson::where('member_id',$req->memberId)->get();
         $lands=Land::where('member_id',$req->memberId)->get();
+        $vehicles=Vehicle::where('member_id',$req->memberId)->get();
         $familyMember->setAttribute('vote',self::checkVote($familyMember->dob));
-        return view('family-member.show',compact('familyMember','socialServices','votingDetails'
-        ,'pensions','deaths','defferentlyAbledPersons','lands'));
+        if(count($deaths)<1){
+            return view('family-member.show',compact('familyMember','socialServices','votingDetails'
+            ,'pensions','deaths','defferentlyAbledPersons','lands','vehicles'));
+        }
+        else{
+            return view('family-member.dead-show',compact('familyMember','socialServices','votingDetails'
+            ,'pensions','deaths','defferentlyAbledPersons','lands','vehicles'));
+        }
     }
 
     function edit(Request $req){

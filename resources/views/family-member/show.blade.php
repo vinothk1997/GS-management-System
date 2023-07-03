@@ -53,7 +53,7 @@
             <td>{{ $familyMember->education }}</td>
         </tr>
     </table>
-
+    <h3>Other Details</h3>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="socialService-head">
@@ -354,6 +354,58 @@
                                         <input type="hidden" name="id" value="{{ $defferentlyAbledPerson->id }}">
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</a>
                                     </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="vehicles">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#vehicle" aria-expanded="false" aria-controls="vehicle">
+                    Vehicle Details
+                </button>
+            </h2>
+            <div id="vehicle" class="accordion-collapse collapse" aria-labelledby="vehicle"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <a href="{{ route('vehicle.create', urlencode($familyMember->member_id)) }}"
+                        class="btn btn-primary">Add
+                        vehicle</a>
+                    <table class="table">
+                        <tr>
+                            <th>Vehicle Brand</th>
+                            <th>Model</th>
+                            <th>Date of Registration</th>
+                            <th>Registration No</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach ($vehicles as $vehicle)
+                            <tr>
+
+                                <td>{{ $vehicle->VehicleModel }}</td>
+                                {{-- <td>{{ $defferentlyAbledPerson->date }}</td>
+                                <td>{{ $defferentlyAbledPerson->reason }}</td>
+                                <td>{{ $defferentlyAbledPerson->monthly_assist }}</td>
+                                <td>{{ $defferentlyAbledPerson->amount }}</td> --}}
+                                <td>
+                                    {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
+                                    {{-- <form class=d-inline action="{{ route('differentlyAbledPerson.edit') }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <input type="hidden" name="id" value="{{ $defferentlyAbledPerson->id }}">
+                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                    </form>
+                                    <form class=d-inline action="{{ route('differentlyAbledPerson.destroy') }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{ $defferentlyAbledPerson->id }}">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach

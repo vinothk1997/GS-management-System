@@ -16,7 +16,16 @@ use DB;
 class FamilyHeadController extends Controller
 {
     function index(){
+        // return session()->get('user');
+        if(session()->get('user') && session()->get('user')['user_type']=='family head'){
+            $familyHeads=DB::table('family_heads')
+            ->join('users','family_id','user_id')
+            ->where('users.name',session()->get('user')['name'])
+            ->select('family_heads.*','users.status')
+            ->get();
+            return view('family-head.index',compact('familyHeads'));
 
+        }
         $familyHeads=DB::table('family_heads')
         ->join('users','family_id','user_id')
         ->select('family_heads.*','users.status')
@@ -32,7 +41,7 @@ class FamilyHeadController extends Controller
     function store(StoreFamilyHeadRequest $req){
         $religionId=Religion::where('name',$req->religion)->pluck('religion_id')->first();
         $ethnicId=Ethnic::where('name',$req->ethnic)->pluck('ethnic_id')->first();
-        $occupationId=Occupation::where('name',$req->occupation)->pluck('occupation_id')->first();
+        $ocupationId=Occupation::where('name',$req->occupation)->pluck('occupation_id')->first();
         $lastFamilyId=FamilyHead::pluck('family_id')->last();
         if(!$lastFamilyId){
             $familyId="FH/GN001/001";
