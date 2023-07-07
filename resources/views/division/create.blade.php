@@ -3,6 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Add Division Form</p>
+    <a class="btn btn-sm btn-primary" href="districts/{{$districtId}}/show">Back</a>
     <Form action="{{route('division.store')}}" method="POST">
         @csrf
         <div class="form-group">

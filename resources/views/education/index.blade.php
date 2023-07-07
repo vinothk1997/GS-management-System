@@ -14,7 +14,6 @@
         <td>{{$education->education_id}}</td>
         <td>{{$education->name}}</th>
         <td>
-            <a href="{{route('education.show',$education->education_id)}}" class="btn btn-sm btn-success">View</a>
             <a href="{{route('education.edit',$education->education_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class=d-inline action="{{route('education.destroy',$education->education_id)}}" method="POST">
                 @csrf

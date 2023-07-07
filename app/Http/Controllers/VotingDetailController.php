@@ -15,10 +15,17 @@ class VotingDetailController extends Controller
 
   }
   
-  public function create($id){
-    $member_id=urldecode($id);
-    $member=FamilyMember::find($member_id);
-    return view('voting-detail.create',compact('member'));
+  public function create(Request $req){
+    $family_id='';
+    $family_member_id='';
+    if($req->family_id);{
+        $family_id=$req->family_id;
+    }
+
+    if($req->member_id){
+        $family_member_id=$req->member_id;
+    }
+    return view('voting-detail.create',compact('family_id','family_member_id'));
   }
   
   public function store(StoreVoteDetailRequest $req){
@@ -29,7 +36,13 @@ class VotingDetailController extends Controller
     $votingDetail->member_id=$req->member_id;
     $votingDetail->save();
 
-    return redirect()->back();
+    if(!empty($votingDetail->member_id)){
+      return redirect()->to('/family-Members/show?memberId='.$votingDetail->member_id);
+      }
+    else{
+        return redirect()->to('/family-Heads/other-details?familyId='.$votingDetail->family_id);
+
+    } 
 
   }
   
@@ -44,7 +57,13 @@ class VotingDetailController extends Controller
     $votingDetail->vote_no=$req->vote_no;
     $votingDetail->year=$req->year;
     $votingDetail->save();
-    return redirect()->to('/family-Members/show?memberId='.$votingDetail->member_id);
+    if(!empty($socialService->member_id)){
+      return redirect()->to('/family-Members/show?memberId='.$votingDetail->member_id);
+      }
+    else{
+        return redirect()->to('/family-Heads/other-details?familyId='.$votingDetail->family_id);
+
+    } 
   }
   
   public function destroy(Request $req){

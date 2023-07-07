@@ -14,7 +14,6 @@
         <td>{{$occupation->occupation_id}}</th>
         <td>{{$occupation->name}}</th>
         <td>
-            <a href="{{route('occupation.show',$occupation->occupation_id)}}" class="btn btn-sm btn-success">View</a>
             <a href="{{route('occupation.edit',$occupation->occupation_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class="d-inline" action="{{route('occupation.destroy',$occupation->occupation_id)}}" method="POST">
                 @method("DELETE")

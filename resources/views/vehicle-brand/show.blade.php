@@ -17,7 +17,6 @@
         <td>{{$vehicleModel->name}}</td>
         <td>{{$vehicleModel->VehicleType->vehicle_type}}</th>
         <td>
-            <a href="" class="btn btn-sm btn-success">View</a>
             <a href="{{route('vehicleModel.edit',$vehicleModel->model_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class="d-inline" action="{{route('vehicleModel.destroy',$vehicleModel->model_id)}}" method="POST">
                 @method("DELETE")

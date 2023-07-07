@@ -1,59 +1,9 @@
 @extends('layouts.master')
-@section('title', 'show-member')
+@section('title', 'familyHeads')
 @section('content')
-    <form action="{{ route('familyHead.show') }}">
-        <input type="hidden" name="familyId" value="{{ $familyMember->family_id }}">
-        <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
-    </form>
-    <div class="h3">
-        Family Member:- {{ $familyMember->member_id }}
+    <div class="py-3">
+        <a href="/family-Heads/show?familyId={{ $familyHead->family_id  }}" class="btn btn-primary">Back</a>
     </div>
-
-    <table class="table">
-        <tr>
-            <td class="fw-bold">First Name</td>
-            <td>{{ $familyMember->first_name }}</td>
-            <td class="fw-bold"> Last Name</td>
-            <td>{{ $familyMember->last_name }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">National Identity Card No</td>
-            <td>{{ $familyMember->nic }}</td>
-            <td class="fw-bold">Date of Birth</td>
-            <td>{{ $familyMember->dob }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Gender</td>
-            <td>{{ $familyMember->gender }}</td>
-            <td class="fw-bold">Mobile</td>
-            <td>{{ $familyMember->mobile }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Birth Certificate No</td>
-            <td>{{ $familyMember->birth_certificate_no }}</td>
-            <td class="fw-bold">Relationship</td>
-            <td>{{ $familyMember->relationship }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">School</td>
-            <td>{{ $familyMember->school }}</td>
-            <td class="fw-bold"> Learning Place</td>
-            <td>{{ $familyMember->learning_place_type }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Monthly Income</td>
-            <td>{{ $familyMember->monthly_income }}</td>
-            <td class="fw-bold">Driving Licence</td>
-            <td>{{ $familyMember->driving_licence_no }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Occupation</td>
-            <td>{{ $familyMember->occupation }}</td>
-            <td class="fw-bold">Education</td>
-            <td>{{ $familyMember->education }}</td>
-        </tr>
-    </table>
-    <h3>Other Details</h3>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="socialService-head">
@@ -66,7 +16,7 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form class=d-inline action="{{ route('socialService.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                        <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                         <button type="submit" class="btn btn-primary my-2">Add
                             Social Service</button>
                     </form>
@@ -107,7 +57,7 @@
                 </div>
             </div>
         </div>
-        @if (!empty($familyMember->vote))
+        @if (!empty($familyHead->vote))
             <div class="accordion-item">
                 <h2 class="accordion-header" id="votingDetail-head">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -119,7 +69,7 @@
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <form class=d-inline action="{{ route('votingDetail.create') }}">
-                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                             <button type="submit" class="btn btn-primary my-2">Add
                                 New Vote</button>
                         </form>
@@ -156,7 +106,7 @@
                 </div>
             </div>
         @endif
-        @if (!empty($familyMember->occupation_id))
+        @if (!empty($familyHead->occupation_id))
             <div class="accordion-item">
                 <h2 class="accordion-header" id="pension-head">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -168,7 +118,7 @@
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <form class=d-inline action="{{ route('pension.create') }}">
-                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                             <button type="submit" class="btn btn-primary my-2">Add
                                 New Pension</button>
                         </form>
@@ -221,7 +171,7 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form class=d-inline action="{{ route('death.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                        <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                         <button type="submit" class="btn btn-primary my-2">Add
                             Death</button>
                     </form>
@@ -267,9 +217,9 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form class=d-inline action="{{ route('land.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                        <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                         <button type="submit" class="btn btn-primary my-2">Add
-                            Land</button>
+                            Death</button>
                     </form>
                     <table class="table">
                         <tr>
@@ -331,7 +281,7 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form class=d-inline action="{{ route('differentlyAbledPerson.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                        <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                         <button type="submit" class="btn btn-primary my-2">Add
                             differentlyAbledPerson</button>
                     </form>
@@ -386,11 +336,11 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form class=d-inline action="{{ route('vehicle.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                        <input type="hidden" name="family_id" value="{{ $familyHead->family_id }}">
                         <button type="submit" class="btn btn-primary my-2">Add
                             Vehicle</button>
                     </form>
-                  
+                
                     <table class="table">
                         <tr>
                             <th>Vehicle Brand</th>
@@ -406,20 +356,18 @@
                                 <td>{{ $vehicle->VehicleModel->name }}</td>
                                 <td>{{ $vehicle->reg_date }}</td>
                                 <td>{{ $vehicle->reg_no }}</td>
-                                
-                                
+
+
                                 <td>
-                                    
-                                    <form class=d-inline action="{{ route('vehicle.edit') }}"
-                                        method="GET">
+
+                                    <form class=d-inline action="{{ route('vehicle.edit') }}" method="GET">
                                         @csrf
                                         @method('POST')
                                         <input type="hidden" name="model_id" value="{{ $vehicle->model_id }}">
                                         <input type="hidden" name="member_id" value="{{ $vehicle->member_id }}">
                                         <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
                                     </form>
-                                    <form class=d-inline action="{{ route('vehicle.destroy') }}"
-                                        method="POST">
+                                    <form class=d-inline action="{{ route('vehicle.destroy') }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="model_id" value="{{ $vehicle->model_id }}">
@@ -434,10 +382,4 @@
             </div>
         </div>
     </div>
-    <script>
-        var $isDeath = $('#death').find('td');
-        if ($isDeath.length > 0) {
-            $('#death-btn').hide();
-        }
-    </script>
 @endsection

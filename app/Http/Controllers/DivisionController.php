@@ -51,17 +51,16 @@ class DivisionController extends Controller
         ->join('districts','divisions.district_id','districts.district_id')
         ->select('divisions.division_id','divisions.name','districts.name as district')
         ->get()[0];
-        // return $division;
         return view('division.edit',compact('division','districts'));
     }
     function update(StoreDivisionRequest $req,$division){
-        $districtId=District::where('name',$req->district)->pluck('district_id')[0];
+  
         $division= Division::find($division);
         $division->name=$req->name;
-        $division->district_id=$districtId;
         $division->save();
-        return redirect()->route('division.index');
+        return redirect()->to('districts/'.$division->district_id.'/show');
     }
+
     function destroy($division){
         Division::destroy($division);
         return redirect()->back();

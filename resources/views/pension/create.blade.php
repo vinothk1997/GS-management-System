@@ -2,10 +2,17 @@
 @section('title', 'add pension')
 @section('content')
     <div class="container">
+        @if($family_member_id)
         <form action="{{ route('familyMember.show') }}">
-            <input type="hidden" name="memberId" value="{{ $member_id }}">
+            <input type="hidden" name="memberId" value="{{ $family_member_id  }}">
             <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
         </form>
+        @elseif($family_id)
+        <form action="{{ route('familyHead.showOtherDeatails') }}" >
+            <input type="hidden" name="familyId" value="{{ $family_id  }}">
+            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+        </form>
+        @endif
         <Form action="{{ route('pension.store') }}" method="POST">
             @csrf
             <p class="h3">Add Pension Form</p>
@@ -40,9 +47,9 @@
                     <option>Government</option>
                 </select>
             </div>
-            <input type="hidden" name="family_id" placeholder="family Id" class="form-control" id="">
-            <input type="hidden" name="member_id" placehoder="member Id" class="form-control" id=""
-                value="{{ $member_id }}">
+            <input type="text" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
+            <input type="text" name="member_id" placeholder="member id want to be loaded"
+                value="{{ $family_member_id }}">
 
             <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>
 

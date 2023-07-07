@@ -13,9 +13,17 @@ class DifferentlyAbledPersonController extends Controller
         return view('differentlyAbledPerson.index',compact('differentlyAbledPersons'));
 
     }
-    public function create($id){
-        $member_id=urldecode($id);
-        return view('differentlyAbledPerson.create',compact('member_id'));
+    public function create(Request $req){
+        $family_id='';
+        $family_member_id='';
+        if($req->family_id);{
+            $family_id=$req->family_id;
+        }
+
+        if($req->member_id){
+            $family_member_id=$req->member_id;
+        }
+        return view('differentlyAbledPerson.create',compact('family_id','family_member_id'));
 
     }
     public function store(StoreDifferentlyAbledPersonRequest $req){
@@ -28,7 +36,13 @@ class DifferentlyAbledPersonController extends Controller
         $differentlyAbledPerson->family_id=$req->family_id;
         $differentlyAbledPerson->member_id=$req->member_id;
         $differentlyAbledPerson->save();
-        return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
+        if(!empty($differentlyAbledPerson->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$differentlyAbledPerson->family_id);
+      
+          }
 
     }
     public function edit(Request $req){
@@ -51,8 +65,15 @@ class DifferentlyAbledPersonController extends Controller
 
     }
     public function destroy(Request $req){
+        $differentlyAbledPerson=DifferentlyAbledPerson::find($req->id);
         DifferentlyAbledPerson::destroy($req->id);
-        return redirect()->route('differentlyAbledPerson.index');
+        if(!empty($differentlyAbledPerson->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$differentlyAbledPerson->family_id);
+      
+        } 
     }
     
 }

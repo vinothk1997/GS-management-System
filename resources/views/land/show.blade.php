@@ -2,8 +2,19 @@
 @section('title','trees')
 @section('content')
 <p class="h3">Tree Table</p>
-<a href="/family-Members/show?memberId={{urlencode($member_id)}}" class="btn btn-primary" >Back</a>
-<a href="{{route('tree.create',$land_id)}}" class="btn btn-primary">Add New</a>
+
+@if($land->member_id)
+<form class="d-inline" action="{{ route('familyMember.show') }}">
+    <input type="hidden" name="memberId" value="{{ $land->member_id  }}">
+    <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+</form>
+@elseif($land->family_id)
+<form class="d-inline" action="{{ route('familyHead.showOtherDeatails') }}">
+    <input type="hidden" name="familyId" value="{{ $land->family_id  }}">
+    <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+</form>
+@endif
+<a href="{{route('tree.create',$land_id)}}" class="btn btn-primary btn-sm">Add New</a>
 <table class="table my-3">
     <tr>
         <td><b>Land Type</b></td>

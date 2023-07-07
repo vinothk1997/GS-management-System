@@ -14,9 +14,17 @@ class SocialServiceController extends Controller
 
     }
 
-    public function create($id){
-        $family_member_id = urldecode($id);
-        return view('social-service.create',compact('family_member_id'));
+    public function create(Request $req){
+        $family_id='';
+        $family_member_id='';
+        if($req->family_id);{
+            $family_id=$req->family_id;
+        }
+
+        if($req->member_id){
+            $family_member_id=$req->member_id;
+        }
+        return view('social-service.create',compact('family_member_id','family_id'));
 
     }
     public function store(StoreSocialServiceRequest $req){
@@ -36,8 +44,13 @@ class SocialServiceController extends Controller
         $socialService->member_id=$req->member_id;
         $socialService->family_id=$req->family_id;
         $socialService->save();
+        if(!empty($socialService->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
+        }
+        else{
+            return redirect()->to('/family-Heads/other-details?familyId='.$socialService->family_id);
 
-        return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
+        }
 
     }
     public function edit(Request $req){
@@ -53,7 +66,13 @@ class SocialServiceController extends Controller
         $socialService->year=$req->year;
         $socialService->save();
 
-        return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
+        if(!empty($socialService->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
+        }
+        else{
+            return redirect()->to('/family-Heads/other-details?familyId='.$socialService->family_id);
+
+        }
 
     }
     public function confirmDelete(){
@@ -67,7 +86,13 @@ class SocialServiceController extends Controller
             $socialService->delete();
         }
 
-        return redirect()->to('/family-Members/show?memberId=' . $memberId);
+        if(!empty($socialService->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$socialService->member_id);
+        }
+        else{
+            return redirect()->to('/family-Heads/other-details?familyId='.$socialService->family_id);
+
+        }
         
     }
 }

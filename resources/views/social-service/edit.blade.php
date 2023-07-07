@@ -2,10 +2,17 @@
 @section('title', 'edit social service')
 @section('content')
     <div class="container">
+        @if($socialService->member_id)
         <form action="{{ route('familyMember.show') }}">
             <input type="hidden" name="memberId" value="{{ $socialService->member_id }}">
             <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
         </form>
+        @elseif($socialService->family_id)
+        <form action="{{ route('familyHead.showOtherDeatails') }}">
+            <input type="hidden" name="familyId" value="{{$socialService->family_id }}">
+            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+        </form>
+        @endif
         <Form action="{{ route('socialService.update') }}" method="POST">
             @csrf
             @method('PUT')

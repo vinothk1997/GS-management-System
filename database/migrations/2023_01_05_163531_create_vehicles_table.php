@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->string('model_id','6')->primary();
-            $table->string('member_id','17');
-            $table->string('family_id','12');
+            $table->string('model_id','6');
+            $table->string('member_id','17')->nullable();
+            $table->string('family_id','12')->nullable();
             $table->string('reg_no','100');
             $table->date('reg_date');
             $table->foreign('member_id')->references('member_id')->on('family_members');

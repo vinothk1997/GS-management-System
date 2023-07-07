@@ -2,10 +2,17 @@
 @section('title', 'add social service')
 @section('content')
     <div class="container">
+        @if($family_member_id)
         <form action="{{ route('familyMember.show') }}">
-            <input type="hidden" name="memberId" value="{{ $family_member_id }}">
+            <input type="hidden" name="memberId" value="{{ $family_member_id  }}">
             <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
         </form>
+        @elseif($family_id)
+        <form action="{{ route('familyHead.showOtherDeatails') }}">
+            <input type="hidden" name="familyId" value="{{ $family_id  }}">
+            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+        </form>
+        @endif
         <Form action="{{ route('socialService.store') }}" method="POST">
             @csrf
             <p class="h3">Add Social Service Form</p>
@@ -45,7 +52,7 @@
                     id="">
             </div>
             <div>
-                <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="">
+                <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
                 <input type="hidden" name="member_id" placeholder="member id want to be loaded"
                     value="{{ $family_member_id }}">
             </div>

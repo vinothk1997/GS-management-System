@@ -14,7 +14,6 @@
         <td>{{$religion->religion_id}}</th>
         <td>{{$religion->name}}</th>
         <td>
-            <a href="{{route('religion.show',$religion->religion_id)}}" class="btn btn-sm btn-success">View</a>
             <a href="{{route('religion.edit',$religion->religion_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class="d-inline" action="{{route('religion.destroy',$religion->religion_id)}}" method="POST">
                 @method("DELETE")

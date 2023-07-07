@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreVoteDetailRequest extends FormRequest
@@ -25,7 +25,13 @@ class StoreVoteDetailRequest extends FormRequest
     {
         return [
             'vote_no'=>'required',
-            'year'=>'unique:voting_details'
+            'year' => [
+                Rule::unique('voting_details')->where(function ($query) {
+                    return $query->where('year', $this->input('year'))
+                                 ->where('member_id', $this->input('member_id'))
+                                 ->where('family_id', $this->input('family_id'));
+                }),
+            ],
         ];
     }
 }

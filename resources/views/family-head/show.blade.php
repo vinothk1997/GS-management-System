@@ -7,6 +7,12 @@
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
     </div>
+    <div class="position-absolute" style="top:45%; right:0">
+        <form class="d-inline" action="{{ route('familyHead.showOtherDeatails') }}">
+            <input type="hidden" value="{{ $familyId }}" name="familyId">
+            <button type="submit" style="background-color:rgb(33, 33, 51);color:white"class="btn btn-sm ">Other Family Head Details</a>
+        </form>
+    </div>
     <p class="h3">Family Members Table</p>
     <div class="my-3">
         <a href="/family-Heads" class="btn btn-sm btn-primary">&#60;&#60;Back</a>

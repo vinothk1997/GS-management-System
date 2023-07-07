@@ -16,10 +16,19 @@ class LandController extends Controller
         return view('land.index',compact('lands'));
 
     }
-    function create($id){
-        $member_id=$id;
+    function create(Request $req){
+        $family_id='';
+        $family_member_id='';
+        if($req->family_id);{
+            $family_id=$req->family_id;
+        }
+
+        if($req->member_id){
+            $family_member_id=$req->member_id;
+        }
+
         $gns=GnDivision::all();
-        return view('land.create',compact('member_id','gns'));
+        return view('land.create',compact('family_id','family_member_id','gns'));
 
     }
     function store(Request $req){
@@ -39,15 +48,22 @@ class LandController extends Controller
         $land->address=$req->address;
         $land->area=$req->area;
         $land->reg_no=$req->reg_no;
-        $land->document_file= self::fileUpload($req,$landId);
+        $land->document_file= self::fileUpload($req,$landId)[1];
         $land->save();
-        return redirect()->back();
+        if(!empty($pension->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$land->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$land->family_id);
+      
+        }
 
     }
 
     public static function fileUpload($req,$landId){
         $file=$req->file('document');
         $path = $file->storeAs('lands', $landId.'.'.$file->getClientOriginalExtension(),'public');
+        $path=explode("/",$path);
         return $path;
 
     }
@@ -69,9 +85,14 @@ class LandController extends Controller
         $land->address=$req->address;
         $land->area=$req->area;
         $land->reg_no=$req->reg_no;
-        // $land->document_file= self::fileUpload($req);
         $land->save();
-        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
+        if(!empty($land->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$land->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$land->family_id);
+      
+        } 
     }
 
     public function show(Request $req){
@@ -88,8 +109,15 @@ class LandController extends Controller
     }
 
     function destroy(Request $req){
+        $Land=Land::find($req->id);
         Land::destroy($req->id);
-        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
+        if(!empty($Land->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$differentlyAbledPerson->family_id);
+      
+        } 
         
     }
 }

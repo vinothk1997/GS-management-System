@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\VehicleBrand;
 
 class VehicleModel extends Model
 {
@@ -15,5 +16,9 @@ class VehicleModel extends Model
 
     public function VehicleType(){
         return $this->hasOne(VehicleType::class,'vehicle_type_id','vehicle_type_id');
+    }
+
+    public function VehicleBrand(){
+        return $this->belongsTo(VehicleBrand::class,'brand_id','brand_id');
     }
 }

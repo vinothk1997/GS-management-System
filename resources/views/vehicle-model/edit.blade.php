@@ -3,6 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Add Vehicle Type Form</p>
+    <a href="/vehicleBrands/{{$vehicleModel->VehicleBrand->brand_id}}" class="btn btn-success btn-sm" method="POST">Back</a>
     <Form action="{{route('vehicleModel.update',$vehicleModel->model_id)}}" method="POST">
         @method('PUT')
         @csrf

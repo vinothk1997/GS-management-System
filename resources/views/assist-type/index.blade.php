@@ -14,7 +14,6 @@
         <td>{{$assistType->assist_type_id}}</th>
         <td>{{$assistType->name}}</th>
         <td>
-            <a href="" class="btn btn-sm btn-success">View</a>
             <a href="{{route('assistType.edit',$assistType->assist_type_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class=d-inline action="{{route('assistType.destroy',$assistType->assist_type_id)}}" method="POST">
                 @csrf

@@ -2,10 +2,19 @@
 @section('title','add deaths')
 @section('content')
 <div class="container">
-    <form action="{{ route('familyMember.show') }}">
-        <input type="hidden" name="memberId" value="{{ $member_id }}">
-        <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
-    </form>
+    <div>
+        @if($family_member_id)
+        <form action="{{ route('familyMember.show') }}">
+            <input type="hidden" name="memberId" value="{{ $family_member_id  }}">
+            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+        </form>
+        @elseif($family_id)
+        <form action="{{ route('familyHead.showOtherDeatails') }}">
+            <input type="hidden" name="familyId" value="{{ $family_id  }}">
+            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+        </form>
+        @endif
+    </div>
     <Form action="{{route('death.store')}}" method="POST">
         @csrf
         <p class="h3">Add Death Form</p>
@@ -24,8 +33,9 @@
                 rows="5"></textarea>
         </div>
         <div>
-            <input type="hidden" name="member_id" placeholder="member id want to be loaded" value="{{$member_id}}">
-            <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="">
+            <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
+            <input type="hidden" name="member_id" placeholder="member id want to be loaded"
+                value="{{ $family_member_id }}">
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
 

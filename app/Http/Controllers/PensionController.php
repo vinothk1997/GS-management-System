@@ -16,10 +16,19 @@ class PensionController extends Controller
         // return $pensions;
         return view('pension.index',compact('pensions'));
     }
-    public function create($id){
-        $member_id=$id;
+
+    public function create(Request $req){
         $banks=$this->banks;
-        return view('pension.create',compact('banks','member_id'));
+        $family_id='';
+        $family_member_id='';
+        if($req->family_id);{
+            $family_id=$req->family_id;
+        }
+    
+        if($req->member_id){
+            $family_member_id=$req->member_id;
+        }
+        return view('pension.create',compact('family_id','family_member_id','banks'));
 
     }
     public function store(StorePensionRequest $req){
@@ -31,7 +40,14 @@ class PensionController extends Controller
         $pension->family_id=$req->family_id;
         $pension->member_id=$req->member_id;
         $pension->save();
-        return redirect()->back();
+
+        if(!empty($pension->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$pension->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$pension->family_id);
+      
+          } 
 
     }
     public function edit(Request $req){
@@ -48,7 +64,14 @@ class PensionController extends Controller
         $pension->amount=$req->amount;
         $pension->category=$req->category;
         $pension->save();
-        return redirect()->to('/family-Members/show?memberId='.$req->member_id);
+        
+        if(!empty($pension->member_id)){
+            return redirect()->to('/family-Members/show?memberId='.$pension->member_id);
+            }
+          else{
+              return redirect()->to('/family-Heads/other-details?familyId='.$pension->family_id);
+      
+          } 
 
     }
 

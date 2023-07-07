@@ -2,10 +2,19 @@
 @section('title','add pension')
 @section('content')
 <div class="container">
+  <div>
+    @if($pension->member_id)
     <form action="{{ route('familyMember.show') }}">
-        <input type="hidden" name="memberId" value="{{ $member_id }}">
+        <input type="hidden" name="memberId" value="{{ $pension->member_id  }}">
         <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
     </form>
+    @elseif($pension->family_id)
+    <form action="{{ route('familyHead.showOtherDeatails') }}" >
+        <input type="hidden" name="familyId" value="{{ $pension->family_id }}">
+        <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+    </form>
+    @endif
+  </div>
     <Form action="{{route('pension.store')}}" method="POST">
         @csrf
         @method('PUT')
@@ -34,6 +43,7 @@
                 <option @if($pension->category=='Government') selected @endif >Government</option>
             </select>
         </div>
+        <input type="hidden" name="pension_id" value="{{$pension->pension_id}}"/>
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
 
     </Form>

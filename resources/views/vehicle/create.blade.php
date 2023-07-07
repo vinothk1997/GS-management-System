@@ -3,10 +3,17 @@
 @section('content')
     <div class="container mt-3">
         <p class="h3">Add Model Form</p>
+        @if($family_member_id)
         <form action="{{ route('familyMember.show') }}">
-            <input type="hidden" name="memberId" value="{{ $memberId }}">
+            <input type="hidden" name="memberId" value="{{ $family_member_id  }}">
             <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
         </form>
+        @elseif($family_id)
+        <form action="{{ route('familyHead.showOtherDeatails') }}">
+            <input type="hidden" name="familyId" value="{{ $family_id  }}">
+            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+        </form>
+        @endif
         <Form action="{{ route('vehicle.store') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -33,7 +40,9 @@
                 <label>Registration Date:</label>
                 <input type="date" class="form-control" name="reg_date">
             </div>
-            <input type="hidden" name="member_id" id="" class="form-control" value="{{$memberId}}">
+            <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
+            <input type="hidden" name="member_id" placeholder="member id want to be loaded"
+                value="{{ $family_member_id }}">
             <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>
         </Form>
     </div>

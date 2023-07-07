@@ -36,7 +36,6 @@ class DistrictController extends Controller
     function show($district){
         $districtId=$district;
         $divisions=Division::where('district_id',$district)->get();
-        // return $divisions;
         return view('district.show',compact('divisions','districtId'));
     }
     function edit($district){

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Add Model Form</p>
-    <a href="{{route('vehicleModel.index')}}" method="POST">Back</a>
+    <a href="/vehicleBrands/{{$brandId}}" method="POST">Back</a>
     <Form action="{{route('vehicleModel.store')}}" method="POST">
         @csrf
         <div class="form-group">

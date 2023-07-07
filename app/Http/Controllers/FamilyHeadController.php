@@ -7,9 +7,18 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreFamilyHeadRequest;
 use App\Models\Ethnic;
 use App\Models\Occupation;
+use App\Models\Education;
 use App\Models\Religion;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
+use App\Models\SocialService;
+use App\Models\VotingDetail;
+use App\Models\Pension;
+use App\Models\Death;
+use App\Models\Vehicle;
+use App\Models\DifferentlyAbledPerson;
+use App\Models\Land;
+use Carbon\Carbon;
 use App\Models\User;
 use DB;
 
@@ -132,4 +141,38 @@ class FamilyHeadController extends Controller
         ->update(['status'=>'inactive']);
         return redirect()->back();  
     }
+
+    function showOtherDeatails(Request $req){
+        $familyHead=FamilyHead::find($req->familyId);
+        // return $familyHead;
+        $occupation=Occupation::where('occupation_id',$familyHead->occupation_id)->pluck('name')->first();
+        $education=Education::where('education_id',$familyHead->education_id)->pluck('name')->first();
+        $familyHead->setAttribute('occupation',$occupation );
+        $familyHead->setAttribute('education',$education);
+        $socialServices=SocialService::where('family_id',$req->familyId)->get();
+        $votingDetails=VotingDetail::where('family_id',$req->familyId)->get();
+        $pensions=Pension::where('family_id',$req->familyId)->get();
+        $deaths=Death::where('family_id',$req->familyId)->get();
+        $defferentlyAbledPersons=DifferentlyAbledPerson::where('family_id',$req->familyId)->get();
+        $lands=Land::where('family_id',$req->familyId)->get();
+        $vehicles=Vehicle::where('family_id',$req->familyId)->get();
+        $familyHead->setAttribute('vote',self::checkVote($familyHead->dob));
+
+         return view('family-head.other-details',compact('familyHead','socialServices','votingDetails'
+        ,'pensions','deaths','defferentlyAbledPersons','lands','vehicles'));
+        
+    
+    }
+
+    public static function checkVote($dob){
+        // check voting Eligibility
+        $yearOfBirth=Carbon::parse($dob)->year;
+        $age=Carbon::today()->year-$yearOfBirth;
+        if($age>18){
+           return 'EligibleForVote';
+        }
+        else{
+            return '';
+        }
+       }
 }

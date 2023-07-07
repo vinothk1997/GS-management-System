@@ -75,6 +75,7 @@ class FamilyMemberController extends Controller
         $lands=Land::where('member_id',$req->memberId)->get();
         $vehicles=Vehicle::where('member_id',$req->memberId)->get();
         $familyMember->setAttribute('vote',self::checkVote($familyMember->dob));
+        // return $vehicles;
         if(count($deaths)<1){
             return view('family-member.show',compact('familyMember','socialServices','votingDetails'
             ,'pensions','deaths','defferentlyAbledPersons','lands','vehicles'));

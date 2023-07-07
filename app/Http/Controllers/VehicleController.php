@@ -8,10 +8,18 @@ use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
 class VehicleController extends Controller
 {
-    function create($memberId){
+    function create(Request $req){
+        $family_id='';
+        $family_member_id='';
+        if($req->family_id);{
+            $family_id=$req->family_id;
+        }
+
+        if($req->member_id){
+            $family_member_id=$req->member_id;
+        }
         $vehicleBrands=VehicleBrand::all();
-        $memberId=$memberId;
-        return view('vehicle.create',compact('vehicleBrands','memberId'));
+        return view('vehicle.create',compact('vehicleBrands','family_id','family_member_id'));
     }
 
     function getVehicleModels($brandId){
@@ -31,7 +39,15 @@ class VehicleController extends Controller
         $obj->reg_no=$req->reg_no;
         $obj->reg_date=$req->reg_date;
         $obj->member_id=$req->member_id;
+        $obj->family_id=$req->family_id;
         $obj->save();
         return back();
+    }
+
+    function edit(Request $req){
+        $vehicleBrands=VehicleBrand::all();
+        $vehicle=Vehicle::where('model_id',$req->model_id)
+        ->where('member_id',$req->member_id)->first();
+        return view('vehicle.edit',compact('vehicleBrands','vehicle'));
     }
 }
