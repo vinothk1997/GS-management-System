@@ -18,7 +18,7 @@
             <form class="d-inline" action="{{route('occupation.destroy',$occupation->occupation_id)}}" method="POST">
                 @method("DELETE")
                 @csrf
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button onclick="return deletedata();" class="btn btn-sm btn-danger">Delete</button>
             </form>
         </td>
     </tr>

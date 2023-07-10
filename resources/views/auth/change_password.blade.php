@@ -11,15 +11,15 @@
         </div>
         <div>
             <label class="form-label">Current Password:</label>
-            <input type="text" name="current_password" id="user_name" class="form-control">
+            <input type="password" name="current_password" id="user_name" class="form-control">
         </div>
         <div>
             <label class="form-label">New Password:</label>
-            <input type="text" name="new_password" id="new_password" class="form-control">
+            <input type="password" name="new_password" id="new_password" class="form-control">
         </div>
         <div>
             <label class="form-label">Confirm Password:</label>
-            <input type="text" name="confirm_new_password" password="confirm_new_password" id="confirm_new_password"
+            <input type="password" name="confirm_new_password" password="confirm_new_password" id="confirm_new_password"
                 class="form-control">
         </div>
         <div class="my-3">

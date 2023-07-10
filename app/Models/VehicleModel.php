@@ -15,7 +15,7 @@ class VehicleModel extends Model
     public $timestamps = false;
 
     public function VehicleType(){
-        return $this->hasOne(VehicleType::class,'vehicle_type_id','vehicle_type_id');
+        return $this->belongsTo(VehicleType::class,'vehicle_type_id','vehicle_type_id');
     }
 
     public function VehicleBrand(){

@@ -24,7 +24,7 @@
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="voting_id" value="{{$votingDetail->Voting_id}}">
-                <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                <button type="submit"  class="btn btn-sm btn-danger">Delete</a>
             </form>
         </td>
     </tr>

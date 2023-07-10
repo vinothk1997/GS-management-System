@@ -21,7 +21,7 @@
             <form class="d-inline" action="{{route('vehicleModel.destroy',$vehicleModel->model_id)}}" method="POST">
                 @method("DELETE")
                 @csrf
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button class="btn btn-sm btn-danger" onclick="return deletedata();">Delete</button>
             </form>
         </td>
     </tr>

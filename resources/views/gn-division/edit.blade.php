@@ -15,14 +15,6 @@
             <label>Code:</label>
             <input type="text" name="code" id="" class="form-control" value="{{$gn->code}}">
         </div>
-        <div class="form-group">
-            <label>Division:</label>
-            <select name="division" id="" class="form-control" value="{{$gn->division}}">
-                @foreach($divisions as $division)
-                <option value="{{$division}}">{{$division}}</option>
-                @endforeach
-            </select>
-        </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
 
     </Form>

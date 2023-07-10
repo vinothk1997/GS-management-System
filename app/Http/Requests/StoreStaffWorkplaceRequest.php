@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class StoreStaffWorkplaceRequest extends FormRequest
 {
@@ -24,7 +26,13 @@ class StoreStaffWorkplaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'startDate'=>'required',
+            'start_date' => [
+                Rule::unique('staff_workplaces')->where(function ($query) {
+                    return $query->where('staff_id', $this->input('staffId'))
+                                 ->where('start_date', $this->input('start_date'));
+                                 
+                }),
+            ],
             'endDate'=>'required',
             'designation'=>'required|string',
             'placeId'=>'required',

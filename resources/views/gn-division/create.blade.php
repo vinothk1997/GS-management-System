@@ -2,6 +2,7 @@
 @section('title','add-gn-division')
 @section('content')
 <div class="container mt-3">
+    <a href="/divisions/{{$divisionId}}/show">Back</a>
     <Form action="{{route('gn.store')}}" method="POST">
         @csrf
         <p class="h3">Add GN Division Form</p>

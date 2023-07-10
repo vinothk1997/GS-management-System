@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\StaffWorkplace;
 class Staff extends Model
 {
     use HasFactory;
@@ -17,5 +18,9 @@ class Staff extends Model
 
     public function User(){
         return $this->hasOne(User::class,'user_id','staff_id');
+    }
+
+    public function StaffWorkplaces(){
+        return $this->hasMany(StaffWorkplace::class,'staff_id','staff_id');
     }
 }

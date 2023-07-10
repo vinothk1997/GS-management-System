@@ -99,6 +99,7 @@
                 @endif
             </div>
             <div>
+                <h5>Pension Details</h5>
                 <table class="table table-bordered">
                     <tr>
                         <th>Pension No</th>
@@ -119,7 +120,7 @@
                 </table>
             </div>
             <div>
-                <h5> Death</h5>
+                <h5> Death Details</h5>
                 <table class="table table-bordered">
                     <tr>
                         <th>Death Date</th>
@@ -135,7 +136,7 @@
                 </table>
             </div>
             <div>
-                <h5>Land</h5>
+                <h5>Land Details</h5>
                 <table class="table table-bordered">
                     <tr>
                         <th>Land Type</th>
@@ -160,7 +161,7 @@
                 </table>
             </div>
             <div>
-                <h5>Differently Abled Person</h5>
+                <h5>Differently Abled Person Details</h5>
                 <table class="table table-bordered">
                     <tr>
                         <th>Type</th>

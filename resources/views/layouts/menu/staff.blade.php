@@ -105,7 +105,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('familyHead.index') }}" class="nav-link">
+                    <a href="{{ route('profile.showUserDetails') }}" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Profile
@@ -123,7 +123,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('message.index') }}" class="nav-link">
+                    <a href="{{ route('auth.changePasswordView') }}" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>
                             Change Password
@@ -173,9 +173,25 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('education.index') }}" class="nav-link ">
+                    <a href="{{ route('report.createFamilyBasedDOB') }}" class="nav-link ">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Report 1</p>
+                        <p>Family Head -DOB</p>
+                    </a>
+                    <a href="{{ route('report.createFamilyBasedGenderAndAge') }}" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Family Head - Age and Gender</p>
+                    </a>
+                    <a href="{{ route('report.createTreeReport') }}" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tree List</p>
+                    </a>
+                    <a href="{{ route('report.createFamilyIncomeReport') }}" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Family Income</p>
+                    </a>
+                    <a href="{{ route('report.createFamilyVehicleReport') }}" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Vehicle List</p>
                     </a>
                 </li>
                

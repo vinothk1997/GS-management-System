@@ -53,13 +53,11 @@ class GnDivisionController extends Controller
         return view('gn-division.edit',compact('gn','divisions'));
     }
     function update(Request $req,$gn){
-        $divisionId=Division::where('name',$req->division)->pluck('division_id')[0];
         $gn= GnDivision::find($gn);
         $gn->name=$req->name;
         $gn->code=$req->code;
-        $gn->division_id=$divisionId;
         $gn->save();
-        return redirect()->route('gn.index');
+        return redirect()->to('divisions/'.$gn->division_id.'/show');
     }
     function destroy($gn){
         $gn= GnDivision::destroy($gn);

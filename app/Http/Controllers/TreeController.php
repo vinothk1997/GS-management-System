@@ -32,21 +32,22 @@ class TreeController extends Controller
     }
     public function edit(Request $req)
     {
+        // return $req;
         $tree=Tree::where('land_id',$req->land_id)
         ->where('tree_name',$req->tree_name)
         ->first();
+        // return $tree;
         return view('tree.edit',compact('tree'));
     }
     public function update(Request $req)
     {
-        $tree=DB::table('trees')->where('land_id',$req->land_id)
-        ->where('tree_name',$req->tree_name)
+        $trees=Tree::where('land_id',$req->land_id)
+        ->where('tree_name',$req->old_tree_name)
         ->update([
             'tree_name'=>$req->tree_name,
             'tree_type'=>$req->tree_type,
             'no_of_tree'=>$req->no_of_tree
         ]);
-
         $land=Land::where('land_id',$req->land_id)->first();
         $member_id=$land->member_id;
         $land_id=$req->land_id;

@@ -283,7 +283,7 @@ Route::group(['prefix'=>'livelihoods'],function(){
 Route::group(['prefix'=>'socialServices'],function(){
     Route::get('/',[SocialServiceController::class,'index'])->name('socialService.index');
     Route::get('social-service-by-family',[SocialServiceController::class,'socialServiceByFamily'])->name('socialService.socialServiceByFamily');
-    Route::post('/create',[SocialServiceController::class,'create'])->name('socialService.create');
+    Route::get('/create',[SocialServiceController::class,'create'])->name('socialService.create');
     Route::get('/show',[SocialServiceController::class,'show'])->name('socialService.show');
     Route::post('/edit',[SocialServiceController::class,'edit'])->name('socialService.edit');
     Route::post('/',[SocialServiceController::class,'store'])->name('socialService.store');
@@ -373,4 +373,19 @@ Route::group(['prefix'=>'Report'],function(){
     Route::get('/generateStaffReport',[ReportController::class,'generateStaffReport'])->name('report.generateStaffReport');
     Route::get('/generateStaffDeatailReport/{staff}',[ReportController::class,'generateStaffDeatailReport'])->name('report.generateStaffDeatailReport');
     Route::get('/generateFamilyHeadListReport',[ReportController::class,'generateFamilyHeadListReport'])->name('report.generateFamilyHeadListReport');
+    
+    Route::get('/createFamilyBasedDOB',[ReportController::class,'createFamilyBasedDOB'])->name('report.createFamilyBasedDOB');
+    Route::get('/generateFamilyBasedDOB',[ReportController::class,'generateFamilyBasedDOB'])->name('report.generateFamilyBasedDOB');
+
+    Route::get('/createFamilyBasedGenderAndAge',[ReportController::class,'createFamilyBasedGenderAndAge'])->name('report.createFamilyBasedGenderAndAge');
+    Route::get('/generateFamilyBasedGenderAndAge',[ReportController::class,'generateFamilyBasedGenderAndAge'])->name('report.generateFamilyBasedGenderAndAge');
+
+    Route::get('/createTreeReport',[ReportController::class,'createTreeReport'])->name('report.createTreeReport');
+    Route::get('/generateTreeReport',[ReportController::class,'generateTreeReport'])->name('report.generateTreeReport');
+
+    Route::get('/createFamilyIncomeReport',[ReportController::class,'createFamilyIncomeReport'])->name('report.createFamilyIncomeReport');
+    Route::get('/generateFamilyIncomeReport',[ReportController::class,'generateFamilyIncomeReport'])->name('report.generateFamilyIncomeReport');
+
+    Route::get('/createFamilyVehicleReport',[ReportController::class,'createFamilyVehicleReport'])->name('report.createFamilyVehicleReport');
+    Route::get('/generateFamilyVehicleReport',[ReportController::class,'generateFamilyVehicleReport'])->name('report.generateFamilyVehicleReport');
 });

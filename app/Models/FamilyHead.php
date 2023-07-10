@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Death;
+use App\Models\FamilyMember;
 
 class FamilyHead extends Model
 {
@@ -22,6 +23,11 @@ class FamilyHead extends Model
         return $this->hasOne(User::class,'user_id','family_id');
     }
 
-   
+   public function FamilyMembers(){
+    return $this->hasMany(FamilyMember::class,'family_id','family_id');
+   }
 
+   public function Vehicle(){
+    return $this->hasMany(Vehicle::class,'family_id','family_id');
+   }
 }

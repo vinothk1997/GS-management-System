@@ -2,6 +2,7 @@
 @section('title','edit-vehicleType')
 @section('content')
 <div class="container mt-3">
+    <a class="btn btn-primary btn-sm" href="{{route('staff.index')}}">Back</a>
     <p class="h3">Add Vehicle Type Form</p>
     <Form action="{{route('staff.update',$staff->staff_id)}}" method="POST">
         @method('PUT')

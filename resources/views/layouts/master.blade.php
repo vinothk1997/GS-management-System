@@ -87,6 +87,7 @@
             </aside>
 
             <div class="content-wrapper">
+                <div ><p class="h2 text-center text-capitalize bg-primary py-3">GN Managememnt System For Gnanimadam</p> </div>
                 @yield('content')
             </div>
 

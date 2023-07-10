@@ -50,7 +50,7 @@ class LandController extends Controller
         $land->reg_no=$req->reg_no;
         $land->document_file= self::fileUpload($req,$landId)[1];
         $land->save();
-        if(!empty($pension->member_id)){
+        if(!empty($land->member_id)){
             return redirect()->to('/family-Members/show?memberId='.$land->member_id);
             }
           else{
@@ -112,10 +112,10 @@ class LandController extends Controller
         $Land=Land::find($req->id);
         Land::destroy($req->id);
         if(!empty($Land->member_id)){
-            return redirect()->to('/family-Members/show?memberId='.$differentlyAbledPerson->member_id);
+            return redirect()->to('/family-Members/show?memberId='.$Land->member_id);
             }
           else{
-              return redirect()->to('/family-Heads/other-details?familyId='.$differentlyAbledPerson->family_id);
+              return redirect()->to('/family-Heads/other-details?familyId='.$Land->family_id);
       
         } 
         

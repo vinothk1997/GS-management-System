@@ -19,7 +19,7 @@
             <form class=d-inline action="{{route('ethnic.destroy',$ethnic->ethnic_id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                <button type="submit" onclick="return deletedata();" class="btn btn-sm btn-danger">Delete</a>
             </form>
         </td>
     </tr>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tree extends Model
 {
     use HasFactory;
-    protected $fillable=['land_id','tree_name','type_of_animal','tree_type','no_of_tree'];
+    protected $fillable=['land_id','tree_name','tree_type','no_of_tree'];
     protected $primaryKey=['land_id','tree_name'];
     protected $keyType='string';
     public $incrementing=false;
