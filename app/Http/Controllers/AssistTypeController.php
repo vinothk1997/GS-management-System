@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAssistTypeRequest;
 use App\Models\AssistType;
 
 class AssistTypeController extends Controller
@@ -15,7 +15,7 @@ class AssistTypeController extends Controller
 
         return view('assist-type.create');
     }
-    function store(Request $req){
+    function store(StoreAssistTypeRequest $req){
         
         $lastAssistTypeId=AssistType::pluck('assist_type_id')->last();
         if(!$lastAssistTypeId){
@@ -38,7 +38,7 @@ class AssistTypeController extends Controller
         $assistType=AssistType::find($assist);
         return view('assist-type.edit',compact('assistType'));
     }
-    function update(Request $req,$assist){
+    function update(StoreAssistTypeRequest $req,$assist){
         $assist= AssistType::find($assist);
         $assist->name=$req->name;
         $assist->save();

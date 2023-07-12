@@ -26,7 +26,7 @@ class StoreStaffRequest extends FormRequest
         return [
             'fname'=>'required',
             'lname'=>'required',
-            'nic'=>'required',
+            'nic'=>'required|unique:App\Models\Staff,nic',
             'dob'=>'required',
             'gender'=>'required',
             'address'=>'required',

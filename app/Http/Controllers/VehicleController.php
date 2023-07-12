@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreVehicleModelRequest;
 use App\Models\Vehicle;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
@@ -33,7 +34,7 @@ class VehicleController extends Controller
 
     }
 
-    function store(Request $req){
+    function store(StoreVehicleModelRequest $req){
         $obj= new Vehicle;
         $obj->model_id=$req->vehicle_model;
         $obj->reg_no=$req->reg_no;
@@ -44,7 +45,7 @@ class VehicleController extends Controller
         return back();
     }
 
-    function edit(Request $req){
+    function edit(StoreVehicleModelRequest $req){
         $vehicleBrands=VehicleBrand::all();
         $vehicle=Vehicle::where('model_id',$req->model_id)
         ->where('member_id',$req->member_id)->first();

@@ -119,7 +119,8 @@ class ReportController extends Controller
                 $filteredFamilyMembers = $familyHead->FamilyMembers->where('dob', '>', $date);
                 foreach($filteredFamilyMembers as $familyMember){
                     $memberData = $familyMember->toArray();
-                    $memberData['education'] = $familyMember->Education->name;
+                    $memberData['learning_place_type'] = $familyMember->learning_place_type!=null?$familyMember->learning_place_type:'N/A';
+                    $memberData['education'] = $familyMember->Education?$familyMember->Education->name:'';
                     $familyMembers[] = $memberData;
                 }
             }

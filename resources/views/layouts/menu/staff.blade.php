@@ -39,12 +39,12 @@
                         <p>Ethnic</p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('infrastructure.index') }}" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('organization.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Infrastructure</p>
+                        <p>Organization</p>
                     </a>
-                </li> --}}
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('occupation.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>

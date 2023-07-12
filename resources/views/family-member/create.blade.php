@@ -152,9 +152,9 @@
                         <label>Occupation:</label>
                         <select name="occupation" class="form-control  @error('occupation') is-invalid @enderror"
                             value="{{ old('occupation') }}">
-                            <option>-- Choose occupation --</option>
+                            <option value="N/A">-- Choose occupation --</option>
                             @foreach ($occupations as $occupation)
-                                <option value="{{ $occupation }}">{{ $occupation }}</option>
+                                <option value="{{ $occupation->occupation_id }}">{{ $occupation->name }}</option>
                             @endforeach
                         </select>
                         @error('occupation')
@@ -168,9 +168,9 @@
                         <label>Education:</label>
                         <select name="education" class="form-control  @error('education') is-invalid @enderror"
                             value="{{ old('ethnic') }}">
-                            <option>-- Choose education --</option>
+                            <option value="N/A">-- Choose education --</option>
                             @foreach ($educations as $education)
-                                <option value="{{ $education }}">{{ $education }}</option>
+                                <option value="{{ $education->education_id }}">{{ $education->name }}</option>
                             @endforeach
                         </select>
                         @error('education')

@@ -14,7 +14,7 @@
         <td>{{$ethnic->ethnic_id}}</td>
         <td>{{$ethnic->name}}</th>
         <td>
-            <a href="{{route('ethnic.show',$ethnic->ethnic_id)}}" class="btn btn-sm btn-success">View</a>
+            {{-- <a href="{{route('ethnic.show',$ethnic->ethnic_id)}}" class="btn btn-sm btn-success">View</a> --}}
             <a href="{{route('ethnic.edit',$ethnic->ethnic_id)}}" class="btn btn-sm btn-secondary">Edit</a>
             <form class=d-inline action="{{route('ethnic.destroy',$ethnic->ethnic_id)}}" method="POST">
                 @csrf

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class StoreFamilyMemberRequest extends FormRequest
 {
@@ -26,18 +28,16 @@ class StoreFamilyMemberRequest extends FormRequest
         return [
             'fname'=>'required',
             'lname'=>'required',
-            'nic'=>'required',
+            'nic'=>['required',
+                Rule::unique('family_heads', 'nic'),
+                Rule::unique('family_members', 'nic')],
             'dob'=>'required',
             'gender'=>'required',
-            'mobile'=>'required',
             'birth_c_no'=>'required',
             'relationship'=>'required',
-            'school'=>'required',
-            'learning_place_type'=>'required',
             'monthly_income'=>'required',
-            'driving_licence_no'=>'required',
-            'occupation'=>'required|notIn:-- Choose occupation --',
-            'education'=>'required|notIn:-- Choose education --',
+            'occupation'=>'notIn:N/A',
+            'education'=>'notIn:N/A',
         ];
     }
     public function messages(){

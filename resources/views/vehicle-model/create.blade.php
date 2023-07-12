@@ -8,8 +8,11 @@
         @csrf
         <div class="form-group">
             <label>Vehicle Model:</label>
-            <input type="text" name="name" id="" onkeypress="return isTextKey(event)" class="form-control">
+            <input type="text" name="name" id="" onkeypress="return isTextKey(event)"  class="form-control @error('name') is-invalid @enderror">
         </div>
+        @error('name')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
             <label>Vehicle Type:</label>
             <select class="form-control"  name="vehicleType">

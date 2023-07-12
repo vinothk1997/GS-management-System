@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEducationRequest extends FormRequest
+class StoreReligionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class StoreEducationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:educations,name'
+            'name'=>'required|unique:religions,name'
         ];
     }
     public function messages()
     {
         return [
-            'name.required'=>'A education field is required.'
+            'name.required'=>'A religion field is required.'
         ];
     }
 }

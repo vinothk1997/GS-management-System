@@ -20,17 +20,17 @@ return new class extends Migration
             $table->string('nic','12');
             $table->date('dob');
             $table->string('gender','6');
-            $table->integer('mobile');
+            $table->integer('mobile')->nullable();
             $table->mediumText('permanent_address');
             $table->mediumText('temporary_address');
-            $table->string('house_no','10');
+            $table->string('house_no','10')->nullable();
             $table->string('card_type','2');
             $table->string('internet','20');
-            $table->string('married_certificate_no','20');
+            $table->string('married_certificate_no','20')->nullable();
             $table->string('gn_id','5');
             $table->string('religion_id','4');
             $table->string('ethnic_id','4');
-            $table->string('occupation_id','5');
+            $table->string('occupation_id','5')->nullable();
             $table->foreign('gn_id')
             ->references('gn_id')
             ->on('gn_divisions');

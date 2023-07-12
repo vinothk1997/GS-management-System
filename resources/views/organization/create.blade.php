@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title','add-occupation')
+@section('title','add-organization')
 @section('content')
 <div class="container mt-3">
-    <p class="h3">Add Occupation Form</p>
-    <a href="{{route('organization.index')}}" method="POST">Back</a>
+    <p class="h3">Add Organization Form</p>
+    <a href="{{route('organization.index')}}" class="btn btn-primary btn-sm">Back</a>
     <Form action="{{route('organization.store')}}" method="POST">
         @csrf
         <div class="form-group">

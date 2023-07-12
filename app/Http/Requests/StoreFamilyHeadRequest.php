@@ -26,20 +26,19 @@ class StoreFamilyHeadRequest extends FormRequest
         return [
             'fname'=>'required',
             'lname'=>'required',
-            'nic'=>'required',
+            'nic'=>'required|unique:App\Models\FamilyHead,nic',
             'dob'=>'required',
             'gender'=>'required',
             'mobile'=>'required',
             'p_address'=>'required',
             't_address'=>'required',
-            'house_no'=>'required',
-            'card_type'=>'required',
-            'internet'=>'required',
-            'married_c_no'=>'required',
+            'card_type'=>'notIn:N/A',
+            'internet'=>'required|notIn:N/A',
+            'married_c_no'=>'unique:App\Models\FamilyHead,married_certificate_no',
             'gn_id'=>'required',
-            'religion'=>'required|notIn:-- Choose religion --',
-            'ethnic'=>'required|notIn:-- Choose ethnic --',
-            'occupation'=>'required|notIn:-- Choose occupation --',
+            'religion'=>'required|notIn:N/A',
+            'ethnic'=>'notIn:N/A',
+            'occupation'=>'notIn:N/A',
         ];
     }
     public function messages(){

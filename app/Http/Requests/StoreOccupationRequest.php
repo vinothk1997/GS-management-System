@@ -24,7 +24,7 @@ class StoreOccupationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
+            'name'=>'required|unique:occupations,name',
         ];
     }
 

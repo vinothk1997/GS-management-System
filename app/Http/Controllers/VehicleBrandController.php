@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreVehicleBrandRequest;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
 
@@ -15,7 +16,7 @@ class VehicleBrandController extends Controller
     function create(){
         return view('vehicle-brand.create');
     }
-    function store(Request $req){
+    function store(StoreVehicleBrandRequest $req){
         $lastVehicleBrandId=VehicleBrand::pluck('brand_id')->last();
         if(!$lastVehicleBrandId){
             $vehicleBrandId="VB001";
@@ -38,7 +39,7 @@ class VehicleBrandController extends Controller
         $vehicleBrand=VehicleBrand::find($vehicleBrand);
         return view('vehicle-brand.edit',compact('vehicleBrand'));
     }
-    function update(Request $req,$vehicleBrand){
+    function update(StoreVehicleBrandRequest $req,$vehicleBrand){
         $vehicleBrand= VehicleBrand::find($vehicleBrand);
         $vehicleBrand->brand=$req->brand;
         $vehicleBrand->save();

@@ -36,7 +36,7 @@ class EducationController extends Controller
         $education=Education::find($education);
         return view('education.edit',compact('education'));
     }
-    function update(Request $req,$education){
+    function update(StoreEducationRequest $req,$education){
         $education= Education::find($education);
         $education->name=$req->name;
         $education->save();

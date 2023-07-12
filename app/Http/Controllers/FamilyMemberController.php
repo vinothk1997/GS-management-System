@@ -23,16 +23,12 @@ class FamilyMemberController extends Controller
         return view('family-member.index',compact('familyMembers'));
     }
     function create(Request $req){
-        $educations=Education::pluck('name');
-        $occupations=Occupation::pluck('name');
+        $educations=Education::all();
+        $occupations=Occupation::all();
         $familyId=$req->familyId;
         return view('family-member.create',compact('educations','occupations','familyId'));
     }
     function store(StoreFamilyMemberRequest $req){
-        // return $req;
-        $educationId=Education::where('name',$req->education)->pluck('education_id')->first();
-        $occupationId=Occupation::where('name',$req->occupation)->pluck('occupation_id')->first();
-        // return $educationId;
         $lastMemberId=FamilyMember::pluck('member_id')->last();
         if(!$lastMemberId){
             $memberId="FH/GN001/001/M/01";
@@ -54,8 +50,8 @@ class FamilyMemberController extends Controller
         $member->learning_place_type=$req->learning_place_type;
         $member->monthly_income=$req->monthly_income;
         $member->driving_licence_no=$req->driving_licence_no;
-        $member->occupation_id=$occupationId;
-        $member->education_id=$educationId;
+        $member->occupation_id=$req->occupation;
+        $member->education_id=$req->education;
         $member->family_id=$req->familyId;
         $member->save();
         return redirect()->back();

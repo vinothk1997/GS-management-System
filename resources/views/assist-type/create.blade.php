@@ -8,8 +8,11 @@
             <p class="h3">Add District Form</p>
             <div class="form-group">
                 <label>Assist Type:</label>
-                <input type="text" name="name" id="" onkeypress="return isTextKey(event)" class="form-control">
+                <input type="text" name="name" id="" onkeypress="return isTextKey(event)" class="form-control @error('name') is-invalid @enderror">
             </div>
+            @error('name')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
             <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
 
         </Form>

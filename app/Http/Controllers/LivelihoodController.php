@@ -39,24 +39,49 @@ class LivelihoodController extends Controller
         else{
             $livelihoodId=++$lastLivelihoodId;
         }
+        
         $livelihoodCheck=Livelihood::where('assist_type_id',$req->assist_type_id)
-                                    ->where('family_id',$family_id)
-                                    ->get();
-        $preLivelihoodId=Livelihood::pluck('livelihood_id')->last();
-        if(!empty($livelihoodCheck)){
-            $prevDonation=Livelihood::where('livelihood_id',$preLivelihoodId)
-            ->update(
-                ['end_date'=>Carbon::yesterday()]
-            );
-            $obj=new Livelihood;
-            $obj->livelihood_id=$livelihoodId;
-            $obj->start_date=$req->start_date;
-            $obj->end_date=null;
-            $obj->amount=$req->amount;
-            $obj->assist_type_id=$req->assist_type_id;
-            $obj->family_id=$req->family_id;
-            $obj->save();
-            return redirect()->back();
+        ->where('family_id',$family_id)->get();
+        if($livelihoodCheck->isNotEmpty()){
+            if($livelihoodCheck->where('end_date',null)){
+                if($livelihoodCheck[0]->start_date===Carbon::today()->format('Y-m-d')){
+                    $livelihoodCheck[0]->delete();
+                    $obj=new Livelihood;
+                    $obj->livelihood_id=$livelihoodId;
+                    $obj->start_date=$req->start_date;
+                    $obj->end_date=null;
+                    $obj->amount=$req->amount;
+                    $obj->assist_type_id=$req->assist_type_id;
+                    $obj->family_id=$req->family_id;
+                    $obj->save();
+                    return redirect()->back();
+                }
+                else{
+                    $livelihoodCheck->where('end_date',null)
+                    ->first()
+                    ->update(['end_date'=>Carbon::yesterday()]);
+                    $obj=new Livelihood;
+                    $obj->livelihood_id=$livelihoodId;
+                    $obj->start_date=$req->start_date;
+                    $obj->end_date=null;
+                    $obj->amount=$req->amount;
+                    $obj->assist_type_id=$req->assist_type_id;
+                    $obj->family_id=$req->family_id;
+                    $obj->save();
+                    return redirect()->back();
+                }
+            }
+            else{
+                $obj=new Livelihood;
+                $obj->livelihood_id=$livelihoodId;
+                $obj->start_date=$req->start_date;
+                $obj->end_date=null;
+                $obj->amount=$req->amount;
+                $obj->assist_type_id=$req->assist_type_id;
+                $obj->family_id=$req->family_id;
+                $obj->save();
+                return redirect()->back();
+            }
         }
         else{
             $obj=new Livelihood;
@@ -69,6 +94,7 @@ class LivelihoodController extends Controller
             $obj->save();
             return redirect()->back();
         }
+
     }        
 
     function edit(Request $req){

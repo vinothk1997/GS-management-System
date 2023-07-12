@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('type','100');
             $table->date('date');
             $table->longText('reason');
-            $table->decimal('monthly_assist');
-            $table->decimal('amount');
+            $table->decimal('monthly_assist')->nullable();
+            $table->decimal('amount')->nullable();
             $table->foreign('member_id')->references('member_id')->on('family_members');
             $table->foreign('family_id')->references('family_id')->on('family_heads');
         });

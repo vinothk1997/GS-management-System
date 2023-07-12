@@ -24,13 +24,13 @@ class StoreEthnicRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
+            'name'=>'required|unique:ethnics,name'
         ];
     }
-
-    public function messages(){
+    public function messages()
+    {
         return [
-            'name.required'=>'A Ethnic is required',
+            'name.required'=>'A ethnic field is required.'
         ];
     }
 }

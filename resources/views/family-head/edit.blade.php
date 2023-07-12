@@ -93,25 +93,25 @@
                 </div>
                 <div class="col-6">
                     <label>Religion: </label>
-                    <select name="religion" class="form-control" value="{{ $familyHead->fname }}">
+                    <select name="religion" class="form-control">
                         @foreach ($religions as $religion)
-                            <option @if ($religion) selected @endif>{{ $religion }}</option>
+                            <option value="{{$religion->religion_id}}" @if ($familyHead->religion_id==$religion->religion_id) selected @endif>{{ $religion->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-6">
                     <label>Ethnic</label>
-                    <select name="ethnic" class="form-control" value="{{ $familyHead->fname }}">
+                    <select name="ethnic" class="form-control">
                         @foreach ($ethnics as $ethnic)
-                            <option @if ($ethnic) selected @endif>{{ $ethnic }}</option>
+                            <option value="{{$ethnic->ethnic_id}}" @if ($familyHead->ethnic_id==$ethnic->ethnic_id) selected @endif>{{ $ethnic->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-6">
                     <label>Occupation</label>
-                    <select name="occupation" class="form-control" value="{{ $familyHead->fname }}">
+                    <select name="occupation" class="form-control" >
                         @foreach ($occupations as $occupation)
-                            <option @if ($religion) selected @endif>{{ $occupation }}</option>
+                            <option value="{{$occupation->occupation_id}}" @if ($familyHead->occupation_id==$occupation->occupation_id) selected @endif>{{ $occupation->name }}</option>
                         @endforeach
                     </select>
                 </div>

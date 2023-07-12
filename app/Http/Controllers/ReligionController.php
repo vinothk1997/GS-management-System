@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreReligionRequest;
+
 use App\Models\Religion;
 
 class ReligionController extends Controller
@@ -14,7 +16,7 @@ class ReligionController extends Controller
     function create(){
         return view('religion.create');
     }
-    function store(Request $req){
+    function store(StoreReligionRequest $req){
         // return $req;
         $lastReligionId=Religion::pluck('religion_id')->last();
         if(!$lastReligionId){
@@ -36,7 +38,7 @@ class ReligionController extends Controller
         $religion=Religion::find($religion);
         return view('religion.edit',compact('religion'));
     }
-    function update(Request $req,$religion){
+    function update(StoreReligionRequest $req,$religion){
         $religion= Religion::find($religion);
         $religion->name=$req->name;
         $religion->save();

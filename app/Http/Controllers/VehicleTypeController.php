@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreVehicleTypeRequest;
 use App\Models\VehicleType;
 
 class VehicleTypeController extends Controller
@@ -14,7 +15,7 @@ class VehicleTypeController extends Controller
     function create(){
         return view('vehicle-type.create');
     }
-    function store(Request $req){
+    function store(StoreVehicleTypeRequest $req){
         $lastVehicleTypeId=VehicleType::pluck('vehicle_type_id')->last();
         if(!$lastVehicleTypeId){
             $vehicleTypeId="VT001";
@@ -35,7 +36,7 @@ class VehicleTypeController extends Controller
         $vehicleType=VehicleType::find($vehicleType);
         return view('vehicle-type.edit',compact('vehicleType'));
     }
-    function update(Request $req,$vehicleType){
+    function update(StoreVehicleTypeRequest $req,$vehicleType){
         $vehicleType= VehicleType::find($vehicleType);
         $vehicleType->vehicle_type=$req->vehicle_type;
         $vehicleType->save();

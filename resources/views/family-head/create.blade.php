@@ -102,7 +102,7 @@
                     <label>Card Type:</label>
                     <select name="card_type" id="" class="form-control @error('card_type') is-invalid @enderror"
                         value="{{old('card_type')}}">
-                        <option>-- Select a card type --</option>
+                        <option value="N/A">-- Select a card type --</option>
                         <option value='U'>U</option>
                         <option value='A'>A</option>
                     </select>
@@ -116,7 +116,8 @@
                     <label>Internet:</label>
                     <select name="internet" id="" class="form-control @error('internet') is-invalid @enderror"
                         value="{{old('internet')}}">
-                        <option>-- Select type of internet service you have --</option>
+                        <option value="N/A">-- Select type of internet service you have --</option>
+                        <option value="no_connection">No Connection</option>
                         <option value="ADSL">ADSL</option>
                         <option value="Fiber">Fiber</option>
                         <option value="Internet Card">Internet Card</option>
@@ -142,9 +143,9 @@
         
                     <select name="religion" class="form-control  @error('religion') is-invalid @enderror"
                         value="{{old('religion')}}">
-                        <option>-- Choose religion --</option>
+                        <option value="N/A" >-- Choose religion --</option>
                         @foreach($religions as $religion)
-                        <option value="{{$religion}}">{{$religion}}</option>
+                        <option value="{{$religion->religion_id}}">{{$religion->name}}</option>
                         @endforeach
                     </select>
                     @error('religion')
@@ -156,9 +157,9 @@
                 <div class="form-group">
                     <label>Ethnic:</label>
                     <select name="ethnic" class="form-control  @error('ethnic') is-invalid @enderror" value="{{old('ethnic')}}">
-                        <option>-- Choose ethnic --</option>
+                        <option value="N/A" >-- Choose ethnic --</option>
                         @foreach($ethnics as $ethnic)
-                        <option value="{{$ethnic}}">{{$ethnic}}</option>
+                        <option value="{{$ethnic->ethnic_id}}">{{$ethnic->name}}</option>
                         @endforeach
                     </select>
                     @error('ethnic')
@@ -171,9 +172,10 @@
                     <label>Occupation:</label>
                     <select name="occupation" class="form-control  @error('occupation') is-invalid @enderror"
                         value="{{old('occupation')}}">
-                        <option>-- Choose occupation --</option>
+                        <option value="N/A">-- Choose occupation --</option>
+                        <option value="">Unemployed </option>
                         @foreach($occupations as $occupation)
-                        <option value="{{$occupation}}"> {{$occupation}}</option>
+                        <option value="{{$occupation->occupation_id}}"> {{$occupation->name}}</option>
                         @endforeach
                     </select>
                     @error('occupation')
@@ -182,11 +184,6 @@
                 </div>
             </div>
         </div>
-   
-
-        
-        <!-- GN ID want to be hidden -->
-        {{-- <label>GN ID</label> --}}
         <input type="hidden" name="gn_id" id="" class="form-control " value="GN063"  @error('gn_id') is-invalid @enderror">
        
         <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>

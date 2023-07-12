@@ -1,5 +1,6 @@
 <?php
 use App\Http\Middleware\EnsureUserLogged;
+use App\Http\Middleware\EnsureUserRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\AssistTypeController;
@@ -58,7 +59,7 @@ Route::group(['prefix'=>'districts'],function(){
     Route::post('/',[DistrictController::class,'store'])->name('district.store');
     Route::put('/{district}',[DistrictController::class,'update'])->name('district.update');
     Route::delete('/{district}',[DistrictController::class,'destroy'])->name('district.destroy');
-});
+})->middleware(EnsureUserRole::class);
 // Assist type
 Route::group(['prefix'=>'assistTypes'],function(){
     Route::get('/',[AssistTypeController::class,'index'])->name('assistType.index');

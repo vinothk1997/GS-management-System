@@ -3,6 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Add District Form</p>
+    <a href="{{route('district.index')}}" class="btn btn-sm btn-primary"> Back</a>
     <Form action="{{route('district.update',$district->district_id)}}" method="POST">
         @method('PUT')
         @csrf

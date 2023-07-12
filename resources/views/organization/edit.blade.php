@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Edit Organization Form</p>
-    <a href="{{route('organization.index')}}" method="POST">Back</a>
+    <a href="{{route('organization.index')}}" class="btn btn-primary btn-sm">Back</a>
     <Form action="{{route('organization.update',$organization->organization_id)}}" method="POST">
         @method('PUT')
         @csrf

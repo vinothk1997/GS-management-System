@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Add Education Form</p>
-    <a href="{{route('education.index')}}" method="POST">Back</a>
+    <a href="{{route('education.index')}}" class="btn btn-primary btn-sm">Back</a>
     <Form action="{{route('education.store')}}" method="POST">
         @csrf
         <div class="form-group">

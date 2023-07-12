@@ -10,8 +10,11 @@
         <div class="form-group">
             <label>Vehicle Model:</label>
             <input type="text" name="name" onkeypress="return isTextKey(event)" value=" {{$vehicleModel->name}}"
-                class="form-control">
+            class="form-control @error('brand') is-invalid @enderror">
         </div>
+        @error('brand')
+        <div class="text-danger">{{ $message }}</div>
+         @enderror
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>
 </div>

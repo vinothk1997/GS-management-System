@@ -9,8 +9,11 @@
         <div class="form-group">
             <label>Religion:</label>
             <input type="text" name="name" id="" onkeypress="return isTextKey(event)" value="{{$religion->name}}"
-                class="form-control">
+            class="form-control @error('name') is-invalid @enderror">
         </div>
+        @error('name')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
     </Form>
 </div>

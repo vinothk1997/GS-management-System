@@ -36,7 +36,7 @@ class EthnicController extends Controller
         $ethnic=Ethnic::find($ethnic);
         return view('ethnic.edit',compact('ethnic'));
     }
-    function update(Request $req,$ethnic){
+    function update(StoreEthnicRequest $req,$ethnic){
         $ethnic= Ethnic::find($ethnic);
         $ethnic->name=$req->name;
         $ethnic->save();

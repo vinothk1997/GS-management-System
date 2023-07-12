@@ -36,7 +36,7 @@ class OccupationController extends Controller
         $occupation=Occupation::find($occupation);
         return view('occupation.edit',compact('occupation'));
     }
-    function update(Request $req,$occupation){
+    function update(StoreOccupationRequest $req,$occupation){
         $occupation= Occupation::find($occupation);
         $occupation->name=$req->name;
         $occupation->save();

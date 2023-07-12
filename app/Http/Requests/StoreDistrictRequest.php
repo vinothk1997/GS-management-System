@@ -24,7 +24,7 @@ class StoreDistrictRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
+            'name'=>'required|unique:districts,name',
         ];
     }
     public function messages()

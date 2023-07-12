@@ -24,7 +24,7 @@ class StorePensionRequest extends FormRequest
     public function rules()
     {
         return [
-            'pension_no'=>'required',
+            'pension_no'=>'required|unique:pensions',
             'bank'=>'required',
             'amount'=>'required',
             'category'=>'required',
