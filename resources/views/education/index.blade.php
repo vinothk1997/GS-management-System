@@ -15,11 +15,11 @@
         <td>{{$education->name}}</th>
         <td>
             <a href="{{route('education.edit',$education->education_id)}}" class="btn btn-sm btn-secondary">Edit</a>
-            <form class=d-inline action="{{route('education.destroy',$education->education_id)}}" method="POST">
+            {{-- <form class=d-inline action="{{route('education.destroy',$education->education_id)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" onclick="return deletedata();" class="btn btn-sm btn-danger">Delete</a>
-            </form>
+            </form> --}}
         </td>
     </tr>
     @endforeach

@@ -15,11 +15,11 @@
         <td>{{$occupation->name}}</th>
         <td>
             <a href="{{route('occupation.edit',$occupation->occupation_id)}}" class="btn btn-sm btn-secondary">Edit</a>
-            <form class="d-inline" action="{{route('occupation.destroy',$occupation->occupation_id)}}" method="POST">
+            {{-- <form class="d-inline" action="{{route('occupation.destroy',$occupation->occupation_id)}}" method="POST">
                 @method("DELETE")
                 @csrf
                 <button onclick="return deletedata();" class="btn btn-sm btn-danger">Delete</button>
-            </form>
+            </form> --}}
         </td>
     </tr>
     @endforeach

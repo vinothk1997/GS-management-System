@@ -35,8 +35,7 @@ class InfrastructureController extends Controller
         $infrastructure->water_facility=$req->water_facility;
         $infrastructure->sanitary_facility=$req->sanitary_facility;
         $infrastructure->save();
-        return redirect()->route('familyHead.show')
-                     ->with('familyId', $req->input('familyId'));
+        return redirect()->to('family-Heads/show?familyId='.$req->familyId);
     }
     
     function show(){

@@ -20,16 +20,14 @@
         <td>{{$organization->mobile}}</td>
         <td>{{$organization->landline_no}}</td>
         <td>
-            <a href="{{route('organization.show',$organization->organization_id)}}"
-                class="btn btn-sm btn-success">View</a>
             <a href="{{route('organization.edit',$organization->organization_id)}}"
                 class="btn btn-sm btn-secondary">Edit</a>
-            <form class="d-inline" action="{{route('organization.destroy',$organization->organization_id)}}"
+            {{-- <form class="d-inline" action="{{route('organization.destroy',$organization->organization_id)}}"
                 method="POST">
                 @method("DELETE")
                 @csrf
                 <button class="btn btn-sm btn-danger" onclick="return deletedata();">Delete</button>
-            </form>
+            </form> --}}
         </td>
     </tr>
     @endforeach

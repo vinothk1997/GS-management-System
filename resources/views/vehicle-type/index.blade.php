@@ -18,12 +18,12 @@
                 class="btn btn-sm btn-success">View</a>
             <a href="{{route('vehicleType.edit',$vehicleType->vehicle_type_id)}}"
                 class="btn btn-sm btn-secondary">Edit</a>
-            <form class="d-inline" action="{{route('vehicleType.destroy',$vehicleType->vehicle_type_id)}}"
+            {{-- <form class="d-inline" action="{{route('vehicleType.destroy',$vehicleType->vehicle_type_id)}}"
                 method="POST">
                 @method("DELETE")
                 @csrf
                 <button onclick="return deletedata();" class="btn btn-sm btn-danger">Delete</button>
-            </form>
+            </form> --}}
         </td>
     </tr>
     @endforeach

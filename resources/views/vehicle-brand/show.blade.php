@@ -18,11 +18,11 @@
         <td>{{$vehicleModel->VehicleType->vehicle_type}}</th>
         <td>
             <a href="{{route('vehicleModel.edit',$vehicleModel->model_id)}}" class="btn btn-sm btn-secondary">Edit</a>
-            <form class="d-inline" action="{{route('vehicleModel.destroy',$vehicleModel->model_id)}}" method="POST">
+            {{-- <form class="d-inline" action="{{route('vehicleModel.destroy',$vehicleModel->model_id)}}" method="POST">
                 @method("DELETE")
                 @csrf
                 <button class="btn btn-sm btn-danger" onclick="return deletedata();">Delete</button>
-            </form>
+            </form> --}}
         </td>
     </tr>
     @endforeach

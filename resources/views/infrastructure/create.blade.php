@@ -2,6 +2,11 @@
 @section('title','add infrastructure')
 @section('content')
 <div class="container">
+    @php
+        $type_of_residences=['Single-family homes','Apartments','Mobile homes','Tiny homes'];
+        $type_of_houses=['Small','Medium','Big'];
+        $type_of_roofs=['Gable Roof','Gambrel Roof','Mansard Roof','Shed Roof'];
+    @endphp
     <div class="my-2">
         <form class="d-inline" action="{{route('familyHead.show')}}" method="GET">
             <input type="hidden" value="{{$family_id}}" name="familyId"/>
@@ -14,24 +19,25 @@
         <div class="form-group">
             <label>Type of Residence:</label>
             <select class="form-control" name="type_of_residence">
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
+                @foreach($type_of_residences as $residence)
+                <option>{{$residence}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
             <label>Type of House:</label>
             <select class="form-control" name="type_of_house">
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
+                @foreach($type_of_houses as $house)
+                <option>{{$house}}</option>
+                @endforeach
             </select>
         </div>
         <label>Type of Roof</label>
         <select name="type_of_roof" class="form-control">
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            @foreach($type_of_roofs as $roof)
+            <option>{{$roof}}</option>
+            @endforeach
+         
         </select>
         <div class="row">
 
@@ -81,7 +87,9 @@
         <div>
             <input type="hidden" name="familyId" placeholder="family id want to be loaded" value="{{$family_id}}">
         </div>
-        <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>
+        @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+        <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>
+        @endif
 
     </Form>
 </div>

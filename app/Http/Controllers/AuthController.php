@@ -57,7 +57,7 @@ class AuthController extends Controller
                             return redirect()->to('family-Heads');
                         }
                         else{
-                            return redirect()->to('staffs');
+                            return redirect()->route('dashboard.show');
                         }
                     }
                     else{

@@ -36,7 +36,7 @@ class GnDivisionController extends Controller
         $gn->code=$req->code;
         $gn->division_id=$req->divisionId;
         $gn->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show(){
         return view('district.index');
@@ -57,10 +57,11 @@ class GnDivisionController extends Controller
         $gn->name=$req->name;
         $gn->code=$req->code;
         $gn->save();
-        return redirect()->to('divisions/'.$gn->division_id.'/show');
+        return redirect()->to('divisions/'.$gn->division_id.'/show')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($gn){
-        $gn= GnDivision::destroy($gn);
-        return redirect()->route('gn.index');
+        $gn= GnDivision::find($gn);
+        $gn->delete();
+        return redirect()->to('divisions/'.$gn->division_id.'/show')->with(['msg'=>'Deleted succesfully']);
     }
 }

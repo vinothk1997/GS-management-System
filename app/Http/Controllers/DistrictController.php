@@ -31,7 +31,7 @@ class DistrictController extends Controller
         $district->district_id=$districtId;
         $district->name=$req->name;
         $district->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show($district){
         $districtId=$district;
@@ -46,10 +46,10 @@ class DistrictController extends Controller
         $district= District::find($district);
         $district->name=$req->name;
         $district->save();
-        return redirect()->route('district.index');
+        return redirect()->route('district.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($district){
         District::destroy($district);
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);
     }
 }

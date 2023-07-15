@@ -16,11 +16,11 @@
         <td>
             {{-- <a href="{{route('ethnic.show',$ethnic->ethnic_id)}}" class="btn btn-sm btn-success">View</a> --}}
             <a href="{{route('ethnic.edit',$ethnic->ethnic_id)}}" class="btn btn-sm btn-secondary">Edit</a>
-            <form class=d-inline action="{{route('ethnic.destroy',$ethnic->ethnic_id)}}" method="POST">
+            {{-- <form class=d-inline action="{{route('ethnic.destroy',$ethnic->ethnic_id)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" onclick="return deletedata();" class="btn btn-sm btn-danger">Delete</a>
-            </form>
+            </form> --}}
         </td>
     </tr>
     @endforeach

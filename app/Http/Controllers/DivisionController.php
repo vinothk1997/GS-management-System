@@ -37,7 +37,7 @@ class DivisionController extends Controller
         $division->name=$req->name;
         $division->district_id=$req->districtId;
         $division->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show($division){
         $divisionId=$division;
@@ -58,11 +58,11 @@ class DivisionController extends Controller
         $division= Division::find($division);
         $division->name=$req->name;
         $division->save();
-        return redirect()->to('districts/'.$division->district_id.'/show');
+        return redirect()->to('districts/'.$division->district_id.'/show')->with(['msg'=>'Updated succesfully']);
     }
 
     function destroy($division){
         Division::destroy($division);
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);
     }
 }

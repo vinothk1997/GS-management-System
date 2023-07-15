@@ -84,7 +84,7 @@ class FamilyHeadController extends Controller
         $user->attempt='0';
         $user->status='active';
         $user->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show(Request $req){
         $familyId=$req->familyId;
@@ -128,13 +128,13 @@ class FamilyHeadController extends Controller
         $familyHead->ethnic_id=$req->ethnic;
         $familyHead->occupation_id=$req->occupation;
         $familyHead->save();
-        return redirect()->route('familyHead.index');
+        return redirect()->route('familyHead.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy(Request $req){
         $familyHead=DB::table('users')
         ->where('user_id',$req->familyId)
         ->update(['status'=>'inactive']);
-        return redirect()->back();  
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);  
     }
 
     function showOtherDeatails(Request $req){

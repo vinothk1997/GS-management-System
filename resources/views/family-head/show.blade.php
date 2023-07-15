@@ -42,7 +42,7 @@
             </tr>
             <tr>
                 <td class="fw-bold"> Mobile:-</td>
-                <td> {{ $familyHead->mobile }}</td>
+                <td> 0{{ $familyHead->mobile }}</td>
                 <td class="fw-bold">Permanent Address:-</td>
                 <td>{{ $familyHead->permanent_address }}</td>
             </tr>
