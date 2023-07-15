@@ -2,8 +2,10 @@
 @section('title','familyHeads')
 @section('content')
 <p class="h3">Family Head Table</p>
+@if(Session::get('user') &&Session::get('user')['user_type']!='family head')
 <a href="{{route('familyHead.create')}}" class="btn btn-sm btn-primary my-2">Add New</a>
 <a href="{{route('report.generateFamilyHeadListReport')}}" class="btn btn-sm btn-primary my-2" target="_blank">Generate Report</a>
+@endif
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
@@ -32,6 +34,7 @@
                     <input type="hidden" name="familyId" value="{{$familyHead->family_id}}" />
                     <button type="submit" class="btn btn-sm btn-primary">View</a>
                 </form>
+                @if(Session::get('user') &&Session::get('user')['user_type']!='family head')
                 @if($familyHead->status=='active')
                 <form class="d-inline" action="{{route('familyHead.edit')}}" method="POST">
                     @csrf
@@ -45,6 +48,7 @@
                     @method('DELETE') <button type="submit" onclick="return deletedata()"
                         class="btn btn-sm btn-danger">Delete</a>
                 </form>
+                @endif
                 @endif
             </td>
         </tr>

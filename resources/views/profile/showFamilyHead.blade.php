@@ -13,8 +13,8 @@
 
         </tr>
         <tr>
-            <td> Mobile:- {{ $familyHead->mobile }}</td>
-            <td> Permanent Address:- 0{{ $familyHead->permanent_address }}</td>
+            <td> Mobile:- 0{{ $familyHead->mobile }}</td>
+            <td> Permanent Address:- {{ $familyHead->permanent_address }}</td>
 
         </tr>
         <tr>
@@ -37,9 +37,11 @@
             <td>Ethnic:- {{ $ethnic }}</td>
         </tr>
     </table>
-    <div>
-        <a href="{{ route('profile.editProfileDetails') }}" class="btn btn-success px-5">Edit</a>
-    </div>
+    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+        <div>
+            <a href="{{ route('profile.editProfileDetails') }}" class="btn btn-success px-5">Edit</a>
+        </div>
+    @endif
 
 
 @endsection

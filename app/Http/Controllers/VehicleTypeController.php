@@ -27,8 +27,9 @@ class VehicleTypeController extends Controller
         $vehicleType->vehicle_type_id=$vehicleTypeId;
         $vehicleType->vehicle_type=$req->vehicle_type;
         $vehicleType->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
+
     function show(){
         return;
     }
@@ -40,10 +41,10 @@ class VehicleTypeController extends Controller
         $vehicleType= VehicleType::find($vehicleType);
         $vehicleType->vehicle_type=$req->vehicle_type;
         $vehicleType->save();
-        return redirect()->route('vehicleType.index');
+        return redirect()->route('vehicleType.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($vehicleType){
         VehicleType::destroy($vehicleType);
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);
     }
 }

@@ -28,14 +28,13 @@ class StoreFamilyMemberRequest extends FormRequest
         return [
             'fname'=>'required',
             'lname'=>'required',
-            'nic'=>['required',
+            'nic'=>[
                 Rule::unique('family_heads', 'nic'),
                 Rule::unique('family_members', 'nic')],
             'dob'=>'required',
             'gender'=>'required',
             'birth_c_no'=>'required',
             'relationship'=>'required',
-            'monthly_income'=>'required',
             'occupation'=>'notIn:N/A',
             'education'=>'notIn:N/A',
         ];

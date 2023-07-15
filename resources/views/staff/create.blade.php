@@ -82,22 +82,28 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Designation:</label>
-                    <select class="form-control" name="designation" id="designation" onblur="loadDesignations();">
-                        <option>-- Choose designation --</option>
+                    <select class="form-control @error('designation') is-invalid @enderror" name="designation" id="designation" onblur="loadDesignations();">
+                        <option value="N/A">-- Choose designation --</option>
                         @foreach($designations as $designation )
                         <option>{{$designation}}</option>
                         @endforeach
                     </select>
                 </div>
+                @error('designation')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-6">
                 <div class="form-group">
                     <label id="work_place">Work place :</label>
-                    <select class="form-control" name="workplace" id="workplace">
-                        <option> --choose work place </option>
+                    <select class="form-control @error('workplace') is-invalid @enderror" name="workplace" id="workplace">
+                        <option value="N/A"> --choose work place </option>
                         <div id="workplace"></div>
                     </select>
                 </div>
+                @error('workplace')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>

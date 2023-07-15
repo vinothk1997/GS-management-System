@@ -31,7 +31,7 @@ class OrganizationController extends Controller
         $organization->mobile=$req->mobile;
         $organization->landline_no=$req->landline;
         $organization->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show(){
         return;
@@ -47,7 +47,7 @@ class OrganizationController extends Controller
         $organization->mobile=$req->mobile;
         $organization->landline_no=$req->landline;
         $organization->save();
-        return redirect()->route('organization.index');
+        return redirect()->route('organization.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($organization){
         Organization::destroy($organization);

@@ -21,7 +21,7 @@ class AnimalController extends Controller
         $animal_types = Animal::where('family_id',$family_id)->pluck('type_of_animal')->toArray();
         $animal_amounts=Animal::where('family_id',$family_id)->pluck('no_of_animal','type_of_animal')->toArray();
         // dd($animal_amounts);
-        return view('animal.create', compact('family_id','animal_types','animal_amounts'));
+        return view('animal.create', compact('family_id','animal_types','animal_amounts'))->with(['msg'=>'Updated succesfully']);
     }
     function store(Request $req)
     {

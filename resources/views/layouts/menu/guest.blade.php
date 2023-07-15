@@ -1,36 +1,29 @@
 
 <!-- Sidebar Menu -->
+<p class="text-white ms-3 h5">Useful websites</p>
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-            <a href="{{ route('familyHead.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-home"></i>
+            <a href="http://www.poonakary.ds.gov.lk/index.php/en/" class="nav-link">
+                <i class=""></i>
                 <p>
-                    Home
+                   DS-Office Poonakary
                 </p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('familyHead.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-info-circle"></i>
+            <a href="https://www.doenets.lk/examresults" class="nav-link">
+                <i class=""></i>
                 <p>
-                    About Us
+                   Examination Results
                 </p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('familyHead.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+            <a href="https://eservices.immigration.gov.lk/onlinetd/OnlineTD/'#/home" class="nav-link">
+                <i class=""></i>
                 <p>
-                    Contact Us
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('auth.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-sign-in-alt"></i>
-                <p>
-                    Login
+                   Online Passport Application System
                 </p>
             </a>
         </li>

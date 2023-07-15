@@ -19,10 +19,9 @@ class ProfileController extends Controller
         // return $user;
         if($user['user_type']=='family head'){
             $data=FamilyHead::where('family_id',$user['user_id'])->first();
-            // return $data;
             $religion=Religion::find($data->religion_id)->pluck('name')->first();
             $ethnic=Ethnic::find($data->ethnic_id)->pluck('name')->first();
-            $occupation=Occupation::find($data->occupation_id)->pluck('name')->first();
+            $occupation=$data->occupation_id?Occupation::find($data->occupation_id)->pluck('name')->first():'N/A';
             return view('profile.showFamilyHead',['familyHead'=>$data],compact('religion','ethnic','occupation'));
         }
         else{

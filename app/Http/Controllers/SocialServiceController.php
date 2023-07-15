@@ -58,7 +58,7 @@ class SocialServiceController extends Controller
         return view('social-service.edit',compact('socialService'));
 
     }
-    public function update(Request $req){
+    public function update(StoreSocialServiceRequest $req){
         $socialService=SocialService::find($req->social_service_id);
         $socialService->type=$req->type;
         $socialService->amount=$req->amount;

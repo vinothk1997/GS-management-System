@@ -10,24 +10,27 @@
     <div class="position-absolute" style="top:45%; right:0">
         <form class="d-inline" action="{{ route('familyHead.showOtherDeatails') }}">
             <input type="hidden" value="{{ $familyId }}" name="familyId">
-            <button type="submit" style="background-color:rgb(33, 33, 51);color:white"class="btn btn-sm ">Other Family Head Details</a>
+            <button type="submit" style="background-color:rgb(33, 33, 51);color:white"class="btn btn-sm ">Other Family Head
+                Details</a>
         </form>
     </div>
     <p class="h3">Family Members Table</p>
     <div class="my-3">
-        <a href="/family-Heads" class="btn btn-sm btn-primary">&#60;&#60;Back</a>
-        <form class="d-inline" action="{{ route('familyMember.create') }}" method="GET">
-            @csrf
-            @method('GET')
-            <input type="hidden" value="{{ $familyId }}" name="familyId">
-            <button type="submit" class="btn btn-sm btn-success">Add New</a>
-        </form>
-        <form class="d-inline" action="{{ route('report.generateFamilyReport') }}" method="GET" target="_blank">
-            @csrf
-            @method('GET')
-            <input type="hidden" value="{{ $familyId }}" name="familyId">
-            <button type="submit" class="btn btn-sm btn-primary ms-2">Generate Report</button>
-        </form>
+        <a href="/family-Heads" class="btn btn-sm btn-primary">Back</a>
+        @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+            <form class="d-inline" action="{{ route('familyMember.create') }}" method="GET">
+                @csrf
+                @method('GET')
+                <input type="hidden" value="{{ $familyId }}" name="familyId">
+                <button type="submit" class="btn btn-sm btn-success">Add New</a>
+            </form>
+            <form class="d-inline" action="{{ route('report.generateFamilyReport') }}" method="GET" target="_blank">
+                @csrf
+                @method('GET')
+                <input type="hidden" value="{{ $familyId }}" name="familyId">
+                <button type="submit" class="btn btn-sm btn-primary ms-2">Generate Report</button>
+            </form>
+        @endif
     </div>
     <div class="rounded" style="background-color:white;">
         <table class="table">
@@ -35,7 +38,7 @@
                 <td class="fw-bold">Full Name:</td>
                 <td>{{ $familyHead->first_name }} {{ $familyHead->last_name }}</td>
                 <td class="fw-bold">Date of Birth:- </td>
-                <td>{{ $familyHead->nic }}</td>
+                <td>{{ $familyHead->dob }}</td>
             </tr>
             <tr>
                 <td class="fw-bold"> Mobile:-</td>
@@ -68,13 +71,15 @@
         </table>
     </div>
     <div>
-        @if ($familyHead->status == 'active')
-            <form class="d-inline" action="{{ route('familyHead.edit') }}" method="POST">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="familyId" value="{{ $familyHead->family_id }}" />
-                <button type="submit" class="btn btn-sm btn-success px-5  mb-3 mx-2">Edit</a>
-            </form>
+        @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+            @if ($familyHead->status == 'active')
+                <form class="d-inline" action="{{ route('familyHead.edit') }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="familyId" value="{{ $familyHead->family_id }}" />
+                    <button type="submit" class="btn btn-sm btn-success px-5  mb-3 mx-2">Edit</a>
+                </form>
+            @endif
         @endif
     </div>
     <div style="background-color: white !important" class="mt-1">
@@ -107,18 +112,20 @@
                                 <input type="hidden" name="memberId" value="{{ $familyMember->member_id }}">
                                 <button type="submit" class="btn btn-sm btn-primary mx-1">View</a>
                             </form>
-                            <form class=d-inline action="{{ route('familyMember.edit') }}" method="POST">
-                                @csrf
-                                @method('POST')
-                                <input type="hidden" name="memberId" value="{{ $familyMember->member_id }}">
-                                <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                            </form>
-                            <form class=d-inline action="{{ route('familyMember.destroy') }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="memberId" value="{{ $familyMember->member_id }}">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                            </form>
+                            @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                <form class=d-inline action="{{ route('familyMember.edit') }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" name="memberId" value="{{ $familyMember->member_id }}">
+                                    <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                </form>
+                                <form class=d-inline action="{{ route('familyMember.destroy') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="memberId" value="{{ $familyMember->member_id }}">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endif
@@ -126,7 +133,7 @@
         </tbody>
     </table>
     <div style="background-color: white !important" class="mt-4">
-        <h3 >Dead Members</h3>
+        <h3>Dead Members</h3>
     </div>
     <table id="dead-member" class="display" style="width:100%">
         <thead>

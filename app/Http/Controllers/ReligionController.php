@@ -29,7 +29,7 @@ class ReligionController extends Controller
         $religion->religion_id=$religionId;
         $religion->name=$req->name;
         $religion->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'added succesfully']);
     }
     function show(){
         return;
@@ -42,7 +42,7 @@ class ReligionController extends Controller
         $religion= Religion::find($religion);
         $religion->name=$req->name;
         $religion->save();
-        return redirect()->route('religion.index');
+        return redirect()->route('religion.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($religion){
         Religion::destroy($religion);

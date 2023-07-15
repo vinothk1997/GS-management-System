@@ -27,7 +27,7 @@ class EthnicController extends Controller
         $ethnic->ethnic_id=$ethnicId;
         $ethnic->name=$req->name;
         $ethnic->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show(){
         return;
@@ -40,7 +40,7 @@ class EthnicController extends Controller
         $ethnic= Ethnic::find($ethnic);
         $ethnic->name=$req->name;
         $ethnic->save();
-        return redirect()->route('ethnic.index');
+        return redirect()->route('ethnic.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($ethnic){
         Ethnic::destroy($ethnic);

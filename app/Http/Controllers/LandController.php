@@ -120,4 +120,15 @@ class LandController extends Controller
         } 
         
     }
+
+    function download(Request $req){
+        $fileName = $req->path; // Assuming $request->path contains only the file name
+        $filePath = 'public/lands/' . $fileName; // Adjust the path based on your storage setup
+
+        if (Storage::exists($filePath)) {
+            return Storage::download($filePath);
+        }
+
+        abort(404);
+        }
 }

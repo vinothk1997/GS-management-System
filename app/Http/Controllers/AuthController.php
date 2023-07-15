@@ -12,6 +12,9 @@ use Session;
 class AuthController extends Controller
 {
     function showLogin(){
+        if(session()->has('user')){
+            session()->get('user')->flush();
+        }
         return view('auth.login');
     }
 
@@ -50,7 +53,12 @@ class AuthController extends Controller
                             "real_name"=>$real_name
         
                         ]);
-                        return redirect()->to('staffs');
+                        if(session()->get('user')['user_type']=='family head'){
+                            return redirect()->to('family-Heads');
+                        }
+                        else{
+                            return redirect()->to('staffs');
+                        }
                     }
                     else{
                         return "Your account has been disabled,contact administrator";

@@ -47,8 +47,8 @@
                     <option>Government</option>
                 </select>
             </div>
-            <input type="text" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
-            <input type="text" name="member_id" placeholder="member id want to be loaded"
+            <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
+            <input type="hidden" name="member_id" placeholder="member id want to be loaded"
                 value="{{ $family_member_id }}">
 
             <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>

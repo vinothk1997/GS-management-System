@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Occupation;
+use App\Models\Education;
+use App\Models\Religion;
+use App\Models\Ethnic;
 use App\Models\Death;
 use App\Models\FamilyMember;
 
@@ -30,4 +34,18 @@ class FamilyHead extends Model
    public function Vehicle(){
     return $this->hasMany(Vehicle::class,'family_id','family_id');
    }
+
+   public function occupation(){
+    return $this->hasOne(Occupation::class,'occupation_id','occupation_id');
+   }
+
+   public function Education(){
+    return $this->hasOne(Education::class,'education_id','education_id');
+}
+   public function religion(){
+    return $this->hasOne(Religion::class,'religion_id','religion_id');
+}
+   public function ethnic(){
+    return $this->hasOne(Ethnic::class,'ethnic_id','ethnic_id');
+}
 }

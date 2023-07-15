@@ -1,29 +1,35 @@
 @extends('layouts.master')
 @section('title', 'add social service')
 @section('content')
+    @php
+        $social_services = ['Samurdhi Allowance', 'Pregnant Mothers Allowance', 'Elderly, Disabled, and Kidney Aatients Allowance', 'Mahapola Scholarship'];
+    @endphp
     <div class="container">
-        @if($family_member_id)
-        <form action="{{ route('familyMember.show') }}">
-            <input type="hidden" name="memberId" value="{{ $family_member_id  }}">
-            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
-        </form>
+        @if ($family_member_id)
+            <form action="{{ route('familyMember.show') }}">
+                <input type="hidden" name="memberId" value="{{ $family_member_id }}">
+                <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+            </form>
         @elseif($family_id)
-        <form action="{{ route('familyHead.showOtherDeatails') }}">
-            <input type="hidden" name="familyId" value="{{ $family_id  }}">
-            <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
-        </form>
+            <form action="{{ route('familyHead.showOtherDeatails') }}">
+                <input type="hidden" name="familyId" value="{{ $family_id }}">
+                <input type="submit" class="btn btn-primary my-2 btn-sm" value="Back" />
+            </form>
         @endif
         <Form action="{{ route('socialService.store') }}" method="POST">
             @csrf
             <p class="h3">Add Social Service Form</p>
             <div class="form-group">
                 <label>Type of Social Service:</label>
-                <select class="form-control" name="type">
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
+                <select class="form-control @error('type') is-invalid @enderror" name="type">
+                    @foreach($social_services as $social_service)
+                    <option>{{$social_service}}</option>
+                    @endforeach
                 </select>
             </div>
+            @error('type')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <div class="form-group">
                 <label>Amount:</label>
                 <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control"
@@ -52,7 +58,8 @@
                     id="">
             </div>
             <div>
-                <input type="hidden" name="family_id" placeholder="family id want to be loaded" value="{{$family_id}}">
+                <input type="hidden" name="family_id" placeholder="family id want to be loaded"
+                    value="{{ $family_id }}">
                 <input type="hidden" name="member_id" placeholder="member id want to be loaded"
                     value="{{ $family_member_id }}">
             </div>

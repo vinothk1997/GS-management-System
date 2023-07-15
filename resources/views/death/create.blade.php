@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label>Reason:</label>
-            <textarea name="reason" id="" class="form-control" onkeypress="return isTextKey(event)" cols="30"
+            <textarea name="reason" id="" class="form-control" cols="30"
                 rows="5"></textarea>
         </div>
         <div>

@@ -90,13 +90,13 @@ class FamilyHeadController extends Controller
         $familyId=$req->familyId;
         $familyHead=DB::table('family_heads')
         ->join('users','family_id','user_id')
+        ->where('family_heads.family_id',$familyId)
         ->first();
         // return $familyHead;
-        // $familyHead=FamilyHead::find($familyId);
         $familyMembers=FamilyMember::where('family_id',$familyId)->get();
         $religion=Religion::find($familyHead->religion_id)->pluck('name')->first();
         $ethnic=Ethnic::find($familyHead->ethnic_id)->pluck('name')->first();
-        $occupation=Occupation::find($familyHead->occupation_id)->pluck('name')->first();
+        $occupation=$familyHead->occupation_id?Occupation::find($familyHead->occupation_id)->pluck('name')->first():'N/A';
         return view('family-head.show',compact('familyMembers','familyId','familyHead','religion','ethnic','occupation'));
     }
 
@@ -139,7 +139,6 @@ class FamilyHeadController extends Controller
 
     function showOtherDeatails(Request $req){
         $familyHead=FamilyHead::find($req->familyId);
-        // return $familyHead;
         $occupation=Occupation::where('occupation_id',$familyHead->occupation_id)->pluck('name')->first();
         $education=Education::where('education_id',$familyHead->education_id)->pluck('name')->first();
         $familyHead->setAttribute('occupation',$occupation );

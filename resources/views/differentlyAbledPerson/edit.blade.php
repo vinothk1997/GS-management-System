@@ -29,7 +29,7 @@
                 value="{{$differentlyAbledPerson->monthly_assist}}">
         </div>
         <div class="form-group">
-            <label>Amount:</label>
+            <label>Lum sum Amount:</label>
             <input type="text" name="amount" onkeypress="return isNumberKey(event)" class="form-control" id=""
                 value="{{$differentlyAbledPerson->amount}}">
         </div>

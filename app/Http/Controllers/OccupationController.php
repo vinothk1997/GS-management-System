@@ -27,7 +27,7 @@ class OccupationController extends Controller
         $occupation->occupation_id=$occupationId;
         $occupation->name=$req->name;
         $occupation->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show(){
         return;
@@ -40,10 +40,10 @@ class OccupationController extends Controller
         $occupation= Occupation::find($occupation);
         $occupation->name=$req->name;
         $occupation->save();
-        return redirect()->route('occupation.index');
+        return redirect()->route('occupation.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($occupation){
         Occupation::destroy($occupation);
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);
     }
 }

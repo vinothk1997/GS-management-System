@@ -3,7 +3,8 @@
 @section('content')
 <div class="container mt-3">
     <p class="h3">Edit Working Histrory</p>
-    <a href="">Back</a>
+    <a href="{{route('staff.show',$staffId)}}">Back</a>
+
     <Form action="{{route('staffWorkplace.update')}}" method="POST">
         @csrf
         @method('PUT')
@@ -22,7 +23,7 @@
                 <option> --choose work place </option>
                 <div id="workplace"></div>
             </select>
-            <input type="hidden" name="staff_id" value="{{$staff_id}}" />
+            <input type="hidden" name="staff_id" value="{{$staffId}}" />
             <input type="hidden" name="start_date" value="{{$start_date}}" />
         </div>
         <button class="btn btn-sm btn-primary my-2" type="submit">Add</button>

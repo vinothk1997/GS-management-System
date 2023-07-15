@@ -35,6 +35,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,7 @@ use App\Http\Controllers\ReportController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 // Districts
 Route::group(['prefix'=>'districts'],function(){
@@ -258,6 +259,7 @@ Route::group(['prefix'=>'lands'],function(){
     Route::post('/',[LandController::class,'store'])->name('land.store');
     Route::put('/',[LandController::class,'update'])->name('land.update');
     Route::delete('/delete',[LandController::class,'destroy'])->name('land.destroy');
+    Route::get('/download',[LandController::class,'download'])->name('land.download');
 });
 // Tree
 Route::group(['prefix'=>'trees'],function(){
@@ -389,4 +391,16 @@ Route::group(['prefix'=>'Report'],function(){
 
     Route::get('/createFamilyVehicleReport',[ReportController::class,'createFamilyVehicleReport'])->name('report.createFamilyVehicleReport');
     Route::get('/generateFamilyVehicleReport',[ReportController::class,'generateFamilyVehicleReport'])->name('report.generateFamilyVehicleReport');
+});
+
+Route::group(['prefix'=>'dashboard'],function(){
+    Route::get('/showDashboard',[DashboardController::class,'showDashboard'])->name('dashboard.show');
+    Route::get('/generateAgeBasisBarGraph',[DashboardController::class,'generateAgeBasisBarGraph']);
+    Route::get('/generateAgeAndGenderBasisGraph',[DashboardController::class,'generateAgeAndGenderBasisGraph']);
+    Route::get('/generateGenderBasisGraph',[DashboardController::class,'generateGenderBasisGraph']);
+    Route::get('/generateMaleFemaleLeardershipBasisGraph',[DashboardController::class,'generateMaleFemaleLeardershipBasisGraph']);
+    Route::get('/generateOcupationWiseGraph',[DashboardController::class,'generateOcupationWiseGraph']);
+    Route::get('/generateEducationWiseGraph',[DashboardController::class,'generateEducationWiseGraph']);
+    Route::get('/generateReligionWiseGraph',[DashboardController::class,'generateReligionWiseGraph']);
+    Route::get('/generateEthnicWiseGraph',[DashboardController::class,'generateEthnicWiseGraph']);
 });

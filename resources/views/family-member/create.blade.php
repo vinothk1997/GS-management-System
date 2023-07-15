@@ -58,10 +58,10 @@
                         <label>Gender:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id='gender' checked
-                                value="male">
+                                value="Male">
                             <label class="form-check-label ">Male</label>
                             <br>
-                            <input class="form-check-input" type="radio" name="gender" id='gender' value="female">
+                            <input class="form-check-input" type="radio" name="gender" id='gender' value="Female">
                             <label class="form-check-label ">Female</label>
                         </div>
                     </div>
@@ -152,6 +152,7 @@
                         <label>Occupation:</label>
                         <select name="occupation" class="form-control  @error('occupation') is-invalid @enderror"
                             value="{{ old('occupation') }}">
+                            <option value="">No Occupation</option>
                             <option value="N/A">-- Choose occupation --</option>
                             @foreach ($occupations as $occupation)
                                 <option value="{{ $occupation->occupation_id }}">{{ $occupation->name }}</option>
@@ -168,6 +169,7 @@
                         <label>Education:</label>
                         <select name="education" class="form-control  @error('education') is-invalid @enderror"
                             value="{{ old('ethnic') }}">
+                            <option value="">Not Studying</option>
                             <option value="N/A">-- Choose education --</option>
                             @foreach ($educations as $education)
                                 <option value="{{ $education->education_id }}">{{ $education->name }}</option>

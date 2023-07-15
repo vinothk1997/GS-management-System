@@ -31,7 +31,7 @@ class VehicleModelController extends Controller
         $vehicleModel->vehicle_type_id=$req->vehicleType;
         $vehicleModel->brand_id=$req->brandId;
         $vehicleModel->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show(){
         return;
@@ -45,10 +45,10 @@ class VehicleModelController extends Controller
         $vehicleModel= VehicleModel::find($vehicleModel);
         $vehicleModel->name=$req->name;
         $vehicleModel->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Updated succesfully']);
     }
     function destroy($vehicleModel){
         VehicleModel::destroy($vehicleModel);
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);
     }   
 }

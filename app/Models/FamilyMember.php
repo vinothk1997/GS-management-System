@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Education;
+use App\Models\Occupation;
 use App\Models\Vehicle;
 
 class FamilyMember extends Model
@@ -30,6 +31,11 @@ class FamilyMember extends Model
 
     public function Vehicle(){
         return $this->belongsTo(Vehicle::class,'member_id','member_id');
+
+    }
+
+    public function occupation(){
+        return $this->hasOne(Occupation::class,'occupation_id','occupation_id');
 
     }
 

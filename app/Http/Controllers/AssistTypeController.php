@@ -28,12 +28,9 @@ class AssistTypeController extends Controller
         $assistType->assist_type_id=$assistTypeId;
         $assistType->name=$req->name;
         $assistType->save();
-        return redirect()->back();
-        return view('district.index');
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
-    function show(){
-        return view('district.index');
-    }
+
     function edit($assist){
         $assistType=AssistType::find($assist);
         return view('assist-type.edit',compact('assistType'));
@@ -42,10 +39,10 @@ class AssistTypeController extends Controller
         $assist= AssistType::find($assist);
         $assist->name=$req->name;
         $assist->save();
-        return redirect()->route('assistType.index');
+        return redirect()->route('assistType.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($assist){
         $assist= AssistType::destroy($assist);
-        return redirect()->route('assistType.index');
+        return redirect()->route('assistType.index')->with(['msg'=>'Deleted succesfully']);
     }
 }

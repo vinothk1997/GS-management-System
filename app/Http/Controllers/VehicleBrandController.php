@@ -28,7 +28,7 @@ class VehicleBrandController extends Controller
         $vehicleBrand->brand_id=$vehicleBrandId;
         $vehicleBrand->brand=$req->brand;
         $vehicleBrand->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Added succesfully']);
     }
     function show($vehicleBrand){
         $vehicleModels=VehicleModel::where('brand_id',$vehicleBrand)->get();
@@ -43,10 +43,10 @@ class VehicleBrandController extends Controller
         $vehicleBrand= VehicleBrand::find($vehicleBrand);
         $vehicleBrand->brand=$req->brand;
         $vehicleBrand->save();
-        return redirect()->route('vehicleBrand.index');
+        return redirect()->route('vehicleBrand.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($vehicleBrand){
         VehicleBrand::destroy($vehicleBrand);
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'Deleted succesfully']);
     }
 }

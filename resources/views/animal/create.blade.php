@@ -43,8 +43,9 @@
         <input type="hidden" name="animals" id='animal_list' value='' />
         <input type="hidden" name="familyId" placeholder="family id want to be loaded" value="{{ $family_id }}">
     </div>
+    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
     <button class="btn btn-sm btn-primary float-right me-5 my-2" style="width:50px;" type="submit">Save</button>
-
+    @endif
     </Form>
     </div>
     <script>

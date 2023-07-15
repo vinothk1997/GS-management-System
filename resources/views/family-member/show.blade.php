@@ -65,11 +65,13 @@
             <div id="socialService" class="accordion-collapse collapse show" aria-labelledby="socialService"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form class=d-inline action="{{ route('socialService.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                        <button type="submit" class="btn btn-primary my-2">Add
-                            Social Service</button>
-                    </form>
+                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                        <form class=d-inline action="{{ route('socialService.create') }}">
+                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <button type="submit" class="btn btn-primary my-2">Add
+                                Social Service</button>
+                        </form>
+                    @endif
                     <table class="table">
                         <tr>
                             <th>Type</th>
@@ -84,23 +86,25 @@
                                 <td>{{ $socialService->year }}</td>
                                 <td>{{ $socialService->amount }}</td>
                                 <td>{{ $socialService->description }}</td>
-                                <td>
-                                    {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
-                                    <form class=d-inline action="{{ route('socialService.edit') }}" method="POST">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="social_service_id"
-                                            value="{{ $socialService->social_service_id }}">
-                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                    </form>
-                                    <form class=d-inline action="{{ route('socialService.destroy') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="social_service_id"
-                                            value="{{ $socialService->social_service_id }}">
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                    </form>
-                                </td>
+                                @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                    <td>
+                                        {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
+                                        <form class=d-inline action="{{ route('socialService.edit') }}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="hidden" name="social_service_id"
+                                                value="{{ $socialService->social_service_id }}">
+                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                        </form>
+                                        <form class=d-inline action="{{ route('socialService.destroy') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="social_service_id"
+                                                value="{{ $socialService->social_service_id }}">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </table>
@@ -118,11 +122,13 @@
                 <div id="votingDetail" class="accordion-collapse collapse" aria-labelledby="votingDetail"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <form class=d-inline action="{{ route('votingDetail.create') }}">
-                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                            <button type="submit" class="btn btn-primary my-2">Add
-                                New Vote</button>
-                        </form>
+                        @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                            <form class=d-inline action="{{ route('votingDetail.create') }}">
+                                <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                                <button type="submit" class="btn btn-primary my-2">Add
+                                    New Vote</button>
+                            </form>
+                        @endif
                         <table class="table">
                             <tr>
                                 <th>Year</th>
@@ -134,21 +140,26 @@
                                 <tr>
                                     <td>{{ $votingDetail->year }}</td>
                                     <td>{{ $votingDetail->vote_no }}</td>
-                                    <td>
-                                        {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
-                                        <form class=d-inline action="{{ route('votingDetail.edit') }}" method="POST">
-                                            @csrf
-                                            @method('POST')
-                                            <input type="hidden" name="voting_id" value="{{ $votingDetail->Voting_id }}">
-                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                        </form>
-                                        <form class=d-inline action="{{ route('votingDetail.destroy') }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="voting_id" value="{{ $votingDetail->Voting_id }}">
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                        </form>
-                                    </td>
+                                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                        <td>
+                                            {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
+                                            <form class=d-inline action="{{ route('votingDetail.edit') }}" method="POST">
+                                                @csrf
+                                                @method('POST')
+                                                <input type="hidden" name="voting_id"
+                                                    value="{{ $votingDetail->Voting_id }}">
+                                                <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                            </form>
+                                            <form class=d-inline action="{{ route('votingDetail.destroy') }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="voting_id"
+                                                    value="{{ $votingDetail->Voting_id }}">
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </table>
@@ -167,11 +178,13 @@
                 <div id="pension" class="accordion-collapse collapse" aria-labelledby="pension"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <form class=d-inline action="{{ route('pension.create') }}">
-                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                            <button type="submit" class="btn btn-primary my-2">Add
-                                New Pension</button>
-                        </form>
+                        @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                            <form class=d-inline action="{{ route('pension.create') }}">
+                                <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                                <button type="submit" class="btn btn-primary my-2">Add
+                                    New Pension</button>
+                            </form>
+                        @endif
                         <table class="table">
                             <tr>
                                 <th>Pension No</th>
@@ -187,22 +200,28 @@
                                     <td>{{ $pension->bank }}</td>
                                     <td>{{ $pension->amount }}</td>
                                     <td>{{ $pension->category }}</td>
-                                    <td>
-                                        <form class=d-inline action="{{ route('pension.edit') }}" method="POST">
-                                            @csrf
-                                            @method('POST')
-                                            <input type="hidden" name="pension_id" value="{{ $pension->pension_id }}">
-                                            <input type="hidden" name="member_id" value="{{ $pension->member_id }}">
-                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                        </form>
-                                        <form class=d-inline action="{{ route('pension.destroy') }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="pension_id" value="{{ $pension->pension_id }}">
-                                            <input type="hidden" name="member_id" value="{{ $pension->member_id }}">
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                        </form>
-                                    </td>
+                                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                        <td>
+                                            <form class=d-inline action="{{ route('pension.edit') }}" method="POST">
+                                                @csrf
+                                                @method('POST')
+                                                <input type="hidden" name="pension_id"
+                                                    value="{{ $pension->pension_id }}">
+                                                <input type="hidden" name="member_id"
+                                                    value="{{ $pension->member_id }}">
+                                                <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                            </form>
+                                            <form class=d-inline action="{{ route('pension.destroy') }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="pension_id"
+                                                    value="{{ $pension->pension_id }}">
+                                                <input type="hidden" name="member_id"
+                                                    value="{{ $pension->member_id }}">
+                                                <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </table>
@@ -220,11 +239,13 @@
             <div id="death" class="accordion-collapse collapse" aria-labelledby="death"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form class=d-inline action="{{ route('death.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                        <button type="submit" class="btn btn-primary my-2">Add
-                            Death</button>
-                    </form>
+                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                        <form class=d-inline action="{{ route('death.create') }}">
+                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <button type="submit" class="btn btn-primary my-2">Add
+                                Death</button>
+                        </form>
+                    @endif
                     <table class="table">
                         <tr>
                             <th>Death Date</th>
@@ -236,21 +257,23 @@
                             <td>{{ $death->death_date }}</td>
                             <td>{{ $death->place }}</td>
                             <td>{{ $death->reason }}</td>
-                            <td>
-                                <form class=d-inline action="{{ route('death.edit') }}" method="GET">
-                                    @csrf
-                                    @method('GET')
-                                    <input type="hidden" name="death_id" value="{{ $death->death_id }}">
-                                    <input type="hidden" name="member_id" value="{{ $death->member_id }}">
-                                    <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                </form>
-                                <form class=d-inline action="{{ route('death.destroy') }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="death_id" value="{{ $death->death_id }}">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                </form>
-                            </td>
+                            @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                <td>
+                                    <form class=d-inline action="{{ route('death.edit') }}" method="GET">
+                                        @csrf
+                                        @method('GET')
+                                        <input type="hidden" name="death_id" value="{{ $death->death_id }}">
+                                        <input type="hidden" name="member_id" value="{{ $death->member_id }}">
+                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                    </form>
+                                    <form class=d-inline action="{{ route('death.destroy') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="death_id" value="{{ $death->death_id }}">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                    </form>
+                                </td>
+                            @endif
                         @endforeach
                     </table>
                 </div>
@@ -266,11 +289,13 @@
             <div id="land" class="accordion-collapse collapse" aria-labelledby="land"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form class=d-inline action="{{ route('land.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                        <button type="submit" class="btn btn-primary my-2">Add
-                            Land</button>
-                    </form>
+                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                        <form class=d-inline action="{{ route('land.create') }}">
+                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <button type="submit" class="btn btn-primary my-2">Add
+                                Land</button>
+                        </form>
+                    @endif
                     <table class="table">
                         <tr>
                             <th>Land Type</th>
@@ -289,29 +314,35 @@
                                 <td>{{ $land->address }}</td>
                                 <td>{{ $land->area }}</td>
                                 <td>{{ $land->reg_no }}</td>
-                                <td><img src="{{ asset('storage/lands/' . $land->document_file) }}" class="round"
-                                        alt="Document Preview" width="100"></td>
+                                <td>
+                                    <form class=d-inline action="{{ route('land.download') }}">
+                                        <input type="hidden" name="path" value="{{ $land->document_file }}">
+                                        <button type="submit" class="btn btn-link mx-1">Download</a>
+                                    </form>
+                                </td>
                                 <td>
                                     <form class=d-inline action="{{ route('land.show') }}">
                                         <input type="hidden" name="land_id" value="{{ $land->land_id }}">
                                         <input type="hidden" name="member_id" value="{{ $land->member_id }}">
                                         <button type="submit" class="btn btn-sm btn-success mx-1">View</a>
                                     </form>
-                                    <form class=d-inline action="{{ route('land.edit') }}" method="POST">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="id" value="{{ $land->land_id }}">
-                                        <input type="hidden" name="member_id" value="{{ $land->member_id }}">
-                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                    </form>
-                                    <form class=d-inline action="{{ route('land.destroy') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{ $land->land_id }}">
-                                        <input type="hidden" name="member_id" value="{{ $land->member_id }}">
+                                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                        <form class=d-inline action="{{ route('land.edit') }}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="hidden" name="id" value="{{ $land->land_id }}">
+                                            <input type="hidden" name="member_id" value="{{ $land->member_id }}">
+                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                        </form>
+                                        <form class=d-inline action="{{ route('land.destroy') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{ $land->land_id }}">
+                                            <input type="hidden" name="member_id" value="{{ $land->member_id }}">
 
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                    </form>
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -330,18 +361,20 @@
             <div id="defferentlyAbledPerson" class="accordion-collapse collapse" aria-labelledby="defferentlyAbledPerson"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form class=d-inline action="{{ route('differentlyAbledPerson.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                        <button type="submit" class="btn btn-primary my-2">Add
-                            differentlyAbledPerson</button>
-                    </form>
+                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                        <form class=d-inline action="{{ route('differentlyAbledPerson.create') }}">
+                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <button type="submit" class="btn btn-primary my-2">Add
+                                differentlyAbledPerson</button>
+                        </form>
+                    @endif
                     <table class="table">
                         <tr>
                             <th>Type</th>
                             <th>Date</th>
                             <th>Reason</th>
                             <th>Monthly Assist</th>
-                            <th>Amount</th>
+                            <th>Lump Sum Amount</th>
                             <th>Action</th>
                         </tr>
                         @foreach ($defferentlyAbledPersons as $defferentlyAbledPerson)
@@ -354,22 +387,26 @@
                                 <td>{{ $defferentlyAbledPerson->amount }}</td>
                                 <td>
                                     {{-- <a href="" class="btn btn-sm btn-success">View</a> --}}
-                                    <form class=d-inline action="{{ route('differentlyAbledPerson.edit') }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="id" value="{{ $defferentlyAbledPerson->id }}">
-                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                    </form>
-                                    <form class=d-inline action="{{ route('differentlyAbledPerson.destroy') }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{ $defferentlyAbledPerson->id }}">
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                    </form>
+                                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                        <form class=d-inline action="{{ route('differentlyAbledPerson.edit') }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="hidden" name="id"
+                                                value="{{ $defferentlyAbledPerson->id }}">
+                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                        </form>
+                                        <form class=d-inline action="{{ route('differentlyAbledPerson.destroy') }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id"
+                                                value="{{ $defferentlyAbledPerson->id }}">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                        </form>
                                 </td>
-                            </tr>
+                        @endif
+                        </tr>
                         @endforeach
                     </table>
                 </div>
@@ -385,12 +422,13 @@
             <div id="vehicle" class="accordion-collapse collapse" aria-labelledby="vehicle"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form class=d-inline action="{{ route('vehicle.create') }}">
-                        <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
-                        <button type="submit" class="btn btn-primary my-2">Add
-                            Vehicle</button>
-                    </form>
-                  
+                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                        <form class=d-inline action="{{ route('vehicle.create') }}">
+                            <input type="hidden" name="member_id" value="{{ $familyMember->member_id }}">
+                            <button type="submit" class="btn btn-primary my-2">Add
+                                Vehicle</button>
+                        </form>
+                    @endif
                     <table class="table">
                         <tr>
                             <th>Vehicle Brand</th>
@@ -406,28 +444,25 @@
                                 <td>{{ $vehicle->VehicleModel->name }}</td>
                                 <td>{{ $vehicle->reg_date }}</td>
                                 <td>{{ $vehicle->reg_no }}</td>
-                                
-                                
                                 <td>
-                                    
-                                    <form class=d-inline action="{{ route('vehicle.edit') }}"
-                                        method="GET">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="model_id" value="{{ $vehicle->model_id }}">
-                                        <input type="hidden" name="member_id" value="{{ $vehicle->member_id }}">
-                                        <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
-                                    </form>
-                                    <form class=d-inline action="{{ route('vehicle.destroy') }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="model_id" value="{{ $vehicle->model_id }}">
-                                        <input type="hidden" name="member_id" value="{{ $vehicle->member_id }}">
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</a>
-                                    </form>
+                                    @if (Session::get('user') && Session::get('user')['user_type'] != 'family head')
+                                        <form class=d-inline action="{{ route('vehicle.edit') }}" method="GET">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="hidden" name="model_id" value="{{ $vehicle->model_id }}">
+                                            <input type="hidden" name="member_id" value="{{ $vehicle->member_id }}">
+                                            <button type="submit" class="btn btn-sm btn-secondary mx-1">Edit</a>
+                                        </form>
+                                        <form class=d-inline action="{{ route('vehicle.destroy') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="model_id" value="{{ $vehicle->model_id }}">
+                                            <input type="hidden" name="member_id" value="{{ $vehicle->member_id }}">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</a>
+                                        </form>
                                 </td>
-                            </tr>
+                        @endif
+                        </tr>
                         @endforeach
                     </table>
                 </div>

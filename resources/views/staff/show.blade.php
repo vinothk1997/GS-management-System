@@ -2,7 +2,7 @@
 @section('title','vehicleType')
 @section('content')
 <p class="h3">Working History Details</p>
-<a href="{{route('staff.index')}}" class="btn btn-primary btn-sm px-4">&#60;&#60; Go Back</a>
+<a href="{{route('staff.index')}}" class="btn btn-primary btn-sm px-4">Go Back</a>
 <a href="{{route('staffWorkplace.create',$staffId)}}" class="btn btn-success btn-sm px-4">Add</a>
 <a href="{{route('report.generateStaffDeatailReport',$staffId)}}" class="btn btn-primary btn-sm px-4" target="_blank">Generate Report</a>
 <div style="background-color:white;">

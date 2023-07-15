@@ -90,7 +90,9 @@
         <div>
             <input type="hidden" name="familyId" placeholder="family id want to be loaded" value="{{$infrastructure->family_id}}">
         </div>
+        @if(Session::get('user') &&Session::get('user')['user_type']!='family head')
         <button class="btn btn-sm btn-primary my-2" type="submit">Update</button>
+        @endif
 
     </Form>
 </div>

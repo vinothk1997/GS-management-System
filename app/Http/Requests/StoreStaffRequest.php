@@ -31,6 +31,8 @@ class StoreStaffRequest extends FormRequest
             'gender'=>'required',
             'address'=>'required',
             'mobile'=>'required',
+            'designation'=>['notIn:N/A'],
+            'workplace'=>['notIn:N/A'],
         ];
     }
 

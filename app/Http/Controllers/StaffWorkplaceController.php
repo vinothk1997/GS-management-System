@@ -42,24 +42,7 @@ class StaffWorkplaceController extends Controller
         else{
             $designations=['DS'];
         }
-        $staffWorkplace=DB::table('staff_workplaces')
-        ->where('staff_id',$staffworkplace)
-        ->where('end_date',null)
-        ->first();
-        // return $staffWorkplace;
-        // check start date with today
-        if($staffWorkplace->start_date== Carbon::today()->format('20y-m-d')){
-                $staffWorkplace=DB::table('staff_workplaces')
-                ->where('staff_id',$staffworkplace)
-                ->where('end_date',null)
-                ->delete();
-                return view('staff-workplace.create',compact('designations','staffId'));
-
-        }
-        else{
-         
-            return view('staff-workplace.edit',compact('designations','start_date','staff_id'));
-        }
+        return view('staff-workplace.edit',compact('designations','start_date','staffId'));
     }
 
     public function store(Request $req){
@@ -115,6 +98,7 @@ class StaffWorkplaceController extends Controller
         return redirect()->back();
     }
     }
+
     function update(Request $req){
         if($req->designation=="DS"){
             $placeId=Division::where('name',$req->workplace)->pluck('division_id')->first();
@@ -127,9 +111,10 @@ class StaffWorkplaceController extends Controller
         ->where('staff_id',$req->staff_id)
         ->where('start_date',$req->start_date)
         ->update([
-            'designation'=>$req->designation,
-            'place_id'=>$placeId,
-        ]);
+                    'designation'=>$req->designation,
+                    'place_id'=>$placeId,
+                ]);
+
         return redirect()->to('/staffs/'.$req->staff_id);
     }
 }

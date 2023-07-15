@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSocialServiceRequest extends FormRequest
@@ -25,7 +27,21 @@ class StoreSocialServiceRequest extends FormRequest
     {
         return [
             'amount'=>'required',
-            'year'=>'required',
+            'type'=>['required',
+            Rule::unique('social_services')->where(function ($query) {
+                return $query->where('year', $this->input('year'))
+                             ->where('type', $this->input('type'))
+                             ->where('member_id', $this->input('member_id'))
+                             ->where('family_id', $this->input('family_id'));
+            }),
+            ]
+
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'type.unique'=>'A this record already inserted for this year.'
         ];
     }
 }

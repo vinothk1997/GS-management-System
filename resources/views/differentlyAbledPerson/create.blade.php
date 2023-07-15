@@ -51,7 +51,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label>Amount:</label>
+                <label>Lump sum Amount:</label>
                 <input type="text" name="amount" onkeypress="return isNumberKey(event)"
                     class="form-control @error('amount') is-invalid @enderror" id="">
                 @error('amount')

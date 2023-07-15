@@ -27,7 +27,7 @@ class EducationController extends Controller
         $education->education_id=$educationId;
         $education->name=$req->name;
         $education->save();
-        return redirect()->back();
+        return redirect()->back()->with(['msg'=>'added succesfully']);
     }
     function show(){
         return;
@@ -40,7 +40,7 @@ class EducationController extends Controller
         $education= Education::find($education);
         $education->name=$req->name;
         $education->save();
-        return redirect()->route('education.index');
+        return redirect()->route('education.index')->with(['msg'=>'Updated succesfully']);
     }
     function destroy($education){
         Education::destroy($education);
